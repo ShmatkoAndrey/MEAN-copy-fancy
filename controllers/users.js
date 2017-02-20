@@ -1,11 +1,12 @@
 var User = require('../models/user');
+var userHelper = require('../helpers/user');
 
 module.exports = function(app){
 
     app.get('/api/current_user', function (req, res) {
-        User.findById(req.session.user_id, function (err, user) {
+        userHelper.current_user(function (user) {
             res.json({ user: user });
-        });
+        })
     });
 
     app.post('/api/login', function (req, res) {

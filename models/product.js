@@ -17,11 +17,11 @@ var schemaProduct =  new db.Schema({
         type: Number,
         require: true
     },
-    user_likes: {
+    user_likes: { // [_id1, _id2, ..]
         type: Array,
         default: []
     },
-    tags: {
+    tags: { // [name1, name2, ..]
         type: Array,
         default: []
     },
@@ -32,8 +32,25 @@ var schemaProduct =  new db.Schema({
 });
 
 
-schemaProduct.methods.getFullInfo = function () {
+schemaProduct.methods.getFullInfo = function (callback) {
+    var p = {
+        _id:            this._id,
+        title:          this.title,
+        description:    this.description,
+        price:          this.price,
+        user_likes:     this.user_likes,
+        tags:           this.tags,
+        created:        this.created
+    };
 
+    var User = require('./user');
+    User.findById(this.user_id, function (err, user) {
+        p.user = {
+            _id: user._id,
+            name: user.name
+        };
+        callback(p);
+    });
 };
 
 
