@@ -56,11 +56,14 @@ schemaUser.methods.getHash = function (password) {
     return c.digest('hex');
 };
 
-schemaUser.methods.getProducts = function (callback) {
-    var Product = require('./product');
-    Product.find({ user_id: this._id }, function (err, posts) {
-        callback(posts);
-    });
+schemaUser.methods.serialized = function () {
+    return {
+        _id: this._id,
+        username: this.username,
+        admin: this.admin,
+        store: this.store
+    }
+
 };
 
 module.exports = db.models.User ? db.model('User') : db.model('User', schemaUser);

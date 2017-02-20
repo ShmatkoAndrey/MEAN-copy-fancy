@@ -47,7 +47,7 @@ schemaProduct.methods.getFullInfo = function (callback) {
     User.findById(this.user_id, function (err, user) {
         p.user = {
             _id: user._id,
-            name: user.name
+            username: user.username
         };
         callback(p);
     });

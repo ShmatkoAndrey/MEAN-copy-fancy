@@ -13,8 +13,8 @@ exports.getFullInfoProducts = function (products, callback) {
     })
 };
 
-exports.Like = function (post, callback) {
-    userHelper.current_user(function (user) {
+exports.Like = function (session_user_id, post, callback) {
+    userHelper.current_user(session_user_id, function (user) {
         var new_likes = product.user_likes;
 
         if (new_likes.some(function (element) { return element == user._id; }) == false) {

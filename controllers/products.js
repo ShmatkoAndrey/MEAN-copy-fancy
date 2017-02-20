@@ -15,9 +15,10 @@ module.exports = function(app){
 
     app.post('/api/products', function (req, res) {
         var product = req.body.product;
-        userHelper.current_user(function (user) {
+        userHelper.current_user(req.session.user_id, function (user) {
             if (user && ( user.admin || user.store )) {
                 var new_product = new Product({
+                    user_id: user.id,
                     title: product.title,
                     description: product.description,
                     price: product.price,
@@ -39,7 +40,7 @@ module.exports = function(app){
 
     app.put('/api/products/:id', function (req, res) {
         var product = req.body.product;
-        userHelper.current_user(function (user) {
+        userHelper.current_user(req.session.user_id, function (user) {
             if (user && ( user.admin || (user._id == product.user_id ) )) {
                 var new_product = new Product({
                     title: product.title,
@@ -63,7 +64,7 @@ module.exports = function(app){
     });
 
     app.delete('/api/products/:id', function (req, res) {
-        userHelper.current_user(function (user) {
+        userHelper.current_user(req.session.user_id, function (user) {
             if (user && ( user.admin || (user._id == product.user_id ) )) {
                 Product.remove({ _id: req.params.id }, function (err) { // findOneAndRemove ?
                     res.json({ delete: true });
@@ -77,7 +78,7 @@ module.exports = function(app){
     app.put('/api/products/like/:id', function (req, res) {
 
         Product.findBuId( req.params.id , function (err, product) {
-            productHelper.Like(product, function (new_likes) {
+            productHelper.Like(req.session.user_id, product, function (new_likes) {
                 Product.update({ _id: post._id }, { $set: { user_likes: new_likes } }, function (err, product) {
                     if(err) res.json({ error: err });
                     else {  res.json({ like: 'ok' }); }

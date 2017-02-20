@@ -4,8 +4,8 @@ var userHelper = require('../helpers/user');
 module.exports = function(app){
 
     app.get('/api/current_user', function (req, res) {
-        userHelper.current_user(function (user) {
-            res.json({ user: user });
+        userHelper.current_user(req.session.user_id, function (user) {
+            res.json({ user: user.serialized() });
         })
     });
 
@@ -15,7 +15,7 @@ module.exports = function(app){
             else if(curUser) {
                 if(curUser.checkPassword(req.body.password)){
                     req.session.user_id = curUser._id;
-                    res.json({ user: curUser });
+                    res.json({ user: curUser.serialized() });
                 } else {
 
                 }
@@ -45,7 +45,7 @@ module.exports = function(app){
                             if(err) res.json({ error: err });
                             else {
                                 req.session.user_id = new_user._id;
-                                res.json({ user: new_user });
+                                res.json({ user: new_user.serialized() });
                             }
                         });
                     }
