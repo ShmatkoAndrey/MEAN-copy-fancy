@@ -1,11 +1,12 @@
 #main-tags {
     list-style-type: none;
     margin: 0;
-
+    margin-top: 20px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 200px;
+    position: fixed;
 }
 
 .tag {

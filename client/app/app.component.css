@@ -1,6 +1,17 @@
+.page {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+}
+
+fancy-header {
+    flex: 0 0 auto;
+}
+
 #main-app {
     display: flex;
-    margin-top: 20px;
+    position: relative;
+    overflow-y: auto;
 }
 
 tags-list {

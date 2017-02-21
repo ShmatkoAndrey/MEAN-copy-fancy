@@ -1,5 +1,14 @@
 <div class="product">
-    <div class="product-title"> {{ product.title }} </div>
-    <div class="product-tags"> {{ product.tags }} </div>
-    <div class="product-price"> {{ product.price }} </div>
+    <div class="product-main-image"> </div>
+    <div class="product-info">
+        <div class="product-left-info">
+            <div class="product-title"> {{ product.title }}</div>
+            <div class="product-tags"> {{ product.tags }} </div>
+            <div class="product-like">
+                <div class="btn-like"> <3 {{ product.user_likes.length }} </div>
+                 <!--ausers avatar-->
+            </div>
+        </div>
+        <div class="product-price"> ${{ product.price }} </div>
+    </div>
 </div>
