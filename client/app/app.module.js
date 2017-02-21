@@ -10,6 +10,11 @@ var platform_browser_1 = require("@angular/platform-browser");
 var forms_1 = require("@angular/forms");
 var http_1 = require("@angular/http");
 var app_component_1 = require("./app.component");
+var header_component_1 = require("./components/header/header.component");
+var tags_list_component_1 = require("./components/tags-list/tags-list.component");
+var popular_component_1 = require("./components/popular/popular.component");
+var product_list_component_1 = require("./components/product-list/product-list.component");
+var product_component_1 = require("./components/product/product.component");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -22,7 +27,14 @@ AppModule = __decorate([
             forms_1.FormsModule,
             http_1.HttpModule
         ],
-        declarations: [app_component_1.AppComponent],
+        declarations: [
+            app_component_1.AppComponent,
+            header_component_1.HeaderComponent,
+            tags_list_component_1.TagsListComponent,
+            popular_component_1.PopularComponent,
+            product_list_component_1.ProductListComponent,
+            product_component_1.ProductComponent
+        ],
         providers: [],
         bootstrap: [app_component_1.AppComponent]
     })
