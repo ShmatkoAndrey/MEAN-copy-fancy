@@ -1,0 +1,9 @@
+.empty {
+    flex: 1 2;
+}
+
+#header {
+    flex: 1 0 600px;
+
+    border: 1px solid greenyellow;
+}

@@ -1,4 +1,30 @@
-fancy-header {
-    display: block;
+#main-app {
+    display: flex;
+
+    border: 1px solid grey;
+}
+
+tags-list {
+    flex: 1 0 200px;
+
+    border: 1px solid black;
+}
+
+product-list {
+    flex : 1 0 600px;
+
     border: 1px solid red;
+}
+
+#right-side {
+    flex: 1 0 200px;
+    border: 1px solid green;
+}
+
+.empty {
+     flex: 1 2;
+ }
+
+fancy-header {
+    display: flex;
 }

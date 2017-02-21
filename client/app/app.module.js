@@ -15,6 +15,7 @@ var tags_list_component_1 = require("./components/tags-list/tags-list.component"
 var popular_component_1 = require("./components/popular/popular.component");
 var product_list_component_1 = require("./components/product-list/product-list.component");
 var product_component_1 = require("./components/product/product.component");
+var product_service_1 = require("./services/product.service");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -35,7 +36,7 @@ AppModule = __decorate([
             product_list_component_1.ProductListComponent,
             product_component_1.ProductComponent
         ],
-        providers: [],
+        providers: [product_service_1.ProductService],
         bootstrap: [app_component_1.AppComponent]
     })
 ], AppModule);

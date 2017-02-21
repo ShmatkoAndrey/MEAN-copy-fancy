@@ -10,6 +10,7 @@ import { PopularComponent }   from './components/popular/popular.component';
 import { ProductListComponent }   from './components/product-list/product-list.component';
 import { ProductComponent }   from './components/product/product.component';
 
+import { ProductService } from './services/product.service';
 
 @NgModule({
   imports: [
@@ -27,7 +28,7 @@ import { ProductComponent }   from './components/product/product.component';
       ProductComponent
   ],
 
-  providers: [],
+  providers: [ ProductService ],
 
   bootstrap:    [ AppComponent ]
 })

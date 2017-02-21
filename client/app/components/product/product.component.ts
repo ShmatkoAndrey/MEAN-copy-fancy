@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
     moduleId: module.id,
@@ -7,5 +7,25 @@ import { Component } from '@angular/core';
     styleUrls: ['product.component.css']
 })
 export class ProductComponent {
+
+    @Input() product;
+
+    formatDate(date) {
+        let d = new Date();
+        d.setTime(Date.parse(date));
+
+        let monthNames = [
+            "Jan", "Feb", "March",
+            "April", "May", "June", "July",
+            "August", "Sept", "Oc",
+            "Nov", "Dec"
+        ];
+
+        let day = d.getDate();
+        let monthIndex = d.getMonth();
+        let year = d.getFullYear();
+
+        return day + ' ' + monthNames[monthIndex] + ' ' + year;
+    }
 
 }
