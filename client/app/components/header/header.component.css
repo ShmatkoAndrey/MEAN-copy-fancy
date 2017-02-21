@@ -1,9 +1,26 @@
+.header-box {
+    display: flex;
+    background-color: white;
+    height: 52px;
+    margin: 0;
+}
+
 .empty {
     flex: 1 2;
 }
 
-#header {
-    flex: 1 0 600px;
+#logo {
+    flex: 1 0 300px;
+    align-self: center;
+    text-align: center;
+    font-size: 30px;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
 
-    border: 1px solid greenyellow;
+.header-menu {
+    flex: 1 0 150px;
+    align-self: center;
+    /*text-align: right;*/
+    font-size: 16px;
+    color: grey;
 }
