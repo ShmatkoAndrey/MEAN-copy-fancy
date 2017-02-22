@@ -30,6 +30,7 @@ var HeaderComponent = (function () {
     };
     HeaderComponent.prototype.logout = function () {
         var _this = this;
+        this.show_modal = false;
         this.userService.logout().then(function (user) { return _this.user = user; });
     };
     return HeaderComponent;

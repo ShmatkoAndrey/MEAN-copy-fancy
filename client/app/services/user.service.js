@@ -14,7 +14,6 @@ require("rxjs/add/operator/toPromise");
 var UserService = (function () {
     function UserService(http) {
         this.http = http;
-        this.user = {};
     }
     UserService.prototype.getCurrentUser = function () {
         var _this = this;
@@ -27,7 +26,7 @@ var UserService = (function () {
     UserService.prototype.login = function (user) {
         var _this = this;
         var data = new http_1.URLSearchParams();
-        data.append('login', user.username);
+        data.append('username', user.username);
         data.append('password', user.password);
         return this.http.post('/api/login', data)
             .toPromise()
@@ -44,7 +43,7 @@ var UserService = (function () {
         return this.http.post('/api/registration', data)
             .toPromise()
             .then(function (res) { return res.json().user; })
-            .then(function (user) { return _this.user = user; })
+            .then(function (user) { return _this.user = {}; })
             .catch(this.handleError);
     };
     UserService.prototype.logout = function () {

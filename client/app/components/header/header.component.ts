@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit{
     constructor(private userService: UserService ) {}
 
     ngOnInit() {
-        this.userService.getCurrentUser().then(user => this.user = user);
+        this.userService.getCurrentUser().then(user => this.user=user);
     }
 
     modalOn() {
@@ -32,7 +32,8 @@ export class HeaderComponent implements OnInit{
     }
 
     logout() {
-        this.userService.logout().then(user => this.user = user);
+        this.show_modal = false;
+        this.userService.logout().then(user => this.user=user);
     }
 
 }

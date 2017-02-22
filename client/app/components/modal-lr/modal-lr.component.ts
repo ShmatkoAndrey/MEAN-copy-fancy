@@ -20,5 +20,4 @@ export class ModalLogRegComponent {
     onSwitch(flag) {
         this.switchLogin.emit(flag);
     }
-
 }

@@ -6,12 +6,12 @@
         Fancy
     </div>
     <div class="header-menu">
-        <span *ngIf="!user || user._id == undefined">
+        <span *ngIf="!userService.user || userService.user._id == undefined">
             <span class="auth-type" (click)="modalOn()" (click)="switchLogin(false)">Registration </span> |
             <span class="auth-type" (click)="modalOn()" (click)="switchLogin(true)"> Login </span>
             <modal-lr [show_modal]="show_modal" (modalOff)="modalOff()" (switchLogin)="switchLogin($event)" [isLogin]="isLogin"> </modal-lr>
         </span>
-        <span *ngIf="user && user._id != undefined"> {{ user.username }} | <span (click)="logout()" > Logout </span> </span>
+        <span *ngIf="userService.user && userService.user._id != undefined"> {{ userService.user.username }} | <span (click)="logout()" > Logout </span> </span>
     </div>
     <div class="empty"></div>
 </div>

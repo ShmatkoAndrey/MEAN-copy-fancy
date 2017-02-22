@@ -4,11 +4,11 @@ import 'rxjs/add/operator/toPromise'
 
 @Injectable()
 export class UserService {
-    user = {};
+    user;
 
     constructor(private http: Http) {}
 
-    getCurrentUser() {
+    getCurrentUser(): Promise<any> {
         return this.http.get('/api/current_user')
             .toPromise()
             .then(res => res.json().user)
@@ -18,7 +18,7 @@ export class UserService {
 
     login(user: any) {
         let data = new URLSearchParams();
-        data.append('login', user.username);
+        data.append('username', user.username);
         data.append('password', user.password);
 
         return this.http.post('/api/login', data)
@@ -37,7 +37,7 @@ export class UserService {
         return this.http.post('/api/registration', data)
             .toPromise()
             .then(res => res.json().user)
-            .then(user => this.user = user)
+            .then(user => this.user = {})
             .catch(this.handleError);
     }
 
