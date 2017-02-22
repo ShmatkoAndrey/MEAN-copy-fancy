@@ -12,9 +12,13 @@ var core_1 = require("@angular/core");
 var ModalLogRegComponent = (function () {
     function ModalLogRegComponent() {
         this.modalOff = new core_1.EventEmitter();
+        this.switchLogin = new core_1.EventEmitter();
     }
     ModalLogRegComponent.prototype.onOff = function () {
         this.modalOff.emit();
+    };
+    ModalLogRegComponent.prototype.onSwitch = function (flag) {
+        this.switchLogin.emit(flag);
     };
     return ModalLogRegComponent;
 }());
@@ -23,9 +27,17 @@ __decorate([
     __metadata("design:type", Boolean)
 ], ModalLogRegComponent.prototype, "show_modal", void 0);
 __decorate([
+    core_1.Input(),
+    __metadata("design:type", Boolean)
+], ModalLogRegComponent.prototype, "isLogin", void 0);
+__decorate([
     core_1.Output(),
     __metadata("design:type", Object)
 ], ModalLogRegComponent.prototype, "modalOff", void 0);
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", Object)
+], ModalLogRegComponent.prototype, "switchLogin", void 0);
 ModalLogRegComponent = __decorate([
     core_1.Component({
         moduleId: module.id,

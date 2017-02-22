@@ -24,6 +24,37 @@ var UserService = (function () {
             .then(function (user) { return _this.user = user; })
             .catch(this.handleError);
     };
+    UserService.prototype.login = function (user) {
+        var _this = this;
+        var data = new http_1.URLSearchParams();
+        data.append('login', user.username);
+        data.append('password', user.password);
+        return this.http.post('/api/login', data)
+            .toPromise()
+            .then(function (res) { return res.json().user; })
+            .then(function (user) { return _this.user = user; })
+            .catch(this.handleError);
+    };
+    UserService.prototype.registration = function (user) {
+        var _this = this;
+        var data = new http_1.URLSearchParams();
+        data.append('login', user.username);
+        data.append('password', user.password);
+        data.append('password_confirmation', user.password_confirmation);
+        return this.http.post('/api/registration', data)
+            .toPromise()
+            .then(function (res) { return res.json().user; })
+            .then(function (user) { return _this.user = user; })
+            .catch(this.handleError);
+    };
+    UserService.prototype.logout = function () {
+        var _this = this;
+        return this.http.get('/api/logout')
+            .toPromise()
+            .then(function (res) { return res.json().user; })
+            .then(function (user) { return _this.user = null; })
+            .catch(this.handleError);
+    };
     UserService.prototype.handleError = function (err) {
         console.error('Error:', err);
         return Promise.reject(err.message || err);

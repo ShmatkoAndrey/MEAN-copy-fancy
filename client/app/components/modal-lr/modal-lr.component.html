@@ -1,9 +1,11 @@
 <div id="myModal" class="modal" [class.hide]="!show_modal"  >
 
-    <!-- Modal content -->
     <div class="modal-content">
         <span class="close" (click)="onOff()">&times;</span>
-        <p>Some text in the Modal..</p>
+        <span (click)="onSwitch(true)" > Login </span>
+        <span (click)="onSwitch(false)" > Registration </span>
+        <login *ngIf="isLogin">  </login>
+        <registration *ngIf="!isLogin">  </registration>
     </div>
 
 </div>

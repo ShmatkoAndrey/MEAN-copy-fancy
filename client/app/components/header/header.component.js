@@ -25,6 +25,9 @@ var HeaderComponent = (function () {
     HeaderComponent.prototype.modalOff = function () {
         this.show_modal = false;
     };
+    HeaderComponent.prototype.switchLogin = function (il) {
+        this.isLogin = il;
+    };
     return HeaderComponent;
 }());
 HeaderComponent = __decorate([

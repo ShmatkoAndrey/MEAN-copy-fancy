@@ -10,6 +10,7 @@ import { UserService } from '../../services/user.service';
 })
 export class HeaderComponent implements OnInit{
     user;
+    isLogin: boolean;
     show_modal:boolean = false;
 
     constructor(private userService: UserService ) {}
@@ -24,6 +25,10 @@ export class HeaderComponent implements OnInit{
 
     modalOff() {
         this.show_modal = false;
+    }
+
+    switchLogin(il) {
+        this.isLogin = il;
     }
 
 }

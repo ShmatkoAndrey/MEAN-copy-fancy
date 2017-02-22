@@ -6,8 +6,9 @@
         Fancy
     </div>
     <div class="header-menu">
-        <span (click)="modalOn()">Registration </span> | <span (click)="modalOn()"> Login </span>
-        <modal-lr [show_modal]="show_modal" (modalOff)="modalOff()"> </modal-lr>
+        <span (click)="modalOn()" (click)="switchLogin(false)">Registration </span> |
+        <span (click)="modalOn()" (click)="switchLogin(true)"> Login </span>
+        <modal-lr [show_modal]="show_modal" (modalOff)="modalOff()" (switchLogin)="switchLogin($event)" [isLogin]="isLogin"> </modal-lr>
     </div>
     <div class="empty"></div>
 </div>
