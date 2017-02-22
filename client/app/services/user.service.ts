@@ -30,7 +30,7 @@ export class UserService {
 
     registration(user: any) {
         let data = new URLSearchParams();
-        data.append('login', user.username);
+        data.append('username', user.username);
         data.append('password', user.password);
         data.append('password_confirmation', user.password_confirmation);
 

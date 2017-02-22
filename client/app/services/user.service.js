@@ -38,7 +38,7 @@ var UserService = (function () {
     UserService.prototype.registration = function (user) {
         var _this = this;
         var data = new http_1.URLSearchParams();
-        data.append('login', user.username);
+        data.append('username', user.username);
         data.append('password', user.password);
         data.append('password_confirmation', user.password_confirmation);
         return this.http.post('/api/registration', data)

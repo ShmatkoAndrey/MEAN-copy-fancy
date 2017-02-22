@@ -31,4 +31,8 @@ export class HeaderComponent implements OnInit{
         this.isLogin = il;
     }
 
+    logout() {
+        this.userService.logout().then(user => this.user = user);
+    }
+
 }

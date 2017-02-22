@@ -28,6 +28,10 @@ var HeaderComponent = (function () {
     HeaderComponent.prototype.switchLogin = function (il) {
         this.isLogin = il;
     };
+    HeaderComponent.prototype.logout = function () {
+        var _this = this;
+        this.userService.logout().then(function (user) { return _this.user = user; });
+    };
     return HeaderComponent;
 }());
 HeaderComponent = __decorate([

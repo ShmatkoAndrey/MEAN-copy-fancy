@@ -44,13 +44,13 @@ schemaProduct.methods.getFullInfo = function (callback) {
     };
 
     var User = require('./user');
-    User.findById(this.user_id, function (err, user) {
-        p.user = {
-            _id: user._id,
-            username: user.username
-        };
+    // User.findById(this.user_id, function (err, user) {
+    //     p.user = {
+    //         _id: user._id,
+    //         username: user.username
+    //     };
         callback(p);
-    });
+    // });
 };
 
 

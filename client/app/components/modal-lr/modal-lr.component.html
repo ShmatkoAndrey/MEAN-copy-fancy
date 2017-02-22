@@ -2,8 +2,8 @@
 
     <div class="modal-content">
         <span class="close" (click)="onOff()">&times;</span>
-        <span (click)="onSwitch(true)" > Login </span>
-        <span (click)="onSwitch(false)" > Registration </span>
+        <span class="auth-type" (click)="onSwitch(true)" [class.bold]="isLogin" > Login </span> |
+        <span class="auth-type" (click)="onSwitch(false)" [class.bold]="!isLogin" > Registration </span>
         <login *ngIf="isLogin">  </login>
         <registration *ngIf="!isLogin">  </registration>
     </div>
