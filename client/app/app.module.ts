@@ -9,8 +9,11 @@ import { TagsListComponent }   from './components/tags-list/tags-list.component'
 import { PopularComponent }   from './components/popular/popular.component';
 import { ProductListComponent }   from './components/product-list/product-list.component';
 import { ProductComponent }   from './components/product/product.component';
+import { LoginComponent }   from './components/login/login.component';
+import { RegistrationComponent }   from './components/registration/registration.component';
 
 import { ProductService } from './services/product.service';
+import { UserService } from './services/user.service';
 
 @NgModule({
   imports: [
@@ -25,10 +28,12 @@ import { ProductService } from './services/product.service';
       TagsListComponent,
       PopularComponent,
       ProductListComponent,
-      ProductComponent
+      ProductComponent,
+      LoginComponent,
+      RegistrationComponent
   ],
 
-  providers: [ ProductService ],
+  providers: [ ProductService, UserService ],
 
   bootstrap:    [ AppComponent ]
 })

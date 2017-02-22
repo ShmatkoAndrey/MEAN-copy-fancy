@@ -5,7 +5,9 @@ module.exports = function(app){
 
     app.get('/api/current_user', function (req, res) {
         userHelper.current_user(req.session.user_id, function (user) {
-            res.json({ user: user.serialized() });
+            if(user && user._id) res.json({ user: user.serialized() });
+            else res.json({ user: {} });
+
         })
     });
 

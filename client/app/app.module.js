@@ -15,7 +15,10 @@ var tags_list_component_1 = require("./components/tags-list/tags-list.component"
 var popular_component_1 = require("./components/popular/popular.component");
 var product_list_component_1 = require("./components/product-list/product-list.component");
 var product_component_1 = require("./components/product/product.component");
+var login_component_1 = require("./components/login/login.component");
+var registration_component_1 = require("./components/registration/registration.component");
 var product_service_1 = require("./services/product.service");
+var user_service_1 = require("./services/user.service");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -34,9 +37,11 @@ AppModule = __decorate([
             tags_list_component_1.TagsListComponent,
             popular_component_1.PopularComponent,
             product_list_component_1.ProductListComponent,
-            product_component_1.ProductComponent
+            product_component_1.ProductComponent,
+            login_component_1.LoginComponent,
+            registration_component_1.RegistrationComponent
         ],
-        providers: [product_service_1.ProductService],
+        providers: [product_service_1.ProductService, user_service_1.UserService],
         bootstrap: [app_component_1.AppComponent]
     })
 ], AppModule);

@@ -19,13 +19,15 @@
 
 .product-info {
     display: flex;
+
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
 }
 
 .product-left-info {
     flex: 1;
-    margin: 20px;
+    margin-top: 20px;
+    margin-left: 20px;
 }
 
 .product-title {
