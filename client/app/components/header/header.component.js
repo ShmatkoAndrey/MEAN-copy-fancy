@@ -13,10 +13,17 @@ var user_service_1 = require("../../services/user.service");
 var HeaderComponent = (function () {
     function HeaderComponent(userService) {
         this.userService = userService;
+        this.show_modal = false;
     }
     HeaderComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.userService.getCurrentUser().then(function (user) { return _this.user = user; });
+    };
+    HeaderComponent.prototype.modalOn = function () {
+        this.show_modal = true;
+    };
+    HeaderComponent.prototype.modalOff = function () {
+        this.show_modal = false;
     };
     return HeaderComponent;
 }());

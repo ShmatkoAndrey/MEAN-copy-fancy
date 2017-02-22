@@ -11,6 +11,7 @@ import { ProductListComponent }   from './components/product-list/product-list.c
 import { ProductComponent }   from './components/product/product.component';
 import { LoginComponent }   from './components/login/login.component';
 import { RegistrationComponent }   from './components/registration/registration.component';
+import { ModalLogRegComponent }   from './components/modal-lr/modal-lr.component';
 
 import { ProductService } from './services/product.service';
 import { UserService } from './services/user.service';
@@ -30,7 +31,8 @@ import { UserService } from './services/user.service';
       ProductListComponent,
       ProductComponent,
       LoginComponent,
-      RegistrationComponent
+      RegistrationComponent,
+      ModalLogRegComponent
   ],
 
   providers: [ ProductService, UserService ],

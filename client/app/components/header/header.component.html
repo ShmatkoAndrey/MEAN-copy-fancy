@@ -6,9 +6,8 @@
         Fancy
     </div>
     <div class="header-menu">
-        <registration> </registration>
-        |
-        <login> </login>
+        <span (click)="modalOn()">Registration </span> | <span (click)="modalOn()"> Login </span>
+        <modal-lr [show_modal]="show_modal" (modalOff)="modalOff()"> </modal-lr>
     </div>
     <div class="empty"></div>
 </div>

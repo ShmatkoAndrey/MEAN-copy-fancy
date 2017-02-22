@@ -10,11 +10,20 @@ import { UserService } from '../../services/user.service';
 })
 export class HeaderComponent implements OnInit{
     user;
+    show_modal:boolean = false;
 
     constructor(private userService: UserService ) {}
 
     ngOnInit() {
         this.userService.getCurrentUser().then(user => this.user = user);
+    }
+
+    modalOn() {
+        this.show_modal = true;
+    }
+
+    modalOff() {
+        this.show_modal = false;
     }
 
 }
