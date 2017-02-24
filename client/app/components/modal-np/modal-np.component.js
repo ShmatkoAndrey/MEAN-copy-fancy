@@ -14,13 +14,51 @@ var ModalNewProductComponent = (function () {
     function ModalNewProductComponent(productSetvice) {
         this.productSetvice = productSetvice;
         this.modalOff = new core_1.EventEmitter();
+        this.descriptionPhoto = [];
+        this.imageDescriptionSrc = [];
     }
     ModalNewProductComponent.prototype.onOff = function () {
         this.modalOff.emit();
     };
     ModalNewProductComponent.prototype.onSubmit = function () {
-        console.log(this.mainPhoto);
         // this.productSetvice.createNewProduct({ title: this.title, description: this.description, price: this.price, tags: this.tags.split(' ') })
+    };
+    ModalNewProductComponent.prototype.onChangeMain = function (e) {
+        var file = e.dataTransfer ? e.dataTransfer.files[0] : e.target.files[0];
+        var pattern = /image-*/;
+        var reader = new FileReader();
+        if (!file.type.match(pattern)) {
+            console.log('invalid format');
+            return;
+        }
+        reader.onload = this._handleReaderLoadedMain.bind(this);
+        reader.readAsDataURL(file);
+        this.mainPhoto = file;
+    };
+    ModalNewProductComponent.prototype._handleReaderLoadedMain = function (e) {
+        var reader = e.target;
+        this.imageMainSrc = reader.result;
+    };
+    ModalNewProductComponent.prototype.onChangeDescription = function (e) {
+        this.descriptionPhoto = [];
+        this.imageDescriptionSrc = [];
+        var files = e.target.files;
+        var files_arr = Object.keys(files).map(function (key) { return files[key]; });
+        files_arr.forEach(function (file) {
+            var pattern = /image-*/;
+            var reader = new FileReader();
+            if (!file.type.match(pattern)) {
+                console.log('invalid format');
+                return;
+            }
+            reader.onload = this._handleReaderLoadedDescription.bind(this);
+            reader.readAsDataURL(file);
+            this.descriptionPhoto.push(file);
+        }.bind(this));
+    };
+    ModalNewProductComponent.prototype._handleReaderLoadedDescription = function (e) {
+        var reader = e.target;
+        this.imageDescriptionSrc.push(reader.result);
     };
     return ModalNewProductComponent;
 }());

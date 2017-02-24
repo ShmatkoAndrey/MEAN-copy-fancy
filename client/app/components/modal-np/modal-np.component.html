@@ -10,8 +10,11 @@
             <input type="text" placeholder="Price" name="price" [(ngModel)]="price" required>
             <input type="text" placeholder="Tags" name="tags" [(ngModel)]="tags" required>
 
-            <input type="file" name="mainPhoto" [(ngModel)]="mainPhoto" />
-            <input type="file" name="descriptionPhoto" [(ngModel)]="descriptionPhoto" multiple />
+            <input type="file" name="mainPhoto"  (change)="onChangeMain($event)" />
+            <img *ngIf="imageMainSrc" class="main-photo" [src]="imageMainSrc" />
+            <br >
+            <input type="file" name="descriptionPhoto" (change)="onChangeDescription($event)" multiple />
+            <img class="description-photo" *ngFor="let photo of imageDescriptionSrc" [src]="photo" />
 
             <button type="submit" [disabled]="productForm.form.invalid"> Add </button>
         </form>

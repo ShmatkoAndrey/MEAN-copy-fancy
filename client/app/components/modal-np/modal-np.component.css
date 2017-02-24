@@ -69,3 +69,15 @@ div {
     padding: 20px;
 }
 
+
+.main-photo {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
+
+.description-photo {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
