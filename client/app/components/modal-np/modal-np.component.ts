@@ -14,10 +14,19 @@ export class ModalNewProductComponent {
 
     title: string;
     description: string;
+    price: string;
+    tags: string;
+    mainPhoto;
+    descriptionPhoto;
 
-    constructor(private productSrtvice: ProductService) {}
+    constructor(private productSetvice: ProductService) {}
 
     onOff() {
         this.modalOff.emit();
+    }
+
+    onSubmit() {
+        console.log(this.mainPhoto);
+        // this.productSetvice.createNewProduct({ title: this.title, description: this.description, price: this.price, tags: this.tags.split(' ') })
     }
 }

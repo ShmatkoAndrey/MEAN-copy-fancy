@@ -14,7 +14,6 @@
         <span *ngIf="userService.user && userService.user._id != undefined">
             <span class="btn-new-post" (click)="modaNPOn()">+</span>
             <modal-np [show_modal]="show_NP_modal" (modalOff)="modalNPOff()" > </modal-np>
-            |
             {{ userService.user.username }} | <span (click)="logout()" > Logout </span>
 
         </span>

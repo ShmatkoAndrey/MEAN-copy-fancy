@@ -14,9 +14,9 @@ module.exports = function(app){
     });
 
     app.post('/api/products', function (req, res) {
-        var product = req.body.product;
+        var product = req.body;
         userHelper.current_user(req.session.user_id, function (user) {
-            if (user && ( user.admin || user.store )) {
+            // if (user && ( user.admin || user.store )) {
                 var new_product = new Product({
                     user_id: user.id,
                     title: product.title,
@@ -28,18 +28,19 @@ module.exports = function(app){
                     if (err) res.json({error: err});
                     else {
                         new_product.getFullInfo(function (product) {
+                            console.log(product);
                             res.json({product: product});
                         });
                     }
                 });
-            } else {
-                res.json({error: "Please, login store acc"});
-            }
+            // } else {
+            //     res.json({error: "Please, login store acc"});
+            // }
         });
     });
 
     app.put('/api/products/:id', function (req, res) {
-        var product = req.body.product;
+        var product = req.body;
         userHelper.current_user(req.session.user_id, function (user) {
             if (user && ( user.admin || (user._id == product.user_id ) )) {
                 var new_product = new Product({

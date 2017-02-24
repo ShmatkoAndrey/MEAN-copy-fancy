@@ -4,9 +4,14 @@
         <span class="close" (click)="onOff()">&times;</span>
 
 
-        <form class="product-form" (ngSubmit)="onSubmit(); productForm.reset();" #productForm="ngForm" >
+        <form class="product-form" (ngSubmit)="onSubmit(); productForm.reset();" #productForm="ngForm" enctype="multipart/form-data" >
             <input type="text" placeholder="Title" name="title" [(ngModel)]="title" required>
             <textarea placeholder="Description" name="description" [(ngModel)]="description" rows="6" required > </textarea>
+            <input type="text" placeholder="Price" name="price" [(ngModel)]="price" required>
+            <input type="text" placeholder="Tags" name="tags" [(ngModel)]="tags" required>
+
+            <input type="file" name="mainPhoto" [(ngModel)]="mainPhoto" />
+            <input type="file" name="descriptionPhoto" [(ngModel)]="descriptionPhoto" multiple />
 
             <button type="submit" [disabled]="productForm.form.invalid"> Add </button>
         </form>

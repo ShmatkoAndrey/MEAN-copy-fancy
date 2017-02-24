@@ -11,12 +11,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var product_service_1 = require("../../services/product.service");
 var ProductListComponent = (function () {
-    function ProductListComponent(productSrtvice) {
-        this.productSrtvice = productSrtvice;
+    function ProductListComponent(productSetvice) {
+        this.productSetvice = productSetvice;
     }
     ProductListComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.productSrtvice.getProducts().then(function (products) { return _this.products = products; });
+        this.productSetvice.getProducts().then(function (products) { return _this.products = products; });
     };
     return ProductListComponent;
 }());

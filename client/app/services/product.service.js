@@ -23,6 +23,19 @@ var ProductService = (function () {
             .then(function (products) { return _this.products = products; })
             .catch(this.handleError);
     };
+    ProductService.prototype.createNewProduct = function (product) {
+        var _this = this;
+        var data = new http_1.URLSearchParams();
+        data.append('title', product.title);
+        data.append('description', product.description);
+        data.append('price', product.price);
+        data.append('tags', product.tags);
+        return this.http.post('/api/products', data)
+            .toPromise()
+            .then(function (res) { return res.json().product; })
+            .then(function (product) { return _this.products.unshift(product); })
+            .catch(this.handleError);
+    };
     ProductService.prototype.handleError = function (err) {
         console.error('Error:', err);
         return Promise.reject(err.message || err);

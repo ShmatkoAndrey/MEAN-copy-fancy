@@ -11,12 +11,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var product_service_1 = require("../../services/product.service");
 var ModalNewProductComponent = (function () {
-    function ModalNewProductComponent(productSrtvice) {
-        this.productSrtvice = productSrtvice;
+    function ModalNewProductComponent(productSetvice) {
+        this.productSetvice = productSetvice;
         this.modalOff = new core_1.EventEmitter();
     }
     ModalNewProductComponent.prototype.onOff = function () {
         this.modalOff.emit();
+    };
+    ModalNewProductComponent.prototype.onSubmit = function () {
+        console.log(this.mainPhoto);
+        // this.productSetvice.createNewProduct({ title: this.title, description: this.description, price: this.price, tags: this.tags.split(' ') })
     };
     return ModalNewProductComponent;
 }());

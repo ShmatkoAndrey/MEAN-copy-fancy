@@ -16,6 +16,20 @@ export class ProductService {
             .catch(this.handleError);
     }
 
+    createNewProduct(product: any) {
+        let data = new URLSearchParams();
+        data.append('title', product.title);
+        data.append('description', product.description);
+        data.append('price', product.price);
+        data.append('tags', product.tags);
+
+        return this.http.post('/api/products', data)
+            .toPromise()
+            .then(res => res.json().product)
+            .then(product => this.products.unshift(product))
+            .catch(this.handleError);
+    }
+
 
     private handleError(err: any) {
         console.error('Error:', err);
