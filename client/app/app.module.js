@@ -18,6 +18,7 @@ var product_component_1 = require("./components/product/product.component");
 var login_component_1 = require("./components/login/login.component");
 var registration_component_1 = require("./components/registration/registration.component");
 var modal_lr_component_1 = require("./components/modal-lr/modal-lr.component");
+var modal_np_component_1 = require("./components/modal-np/modal-np.component");
 var product_service_1 = require("./services/product.service");
 var user_service_1 = require("./services/user.service");
 var AppModule = (function () {
@@ -41,7 +42,8 @@ AppModule = __decorate([
             product_component_1.ProductComponent,
             login_component_1.LoginComponent,
             registration_component_1.RegistrationComponent,
-            modal_lr_component_1.ModalLogRegComponent
+            modal_lr_component_1.ModalLogRegComponent,
+            modal_np_component_1.ModalNewProductComponent
         ],
         providers: [product_service_1.ProductService, user_service_1.UserService],
         bootstrap: [app_component_1.AppComponent]

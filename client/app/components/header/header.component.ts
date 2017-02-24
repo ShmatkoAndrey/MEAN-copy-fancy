@@ -11,7 +11,8 @@ import { UserService } from '../../services/user.service';
 export class HeaderComponent implements OnInit{
     user;
     isLogin: boolean;
-    show_modal:boolean = false;
+    show_LR_modal:boolean = false;
+    show_NP_modal:boolean = false;
 
     constructor(private userService: UserService ) {}
 
@@ -19,12 +20,12 @@ export class HeaderComponent implements OnInit{
         this.userService.getCurrentUser().then(user => this.user=user);
     }
 
-    modalOn() {
-        this.show_modal = true;
+    modalLROn() {
+        this.show_LR_modal = true;
     }
 
-    modalOff() {
-        this.show_modal = false;
+    modalLROff() {
+        this.show_LR_modal = false;
     }
 
     switchLogin(il) {
@@ -32,8 +33,17 @@ export class HeaderComponent implements OnInit{
     }
 
     logout() {
-        this.show_modal = false;
+        this.show_LR_modal = false;
         this.userService.logout().then(user => this.user=user);
     }
+
+    modaNPOn() {
+        this.show_NP_modal = true;
+    }
+
+    modalNPOff() {
+        this.show_NP_modal = false;
+    }
+
 
 }

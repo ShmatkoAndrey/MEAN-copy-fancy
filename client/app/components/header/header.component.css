@@ -28,3 +28,15 @@
 .auth-type {
     cursor: hand;
 }
+
+.btn-new-post {
+    padding: 5px 9px;
+    border: 1px solid deepskyblue;
+    border-radius: 20px;
+    cursor: hand;
+    font-size: 20px;
+}
+
+.btn-new-post:hover {
+    background-color: rgba(0, 191, 255, 0.12);
+}

@@ -12,6 +12,7 @@ import { ProductComponent }   from './components/product/product.component';
 import { LoginComponent }   from './components/login/login.component';
 import { RegistrationComponent }   from './components/registration/registration.component';
 import { ModalLogRegComponent }   from './components/modal-lr/modal-lr.component';
+import { ModalNewProductComponent }   from './components/modal-np/modal-np.component';
 
 import { ProductService } from './services/product.service';
 import { UserService } from './services/user.service';
@@ -32,7 +33,8 @@ import { UserService } from './services/user.service';
       ProductComponent,
       LoginComponent,
       RegistrationComponent,
-      ModalLogRegComponent
+      ModalLogRegComponent,
+      ModalNewProductComponent
   ],
 
   providers: [ ProductService, UserService ],

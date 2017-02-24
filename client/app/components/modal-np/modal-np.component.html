@@ -1,0 +1,18 @@
+<div id="myModal" class="modal" [class.hide]="!show_modal"  >
+
+    <div class="modal-content">
+        <span class="close" (click)="onOff()">&times;</span>
+
+
+        <form class="product-form" (ngSubmit)="onSubmit(); productForm.reset();" #productForm="ngForm" >
+            <input type="text" placeholder="Title" name="title" [(ngModel)]="title" required>
+            <textarea placeholder="Description" name="description" [(ngModel)]="description" rows="6" required > </textarea>
+
+            <button type="submit" [disabled]="productForm.form.invalid"> Add </button>
+        </form>
+
+
+
+    </div>
+
+</div>
