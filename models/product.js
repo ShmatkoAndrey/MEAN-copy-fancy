@@ -25,6 +25,13 @@ var schemaProduct =  new db.Schema({
         type: Array,
         default: []
     },
+    descriptionPhoto: {
+        type: Array,
+        default: []
+    },
+    mainPhoto: {
+      type: String
+    },
     created : {
         type: Date,
         default: Date.now()
@@ -40,7 +47,9 @@ schemaProduct.methods.getFullInfo = function (callback) {
         price:          this.price,
         user_likes:     this.user_likes,
         tags:           this.tags,
-        created:        this.created
+        created:        this.created,
+        descriptionPhoto: this.descriptionPhoto,
+        mainPhoto: this.mainPhoto
     };
 
     var User = require('./user');

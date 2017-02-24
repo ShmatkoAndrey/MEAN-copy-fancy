@@ -28,7 +28,14 @@ export class ModalNewProductComponent {
     }
 
     onSubmit() {
-        // this.productSetvice.createNewProduct({ title: this.title, description: this.description, price: this.price, tags: this.tags.split(' ') })
+        this.productSetvice.createNewProduct({
+            title: this.title,
+            description: this.description,
+            price: this.price,
+            tags: this.tags.split(' '),
+            mainPhoto: this.mainPhoto,
+            descriptionPhoto: this.descriptionPhoto
+        })
     }
 
     onChangeMain(e) {

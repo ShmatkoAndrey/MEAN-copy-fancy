@@ -21,7 +21,14 @@ var ModalNewProductComponent = (function () {
         this.modalOff.emit();
     };
     ModalNewProductComponent.prototype.onSubmit = function () {
-        // this.productSetvice.createNewProduct({ title: this.title, description: this.description, price: this.price, tags: this.tags.split(' ') })
+        this.productSetvice.createNewProduct({
+            title: this.title,
+            description: this.description,
+            price: this.price,
+            tags: this.tags.split(' '),
+            mainPhoto: this.mainPhoto,
+            descriptionPhoto: this.descriptionPhoto
+        });
     };
     ModalNewProductComponent.prototype.onChangeMain = function (e) {
         var file = e.dataTransfer ? e.dataTransfer.files[0] : e.target.files[0];

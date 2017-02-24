@@ -1,5 +1,5 @@
 import  { Injectable } from '@angular/core';
-import  { Http, URLSearchParams } from '@angular/http';
+import  { Http, URLSearchParams, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/toPromise'
 
 @Injectable()
@@ -17,11 +17,15 @@ export class ProductService {
     }
 
     createNewProduct(product: any) {
-        let data = new URLSearchParams();
+        let data: FormData = new FormData();
         data.append('title', product.title);
         data.append('description', product.description);
         data.append('price', product.price);
         data.append('tags', product.tags);
+        data.append('mainPhoto', product.mainPhoto);
+        product.descriptionPhoto.forEach(function (e, i) {
+            data.append('descriptionPhoto['+ i +']', e);
+        });
 
         return this.http.post('/api/products', data)
             .toPromise()

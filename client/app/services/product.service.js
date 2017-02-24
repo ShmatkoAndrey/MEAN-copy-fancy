@@ -25,11 +25,15 @@ var ProductService = (function () {
     };
     ProductService.prototype.createNewProduct = function (product) {
         var _this = this;
-        var data = new http_1.URLSearchParams();
+        var data = new FormData();
         data.append('title', product.title);
         data.append('description', product.description);
         data.append('price', product.price);
         data.append('tags', product.tags);
+        data.append('mainPhoto', product.mainPhoto);
+        product.descriptionPhoto.forEach(function (e, i) {
+            data.append('descriptionPhoto[' + i + ']', e);
+        });
         return this.http.post('/api/products', data)
             .toPromise()
             .then(function (res) { return res.json().product; })
