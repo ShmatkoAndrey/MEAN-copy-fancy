@@ -11,8 +11,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var product_service_1 = require("../../services/product.service");
 var ModalNewProductComponent = (function () {
-    function ModalNewProductComponent(productSetvice) {
-        this.productSetvice = productSetvice;
+    function ModalNewProductComponent(productService) {
+        this.productService = productService;
         this.modalOff = new core_1.EventEmitter();
         this.descriptionPhoto = [];
         this.imageDescriptionSrc = [];
@@ -21,7 +21,8 @@ var ModalNewProductComponent = (function () {
         this.modalOff.emit();
     };
     ModalNewProductComponent.prototype.onSubmit = function () {
-        this.productSetvice.createNewProduct({
+        this.modalOff.emit();
+        this.productService.createNewProduct({
             title: this.title,
             description: this.description,
             price: this.price,
@@ -47,8 +48,6 @@ var ModalNewProductComponent = (function () {
         this.imageMainSrc = reader.result;
     };
     ModalNewProductComponent.prototype.onChangeDescription = function (e) {
-        this.descriptionPhoto = [];
-        this.imageDescriptionSrc = [];
         var files = e.target.files;
         var files_arr = Object.keys(files).map(function (key) { return files[key]; });
         files_arr.forEach(function (file) {

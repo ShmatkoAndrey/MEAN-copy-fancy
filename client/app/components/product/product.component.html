@@ -1,4 +1,4 @@
-<div class="product">
+<div class="product" (click)="modalOn()">
     <img class="product-main-image" [src]="'/images/' + product._id + '/' + product.mainPhoto" />
     <div class="product-info">
         <div class="product-left-info">
@@ -6,9 +6,11 @@
             <div class="product-tags"> {{ product.tags }} </div>
             <div class="product-like">
                 <div class="btn-like"> <3 {{ product.user_likes.length }} </div>
-                 <!--ausers avatar-->
+                 <!--users avatar-->
             </div>
         </div>
         <div class="product-price"> ${{ product.price }} </div>
     </div>
 </div>
+
+<modal-showp [product]="product" [show_modal]="show_modal" (modalOff)="modalOff()" >  </modal-showp>

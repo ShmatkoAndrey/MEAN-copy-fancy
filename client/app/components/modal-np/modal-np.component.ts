@@ -21,14 +21,16 @@ export class ModalNewProductComponent {
     imageMainSrc;
     imageDescriptionSrc: string[] = [];
 
-    constructor(private productSetvice: ProductService) {}
+    constructor(private productService: ProductService) {}
 
     onOff() {
         this.modalOff.emit();
     }
 
     onSubmit() {
-        this.productSetvice.createNewProduct({
+        this.modalOff.emit();
+
+        this.productService.createNewProduct({
             title: this.title,
             description: this.description,
             price: this.price,
@@ -57,9 +59,6 @@ export class ModalNewProductComponent {
     }
 
     onChangeDescription(e) {
-        this.descriptionPhoto = [];
-        this.imageDescriptionSrc = [];
-
         let files = e.target.files;
         let files_arr = Object.keys(files).map(function (key) { return files[key]; });
 

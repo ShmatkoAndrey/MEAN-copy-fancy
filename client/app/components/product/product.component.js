@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var ProductComponent = (function () {
     function ProductComponent() {
+        this.show_modal = false;
     }
     ProductComponent.prototype.formatDate = function (date) {
         var d = new Date();
@@ -25,6 +26,12 @@ var ProductComponent = (function () {
         var monthIndex = d.getMonth();
         var year = d.getFullYear();
         return day + ' ' + monthNames[monthIndex] + ' ' + year;
+    };
+    ProductComponent.prototype.modalOn = function () {
+        this.show_modal = true;
+    };
+    ProductComponent.prototype.modalOff = function () {
+        this.show_modal = false;
     };
     return ProductComponent;
 }());

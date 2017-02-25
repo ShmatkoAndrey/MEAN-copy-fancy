@@ -7,8 +7,8 @@ import { Component, Input } from '@angular/core';
     styleUrls: ['product.component.css']
 })
 export class ProductComponent {
-
     @Input() product;
+    show_modal = false;
 
     formatDate(date) {
         let d = new Date();
@@ -26,6 +26,14 @@ export class ProductComponent {
         let year = d.getFullYear();
 
         return day + ' ' + monthNames[monthIndex] + ' ' + year;
+    }
+
+    modalOn() {
+        this.show_modal = true;
+    }
+
+    modalOff() {
+        this.show_modal = false;
     }
 
 }

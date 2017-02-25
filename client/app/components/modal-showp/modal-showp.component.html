@@ -1,0 +1,27 @@
+<div id="myModal" class="modal" [class.hide]="!show_modal"  >
+    <div class="modal-content">
+        <span class="close" (click)="onOff()">&times;</span>
+
+
+        <div class="product-content">
+            <img class="product-main-image" [src]="'/images/' + product._id + '/' + main_img" />
+            <div class="product-info">
+                <div class="product-left-info">
+                    <div class="product-title"> {{ product.title }}</div>
+                    <div class="product-tags"> {{ product.tags }} </div>
+
+                    <div class="description-imgs">
+                        <div class="imgs-menu">
+                            <img class="description-photo"  [src]="'/images/' + product._id + '/' + product.mainPhoto" (click)="showPhoto(product.mainPhoto)" />
+                            <img class="description-photo" *ngFor="let photo of product.descriptionPhoto" [src]="'/images/' + product._id + '/' + photo" (click)="showPhoto(photo)" />
+                        </div>
+                        <div class="product-description"> {{product.description}} </div>
+                    </div>
+                </div>
+                <div class="product-price"> ${{ product.price }} </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
