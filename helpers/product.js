@@ -1,4 +1,8 @@
+var Product = require('../models/product');
 var userHelper = require('../helpers/user');
+var fileHepler = require('../helpers/files');
+var formidable = require('formidable');
+var mkdirp = require('mkdirp');
 
 exports.getFullInfoProducts = function (products, callback) {
     var ii = 0;
@@ -27,5 +31,62 @@ exports.Like = function (session_user_id, post, callback) {
         }
 
         callback(new_likes);
+    });
+};
+
+exports.createProduct = function (req, res, callback) {
+    var form = new formidable.IncomingForm();
+    form.parse(req, function (err, fields, files) {
+        var product = fields, descriptionPhotos = [], mainPhoto = files.mainPhoto;
+        for (var i = 0; i < Object.keys(files).length - 1; i++) {
+            descriptionPhotos.push(files['descriptionPhoto[' + i + ']']);
+        }
+
+        userHelper.current_user(req.session.user_id, function (user) {
+
+            // if (user && ( user.admin || user.store )) {
+            var new_product = new Product({
+                user_id: user.id,
+                title: product.title,
+                description: product.description,
+                price: product.price,
+                tags: product.tags
+            });
+
+            var dphotos = [], ii = 0;
+
+            descriptionPhotos.forEach(function (e, i) {
+
+                mkdirp('./images/' + new_product._id, function (err) {
+
+                    var name = Math.random().toString(36).substring(7) + '.' + e.name.split('.').pop();
+                    fileHepler.saveImg(e.path, __dirname + './../images/' + new_product._id + '/' + name, function () {
+                        dphotos[i] = name;
+                        ii++;
+                        if (ii == descriptionPhotos.length) {
+                            var mainPhotoDir = Math.random().toString(36).substring(7) + '.' + mainPhoto.name.split('.').pop();
+                            fileHepler.saveImg(mainPhoto.path, __dirname + './../images/' + new_product._id + '/' + mainPhotoDir, function () {
+                                new_product.descriptionPhoto = dphotos;
+                                new_product.mainPhoto = mainPhotoDir;
+                                new_product.save(function (err) {
+                                    if (err) res.json({error: err});
+                                    else {
+                                        new_product.getFullInfo(function (product) {
+                                            callback(product);
+                                        });
+                                    }
+                                });
+                            });
+                        }
+                    });
+
+                });
+            });
+            // } else {
+            //     res.json({error: "Please, login store acc"});
+            // }
+
+        });
+
     });
 };
