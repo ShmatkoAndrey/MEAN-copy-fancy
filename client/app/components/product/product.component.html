@@ -1,5 +1,5 @@
 <div class="product">
-    <div class="product-main-image"> </div>
+    <img class="product-main-image" [src]="'/images/' + product._id + '/' + product.mainPhoto" />
     <div class="product-info">
         <div class="product-left-info">
             <div class="product-title"> {{ product.title }}</div>

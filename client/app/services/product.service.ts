@@ -12,7 +12,7 @@ export class ProductService {
         return this.http.get('/api/products')
             .toPromise()
             .then(res => res.json().products)
-            .then(products => this.products = products)
+            .then(products => this.products = products.reverse())
             .catch(this.handleError);
     }
 

@@ -20,7 +20,7 @@ var ProductService = (function () {
         return this.http.get('/api/products')
             .toPromise()
             .then(function (res) { return res.json().products; })
-            .then(function (products) { return _this.products = products; })
+            .then(function (products) { return _this.products = products.reverse(); })
             .catch(this.handleError);
     };
     ProductService.prototype.createNewProduct = function (product) {
