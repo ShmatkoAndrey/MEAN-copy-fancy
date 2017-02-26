@@ -48,6 +48,12 @@
     border: 1px solid dodgerblue;
     color: dodgerblue;
     border-radius: 3px;
+
+    cursor: hand;
+}
+
+.btn-like:hover {
+    background-color: rgba(30, 144, 255, 0.2);
 }
 
 .product-price {
@@ -59,4 +65,10 @@
     margin: 10px;
     border: 1px solid grey;
     border-radius: 3px;
+
+    cursor: hand;
+}
+
+.product-price:hover {
+    background-color: rgba(128, 128, 128, 0.2);
 }

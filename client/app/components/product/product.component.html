@@ -1,11 +1,11 @@
-<div class="product" (click)="modalOn()">
-    <img class="product-main-image" [src]="'/images/' + product._id + '/' + product.mainPhoto" />
+<div class="product">
+    <img class="product-main-image" [src]="'/images/' + product._id + '/' + product.mainPhoto" (click)="modalOn()" />
     <div class="product-info">
         <div class="product-left-info">
-            <div class="product-title"> {{ product.title }}</div>
-            <div class="product-tags"> {{ product.tags }} </div>
+            <div class="product-title"  (click)="modalOn()"> {{ product.title }} </div>
+            <div class="product-tags"   (click)="modalOn()"> {{ product.tags }} </div>
             <div class="product-like">
-                <div class="btn-like"> <3 {{ product.user_likes.length }} </div>
+                <div class="btn-like"> <3 {{ product.user_likes.length }} </div> <!--click like-->
                  <!--users avatar-->
             </div>
         </div>
