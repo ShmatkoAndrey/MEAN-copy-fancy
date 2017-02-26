@@ -16,11 +16,12 @@
 }
 
 .modal-content {
-    flex: 0 0 760px;
+    flex: 0 0 770px;
     background-color: #fefefe;
     margin: 2% 0;
     padding: 20px;
     border: 1px solid #888;
+    min-height: 700px;
 }
 
 .close {
