@@ -22,6 +22,8 @@ var ModalShowProductComponent = (function () {
     ModalShowProductComponent.prototype.showPhoto = function (photo) {
         this.main_img = photo;
     };
+    ModalShowProductComponent.prototype.contentClick = function () {
+    };
     return ModalShowProductComponent;
 }());
 __decorate([

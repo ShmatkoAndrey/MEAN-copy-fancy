@@ -24,4 +24,8 @@ export class ModalShowProductComponent implements OnInit{
         this.main_img = photo;
     }
 
+    contentClick() {
+
+    }
+
 }
