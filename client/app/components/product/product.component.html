@@ -5,7 +5,7 @@
             <div class="product-title"  (click)="modalOn()"> {{ product.title }} </div>
             <div class="product-tags"   (click)="modalOn()"> {{ product.tags }} </div>
             <div class="product-like">
-                <div class="btn-like"> <3 {{ product.user_likes.length }} </div> <!--click like-->
+                <div class="btn-like" (click)="onLike()"> <3 {{ product.user_likes.length }} </div> <!--click like-->
                  <!--users avatar-->
             </div>
         </div>

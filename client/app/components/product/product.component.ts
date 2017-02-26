@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 
+import { ProductService } from '../../services/product.service';
+
 @Component({
     moduleId: module.id,
     selector: 'product',
@@ -9,6 +11,8 @@ import { Component, Input } from '@angular/core';
 export class ProductComponent {
     @Input() product;
     show_modal = false;
+
+    constructor(private productSetvice: ProductService) {}
 
     formatDate(date) {
         let d = new Date();
@@ -34,6 +38,10 @@ export class ProductComponent {
 
     modalOff() {
         this.show_modal = false;
+    }
+
+    onLike() {
+        this.productSetvice.like(this.product);
     }
 
 }

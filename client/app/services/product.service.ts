@@ -34,9 +34,33 @@ export class ProductService {
             .catch(this.handleError);
     }
 
+    like(product) {
+        return this.http.get('/api/products/like/' + product._id)
+            .toPromise()
+            .then(res => res.json().product)
+            .then(product => {
+                let index = this.findIndexById(product._id);
+                if (index > -1) {
+                    this.products[index] = product;
+                }
+            })
+            .catch(this.handleError);
+    }
+
 
     private handleError(err: any) {
         console.error('Error:', err);
         return Promise.reject(err.message || err);
+    }
+
+    private findIndexById(id): number {
+        let index = -1;
+        this.products.forEach(function (e, i) {
+            if(e._id == id) {
+                index = i;
+                return index;
+            }
+        });
+        return index;
     }
 }

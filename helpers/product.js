@@ -17,7 +17,7 @@ exports.getFullInfoProducts = function (products, callback) {
     })
 };
 
-exports.Like = function (session_user_id, post, callback) {
+exports.Like = function (session_user_id, product, callback) {
     userHelper.current_user(session_user_id, function (user) {
         var new_likes = product.user_likes;
 

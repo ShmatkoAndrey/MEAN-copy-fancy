@@ -40,9 +40,32 @@ var ProductService = (function () {
             .then(function (product) { return _this.products.unshift(product); })
             .catch(this.handleError);
     };
+    ProductService.prototype.like = function (product) {
+        var _this = this;
+        return this.http.get('/api/products/like/' + product._id)
+            .toPromise()
+            .then(function (res) { return res.json().product; })
+            .then(function (product) {
+            var index = _this.findIndexById(product._id);
+            if (index > -1) {
+                _this.products[index] = product;
+            }
+        })
+            .catch(this.handleError);
+    };
     ProductService.prototype.handleError = function (err) {
         console.error('Error:', err);
         return Promise.reject(err.message || err);
+    };
+    ProductService.prototype.findIndexById = function (id) {
+        var index = -1;
+        this.products.forEach(function (e, i) {
+            if (e._id == id) {
+                index = i;
+                return index;
+            }
+        });
+        return index;
     };
     return ProductService;
 }());
