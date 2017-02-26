@@ -27,6 +27,11 @@
     object-fit: cover;
 }
 
+.imgs-menu {
+    height: 650px;
+    overflow: auto;
+}
+
 .product-info {
     display: flex;
     padding: 20px;
