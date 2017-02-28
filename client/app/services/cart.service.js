@@ -17,13 +17,16 @@ var CartService = (function () {
         this.cart = [];
     }
     CartService.prototype.getCart = function () {
-        // // http://stackoverflow.com/questions/11344531/pure-javascript-store-object-in-cookie
-        // document.cookie = "userName=Vasya";
-        // console.log(this.getCookie('userName'));
+        console.log(document.cookie);
+        var c = this.getCookie('cart');
+        if (c) {
+            this.cart = JSON.parse(c);
+        }
         return this.cart;
     };
     CartService.prototype.addToCart = function (product) {
-        this.cart.push(product);
+        this.cart.push({ title: product.title, price: product.price, _id: product._id });
+        this.setCookie('cart', this.cart, { expires: 36000 });
     };
     CartService.prototype.deleteFromCart = function (product) {
     };
@@ -46,7 +49,7 @@ var CartService = (function () {
         if (expires && expires.toUTCString) {
             options.expires = expires.toUTCString();
         }
-        value = encodeURIComponent(value);
+        value = JSON.stringify(value);
         var updatedCookie = name + "=" + value;
         for (var propName in options) {
             updatedCookie += "; " + propName;

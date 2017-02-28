@@ -8,21 +8,24 @@ export class CartService {
 
     constructor(private http: Http) {}
 
-
     getCart() {
-        // // http://stackoverflow.com/questions/11344531/pure-javascript-store-object-in-cookie
-        // document.cookie = "userName=Vasya";
-        // console.log(this.getCookie('userName'));
+        console.log(document.cookie);
+        let c = this.getCookie('cart');
+        if(c) {
+            this.cart = JSON.parse(c);
+        }
         return this.cart;
     }
 
     addToCart(product) {
-        this.cart.push(product);
+        this.cart.push({title: product.title, price: product.price, _id: product._id});
+        this.setCookie('cart', this.cart, {expires: 36000});
     }
 
     deleteFromCart(product) {
 
     }
+
 
 
     private handleError(err: any) {
@@ -36,6 +39,7 @@ export class CartService {
         ));
         return matches ? decodeURIComponent(matches[1]) : undefined;
     }
+
     private setCookie(name, value, options) {
         options = options || {};
 
@@ -50,7 +54,7 @@ export class CartService {
             options.expires = expires.toUTCString();
         }
 
-        value = encodeURIComponent(value);
+        value = JSON.stringify(value);
 
         let updatedCookie = name + "=" + value;
 
