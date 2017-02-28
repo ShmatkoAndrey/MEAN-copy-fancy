@@ -23,6 +23,7 @@ var modal_showp_component_1 = require("./components/modal-showp/modal-showp.comp
 var cart_component_1 = require("./components/cart/cart.component");
 var product_service_1 = require("./services/product.service");
 var user_service_1 = require("./services/user.service");
+var cart_service_1 = require("./services/cart.service");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -49,7 +50,7 @@ AppModule = __decorate([
             modal_showp_component_1.ModalShowProductComponent,
             cart_component_1.CartComponent
         ],
-        providers: [product_service_1.ProductService, user_service_1.UserService],
+        providers: [product_service_1.ProductService, user_service_1.UserService, cart_service_1.CartService],
         bootstrap: [app_component_1.AppComponent]
     })
 ], AppModule);

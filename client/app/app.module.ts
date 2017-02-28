@@ -18,6 +18,7 @@ import { CartComponent }   from './components/cart/cart.component';
 
 import { ProductService } from './services/product.service';
 import { UserService } from './services/user.service';
+import { CartService } from './services/cart.service';
 
 @NgModule({
   imports: [
@@ -41,7 +42,7 @@ import { UserService } from './services/user.service';
       CartComponent
   ],
 
-  providers: [ ProductService, UserService ],
+  providers: [ ProductService, UserService, CartService ],
 
   bootstrap:    [ AppComponent ]
 })
