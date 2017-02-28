@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 import { ProductService } from '../../services/product.service';
+import { UserService } from '../../services/user.service';
 import { CartService } from '../../services/cart.service';
 
 @Component({
@@ -14,6 +15,7 @@ export class ProductComponent {
     show_modal = false;
 
     constructor(private productSetvice: ProductService,
+                private userService: UserService,
                 private cartService: CartService) {}
 
     formatDate(date) {
@@ -43,7 +45,7 @@ export class ProductComponent {
     }
 
     onLike() {
-        this.productSetvice.like(this.product);
+        if(this.userService.user) { this.productSetvice.like(this.product); }
     }
 
     onAddToCart() {

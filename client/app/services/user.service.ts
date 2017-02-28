@@ -37,7 +37,7 @@ export class UserService {
         return this.http.post('/api/registration', data)
             .toPromise()
             .then(res => res.json().user)
-            .then(user => this.user = {})
+            .then(user => this.user = user)
             .catch(this.handleError);
     }
 

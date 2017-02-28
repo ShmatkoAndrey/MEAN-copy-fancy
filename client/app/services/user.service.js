@@ -43,7 +43,7 @@ var UserService = (function () {
         return this.http.post('/api/registration', data)
             .toPromise()
             .then(function (res) { return res.json().user; })
-            .then(function (user) { return _this.user = {}; })
+            .then(function (user) { return _this.user = user; })
             .catch(this.handleError);
     };
     UserService.prototype.logout = function () {

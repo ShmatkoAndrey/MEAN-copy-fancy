@@ -1,12 +1,7 @@
-<div id="cart">
-
-    <span > {{getSum()}} </span>
+<div id="cart" *ngIf="cart.length">
+    <span class="sum" > Sum: {{getSum()}} </span>
     <hr>
     <ul>
-        <li *ngFor="let product of cart"> {{product.title}} - ${{product.price}} </li>
+        <li *ngFor="let product of cart"> <div class="title" >{{product.title}}</div> <div class="price"> ${{product.price}} </div></li>
     </ul>
-
-
-
-
 </div>

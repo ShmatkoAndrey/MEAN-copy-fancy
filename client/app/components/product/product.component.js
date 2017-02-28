@@ -10,10 +10,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var product_service_1 = require("../../services/product.service");
+var user_service_1 = require("../../services/user.service");
 var cart_service_1 = require("../../services/cart.service");
 var ProductComponent = (function () {
-    function ProductComponent(productSetvice, cartService) {
+    function ProductComponent(productSetvice, userService, cartService) {
         this.productSetvice = productSetvice;
+        this.userService = userService;
         this.cartService = cartService;
         this.show_modal = false;
     }
@@ -38,7 +40,9 @@ var ProductComponent = (function () {
         this.show_modal = false;
     };
     ProductComponent.prototype.onLike = function () {
-        this.productSetvice.like(this.product);
+        if (this.userService.user) {
+            this.productSetvice.like(this.product);
+        }
     };
     ProductComponent.prototype.onAddToCart = function () {
         this.cartService.addToCart(this.product);
@@ -57,6 +61,7 @@ ProductComponent = __decorate([
         styleUrls: ['product.component.css']
     }),
     __metadata("design:paramtypes", [product_service_1.ProductService,
+        user_service_1.UserService,
         cart_service_1.CartService])
 ], ProductComponent);
 exports.ProductComponent = ProductComponent;
