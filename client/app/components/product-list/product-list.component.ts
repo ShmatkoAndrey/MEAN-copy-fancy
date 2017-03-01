@@ -11,10 +11,9 @@ import { ProductService } from '../../services/product.service';
 export class ProductListComponent implements OnInit{
     products;
 
-    constructor(private productSetvice: ProductService) {}
+    constructor(private productService: ProductService) {}
 
-    ngOnInit(){
-        this.productSetvice.getProducts().then(products => this.products = products);
+    ngOnInit() {
+        this.productService.getProducts().then(products => this.products = products);
     }
-
 }

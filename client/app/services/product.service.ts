@@ -14,7 +14,10 @@ export class ProductService {
         return this.http.get('/api/products/'+ this.n_start + '/' + this.n)
             .toPromise()
             .then(res => res.json().products)
-            .then(products => this.products.concat(products))
+            .then(products => {
+                this.products = this.products.concat(products)
+                this.n_start += this.n;
+            })
             .catch(this.handleError);
     }
 
@@ -46,15 +49,6 @@ export class ProductService {
                     this.products[index] = product;
                 }
             })
-            .catch(this.handleError);
-    }
-
-    getNProducts(n_start, n) {
-        let products_n = [];
-        return this.http.get('/api/products/'+ n_start + '/' + n)
-            .toPromise()
-            .then(res => res.json().products)
-            .then(products => products_n = products)
             .catch(this.handleError);
     }
 
