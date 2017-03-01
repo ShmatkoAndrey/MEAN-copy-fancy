@@ -3,16 +3,21 @@
     <fancy-header> </fancy-header>
 
     <div id="main-app" (scroll)="onScroll($event)">
+
         <div class="empty"></div>
 
-        <tags-list> </tags-list>
+        <div id="main-content">
+            <div id="left-side">
+                <tags-list> </tags-list>
+            </div>
 
-        <product-list> </product-list>
+            <product-list> </product-list>
 
-        <div id="right-side">
-            <cart> </cart>
-            <popular> </popular>
-            <!--<stores> </stores>-->
+            <div id="right-side">
+                <cart> </cart>
+                <popular> </popular>
+                <!--<stores> </stores>-->
+            </div>
         </div>
 
         <div class="empty"></div>

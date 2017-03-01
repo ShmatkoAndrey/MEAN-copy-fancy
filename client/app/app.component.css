@@ -14,16 +14,22 @@ fancy-header {
     overflow-y: auto;
 }
 
-tags-list {
-    flex: 1 0 200px;
+#main-content {
+    flex: 0 0 1200px;
+    display: flex;
+    flex-direction: row;
+}
+
+#left-side {
+    flex: 0 0 240px;
 }
 
 product-list {
-    flex : 1 0 550px;
+    flex : 0 0 700px;
 }
 
 #right-side {
-    flex: 1 0 200px;
+    flex: 0 0 200px;
 }
 
 .empty {
