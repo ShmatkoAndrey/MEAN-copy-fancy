@@ -17,7 +17,6 @@ var CartService = (function () {
         this.cart = [];
     }
     CartService.prototype.getCart = function () {
-        console.log(document.cookie);
         var c = this.getCookie('cart');
         if (c) {
             this.cart = JSON.parse(c);

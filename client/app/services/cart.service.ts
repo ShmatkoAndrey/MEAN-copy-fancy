@@ -9,11 +9,8 @@ export class CartService {
     constructor(private http: Http) {}
 
     getCart() {
-        console.log(document.cookie);
         let c = this.getCookie('cart');
-        if(c) {
-            this.cart = JSON.parse(c);
-        }
+        if(c) { this.cart = JSON.parse(c); }
         return this.cart;
     }
 

@@ -4,15 +4,17 @@ import 'rxjs/add/operator/toPromise'
 
 @Injectable()
 export class ProductService {
-    products;
+    products = [];
+    n_start = 0;
+    n = 5;
 
     constructor(private http: Http) {}
 
     getProducts() {
-        return this.http.get('/api/products')
+        return this.http.get('/api/products/'+ this.n_start + '/' + this.n)
             .toPromise()
             .then(res => res.json().products)
-            .then(products => this.products = products.reverse())
+            .then(products => this.products.concat(products))
             .catch(this.handleError);
     }
 
@@ -44,6 +46,15 @@ export class ProductService {
                     this.products[index] = product;
                 }
             })
+            .catch(this.handleError);
+    }
+
+    getNProducts(n_start, n) {
+        let products_n = [];
+        return this.http.get('/api/products/'+ n_start + '/' + n)
+            .toPromise()
+            .then(res => res.json().products)
+            .then(products => products_n = products)
             .catch(this.handleError);
     }
 

@@ -14,13 +14,16 @@ require("rxjs/add/operator/toPromise");
 var ProductService = (function () {
     function ProductService(http) {
         this.http = http;
+        this.products = [];
+        this.n_start = 0;
+        this.n = 5;
     }
     ProductService.prototype.getProducts = function () {
         var _this = this;
-        return this.http.get('/api/products')
+        return this.http.get('/api/products/' + this.n_start + '/' + this.n)
             .toPromise()
             .then(function (res) { return res.json().products; })
-            .then(function (products) { return _this.products = products.reverse(); })
+            .then(function (products) { return _this.products.concat(products); })
             .catch(this.handleError);
     };
     ProductService.prototype.createNewProduct = function (product) {
@@ -51,6 +54,14 @@ var ProductService = (function () {
                 _this.products[index] = product;
             }
         })
+            .catch(this.handleError);
+    };
+    ProductService.prototype.getNProducts = function (n_start, n) {
+        var products_n = [];
+        return this.http.get('/api/products/' + n_start + '/' + n)
+            .toPromise()
+            .then(function (res) { return res.json().products; })
+            .then(function (products) { return products_n = products; })
             .catch(this.handleError);
     };
     ProductService.prototype.handleError = function (err) {
