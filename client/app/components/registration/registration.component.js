@@ -25,8 +25,25 @@ var RegistrationComponent = (function () {
             password: this.password,
             password_confirmation: this.password_confirmation,
             store: this.store || false,
-            admin: this.admin || false
+            admin: this.admin || false,
+            avatar: this.avatar
         });
+    };
+    RegistrationComponent.prototype.onChangeAvatar = function (e) {
+        var file = e.dataTransfer ? e.dataTransfer.files[0] : e.target.files[0];
+        var pattern = /image-*/;
+        var reader = new FileReader();
+        if (!file.type.match(pattern)) {
+            console.log('invalid format');
+            return;
+        }
+        reader.onload = this._handleReaderLoadedMain.bind(this);
+        reader.readAsDataURL(file);
+        this.avatar = file;
+    };
+    RegistrationComponent.prototype._handleReaderLoadedMain = function (e) {
+        var reader = e.target;
+        this.imageAvatarSrc = reader.result;
     };
     return RegistrationComponent;
 }());

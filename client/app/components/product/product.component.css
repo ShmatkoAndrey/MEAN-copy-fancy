@@ -37,18 +37,18 @@
 
 .product-like {
     flex: 1;
+    display: flex;
+    align-items: center;
 }
 
 .btn-like {
     width: 40px;
-
     font-size: 14px;
     padding: 5px;
-    margin: 15px 0;
+    margin: 15px 10px 15px 0;
     border: 1px solid dodgerblue;
     color: dodgerblue;
     border-radius: 3px;
-
     cursor: hand;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -81,4 +81,12 @@
 
 .product-price:hover {
     background-color: rgba(128, 128, 128, 0.2);
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    margin: 10px -10px 10px 0;
+    border: 2px solid white;
 }

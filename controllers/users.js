@@ -28,38 +28,10 @@ module.exports = function(app){
     });
 
     app.post('/api/registration', function (req, res) {
-        var username = req.body.username;
-        var password = req.body.password;
-        var password_confirm = req.body.password_confirmation;
-        var store = req.body.store;
-        var admin = req.body.admin;
-        if(password === password_confirm){
-            User.findOne({username: username}, function (err, user) {
-                if(err) res.json({ error: err });
-                else {
-                    if(user) {
-                        res.json({ error: "Username busy" });
-                    }
-                    else{
-                        var new_user = new User({
-                            username: username,
-                            password: password,
-                            store: store,
-                            admin: admin
-                        });
-                        new_user.save(function (err) {
-                            if(err) res.json({ error: err });
-                            else {
-                                req.session.user_id = new_user._id;
-                                res.json({ user: new_user.serialized() });
-                            }
-                        });
-                    }
-                }
-            })
-        } else {
-            res.json({ error: "Password != password_confirm" });
-        }
+       userHelper.saveUser(req, function (user) {
+           req.session.user_id = user._id;
+           res.json({ user: user.serialized() });
+       })
     });
 
     app.get('/api/logout', function (req, res) {

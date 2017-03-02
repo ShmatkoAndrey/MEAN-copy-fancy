@@ -1,7 +1,6 @@
 var Product = require('../models/product');
 var productHelper = require('../helpers/product');
 var userHelper = require('../helpers/user');
-var path = require('path');
 
 module.exports = function(app){
 
@@ -26,10 +25,6 @@ module.exports = function(app){
         productHelper.createProduct(req, res, function (product) {
             res.json({ product: product });
         })
-    });
-
-    app.get('/images/:product_id/:photo', function (req, res) {
-        res.sendFile(path.resolve(__dirname + './../images/' + req.params.product_id + '/' + req.params.photo));
     });
 
     app.put('/api/products/:id', function (req, res) {

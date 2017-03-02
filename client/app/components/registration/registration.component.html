@@ -1,8 +1,7 @@
-<form class="login-form" (ngSubmit)="onSubmit(); registrationForm.reset();" #registrationForm="ngForm" >
+<form class="login-form" (ngSubmit)="onSubmit(); registrationForm.reset();" #registrationForm="ngForm" enctype="multipart/form-data"  >
     <input type="text" placeholder="Login" name="username" [(ngModel)]="username" required>
     <input type="password" placeholder="Password" name="password" [(ngModel)]="password" required>
     <input type="password" placeholder="Password" name="password_confirmation" [(ngModel)]="password_confirmation" required>
-
     <div class="slide-store">
         <div class="slide">
             <input type="checkbox" value="store" id="slideStore" name="check" [(ngModel)]="store" />
@@ -10,7 +9,6 @@
         </div>
         <div class="label"> Store</div>
     </div>
-
     <div class="slide-admin">
         <div class="slide">
             <input type="checkbox" value="admin" id="slideAdmin" name="check" [(ngModel)]="admin" />
@@ -19,8 +17,8 @@
         <div class="label"> Admin</div>
     </div>
 
-
-
+    <input type="file" name="avatar"  (change)="onChangeAvatar($event)" />
+    <img *ngIf="imageAvatarSrc" class="main-photo" [src]="imageAvatarSrc" />
 
     <button type="submit" [disabled]="registrationForm.form.invalid"> Registration </button>
 </form>

@@ -29,12 +29,13 @@ export class UserService {
     }
 
     registration(user: any) {
-        let data = new URLSearchParams();
+        let data: FormData = new FormData();
         data.append('username', user.username);
         data.append('password', user.password);
         data.append('password_confirmation', user.password_confirmation);
         data.append('store', user.store);
         data.append('admin', user.admin);
+        data.append('avatar', user.avatar);
 
         return this.http.post('/api/registration', data)
             .toPromise()

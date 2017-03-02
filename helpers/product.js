@@ -44,9 +44,7 @@ exports.createProduct = function (req, res, callback) {
         for (var i = 0; i < Object.keys(files).length - 1; i++) {
             descriptionPhotos.push(files['descriptionPhoto[' + i + ']']);
         }
-
         userHelper.current_user(req.session.user_id, function (user) {
-
             if (user && ( user.admin || user.store )) {
             var new_product = new Product({
                 user_id: user.id,
@@ -55,13 +53,9 @@ exports.createProduct = function (req, res, callback) {
                 price: product.price,
                 tags: product.tags
             });
-
             var dphotos = [], ii = 0;
-
             descriptionPhotos.forEach(function (e, i) {
-
                 mkdirp('./images/' + new_product._id, function (err) {
-
                     var name = Math.random().toString(36).substring(7) + '.' + e.name.split('.').pop();
                     fileHepler.saveImg(e.path, __dirname + './../images/' + new_product._id + '/' + name, function () {
                         dphotos[i] = name;

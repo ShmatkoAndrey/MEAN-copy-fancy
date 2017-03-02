@@ -61,7 +61,8 @@ schemaUser.methods.serialized = function () {
         _id: this._id,
         username: this.username,
         admin: this.admin,
-        store: this.store
+        store: this.store,
+        avatar: this.avatar
     }
 
 };

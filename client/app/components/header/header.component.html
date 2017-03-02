@@ -11,12 +11,13 @@
             <span class="auth-type" (click)="modalLROn()" (click)="switchLogin(true)"> Login </span>
             <modal-lr [show_modal]="show_LR_modal" (modalOff)="modalLROff()" (switchLogin)="switchLogin($event)" [isLogin]="isLogin"> </modal-lr>
         </span>
-        <span *ngIf="userService.user && userService.user._id != undefined">
+        <div class="user-info" *ngIf="userService.user && userService.user._id != undefined">
             <span class="btn-new-post" (click)="modaNPOn()">+</span>
             <modal-np [show_modal]="show_NP_modal" (modalOff)="modalNPOff()" > </modal-np>
-            {{ userService.user.username }} | admin: {{userService.user.admin}}; store: {{userService.user.store}}|  <span (click)="logout()" > Logout </span>
-
-        </span>
+            <img class="avatar" [src]="'/images/users/' + userService.user._id + '/avatar.jpg'" />
+            <span class="user-username"> {{ userService.user.username }} </span>
+            <span (click)="logout()" > Logout </span>
+        </div>
     </div>
     <div class="empty"></div>
 </div>

@@ -6,7 +6,7 @@
             <div class="product-tags"   (click)="modalOn()"> {{ product.tags }} </div>
             <div class="product-like">
                 <div class="btn-like" (click)="onLike()"> <3 {{ product.user_likes.length }} </div> <!--click like-->
-                 <!--users avatar-->
+                <img class="avatar" *ngFor="let user of product.user_likes" [src]="'/images/users/' + user + '/avatar.jpg'" />
             </div>
         </div>
         <div class="product-price" (click)="onAddToCart()"> ${{ product.price }} </div>
