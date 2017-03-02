@@ -47,10 +47,11 @@ export class ProductService {
     }
 
     like(product) {
-        return this.http.get('/api/products/like/' + product._id)
+        return this.http.get('/api/like/' + product._id)
             .toPromise()
             .then(res => res.json().product)
             .then(product => {
+                console.log(product);
                 let index = this.findIndexById(product._id);
                 if (index > -1) {
                     this.products[index] = product;

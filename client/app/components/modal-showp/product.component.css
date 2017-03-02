@@ -11,14 +11,44 @@
     display: flex;
 }
 
-.product-main-image {
-    object-fit: contain;
+.product-main-image-block {
     width: 650px;
     height: 650px;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
-    display: inline-block;
     background-color: #f2f2f2;
+}
+
+.product-main-image {
+    object-fit: contain;
+    width: inherit;
+    height: inherit;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+.left-arrow, .right-arrow {
+    font-size: 36px;
+    padding: 20px;
+    background-color: rgba(211, 211, 211, 0.5);
+    width: 30px;
+    cursor: hand;
+    position: fixed;
+    margin-top: 290px;
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.right-arrow {
+    margin-left: 580px;
+}
+
+.left-arrow:hover, .right-arrow:hover {
+    background-color: rgba(211, 211, 211, 0.7);
 }
 
 .description-photo {

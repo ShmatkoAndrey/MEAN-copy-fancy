@@ -55,10 +55,11 @@ var ProductService = (function () {
     };
     ProductService.prototype.like = function (product) {
         var _this = this;
-        return this.http.get('/api/products/like/' + product._id)
+        return this.http.get('/api/like/' + product._id)
             .toPromise()
             .then(function (res) { return res.json().product; })
             .then(function (product) {
+            console.log(product);
             var index = _this.findIndexById(product._id);
             if (index > -1) {
                 _this.products[index] = product;

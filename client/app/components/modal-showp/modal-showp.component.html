@@ -6,10 +6,16 @@
 
             <div class="product-photos">
                 <div class="imgs-menu">
-                    <img class="description-photo"  [src]="'/images/' + product._id + '/' + product.mainPhoto" (click)="showPhoto(product.mainPhoto)" />
-                    <img class="description-photo" *ngFor="let photo of product.descriptionPhoto" [src]="'/images/' + product._id + '/' + photo" (click)="showPhoto(photo)" />
+                    <img class="description-photo" *ngFor="let photo of all_imgs" [src]="'/images/' + product._id + '/' + photo" (click)="showPhoto(photo)" />
                 </div>
-                <img class="product-main-image" [src]="'/images/' + product._id + '/' + main_img" />
+
+
+                <div class="product-main-image-block">
+                    <div class="left-arrow" (click)="PrevPhoto()"> < </div>
+                    <div class="right-arrow" (click)="NextPhoto()"> > </div>
+                    <img class="product-main-image" [src]="'/images/' + product._id + '/' + main_img" />
+                </div>
+
             </div>
 
             <div class="product-info">

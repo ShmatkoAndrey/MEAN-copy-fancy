@@ -12,17 +12,34 @@ var core_1 = require("@angular/core");
 var ModalShowProductComponent = (function () {
     function ModalShowProductComponent() {
         this.modalOff = new core_1.EventEmitter();
+        this.all_imgs = [];
     }
     ModalShowProductComponent.prototype.onOff = function () {
         this.modalOff.emit();
     };
     ModalShowProductComponent.prototype.ngOnInit = function () {
         this.main_img = this.product.mainPhoto;
+        this.all_imgs.push(this.product.mainPhoto);
+        this.all_imgs = this.all_imgs.concat(this.product.descriptionPhoto);
     };
     ModalShowProductComponent.prototype.showPhoto = function (photo) {
         this.main_img = photo;
     };
-    ModalShowProductComponent.prototype.contentClick = function () {
+    ModalShowProductComponent.prototype.PrevPhoto = function () {
+        var i = this.all_imgs.indexOf(this.main_img);
+        if (i == 0)
+            i = this.all_imgs.length - 1;
+        else
+            i--;
+        this.main_img = this.all_imgs[i];
+    };
+    ModalShowProductComponent.prototype.NextPhoto = function () {
+        var i = this.all_imgs.indexOf(this.main_img);
+        if (i == this.all_imgs.length - 1)
+            i = 0;
+        else
+            i++;
+        this.main_img = this.all_imgs[i];
     };
     return ModalShowProductComponent;
 }());

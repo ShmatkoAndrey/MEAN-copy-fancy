@@ -69,8 +69,7 @@ module.exports = function(app){
         });
     });
 
-    app.get('/api/products/like/:id', function (req, res) {
-
+    app.get('/api/like/:id', function (req, res) {
         Product.findById( req.params.id , function (err, product) {  // ? del
             productHelper.Like(req.session.user_id, product, function (new_likes) {
                 Product.update({ _id: product._id }, { $set: { user_likes: new_likes } }, function (err, status) {
