@@ -40,6 +40,8 @@ var UserService = (function () {
         data.append('username', user.username);
         data.append('password', user.password);
         data.append('password_confirmation', user.password_confirmation);
+        data.append('store', user.store);
+        data.append('admin', user.admin);
         return this.http.post('/api/registration', data)
             .toPromise()
             .then(function (res) { return res.json().user; })

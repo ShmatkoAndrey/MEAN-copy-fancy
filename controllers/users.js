@@ -31,6 +31,8 @@ module.exports = function(app){
         var username = req.body.username;
         var password = req.body.password;
         var password_confirm = req.body.password_confirmation;
+        var store = req.body.store;
+        var admin = req.body.admin;
         if(password === password_confirm){
             User.findOne({username: username}, function (err, user) {
                 if(err) res.json({ error: err });
@@ -41,7 +43,9 @@ module.exports = function(app){
                     else{
                         var new_user = new User({
                             username: username,
-                            password: password
+                            password: password,
+                            store: store,
+                            admin: admin
                         });
                         new_user.save(function (err) {
                             if(err) res.json({ error: err });

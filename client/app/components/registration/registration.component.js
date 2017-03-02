@@ -11,19 +11,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var user_service_1 = require("../../services/user.service");
 var RegistrationComponent = (function () {
-    // @Output() login = new EventEmitter();
     function RegistrationComponent(userService) {
         this.userService = userService;
         this.username = '';
         this.password = '';
         this.password_confirmation = '';
+        this.store = false;
+        this.admin = false;
     }
     RegistrationComponent.prototype.onSubmit = function () {
         this.userService.registration({
             username: this.username,
             password: this.password,
-            password_confirmation: this.password_confirmation
-        }); //.then(user => this.login.emit(user));
+            password_confirmation: this.password_confirmation,
+            store: this.store || false,
+            admin: this.admin || false
+        });
     };
     return RegistrationComponent;
 }());
