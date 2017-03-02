@@ -47,7 +47,7 @@ exports.createProduct = function (req, res, callback) {
 
         userHelper.current_user(req.session.user_id, function (user) {
 
-            // if (user && ( user.admin || user.store )) {
+            if (user && ( user.admin || user.store )) {
             var new_product = new Product({
                 user_id: user.id,
                 title: product.title,
@@ -85,9 +85,9 @@ exports.createProduct = function (req, res, callback) {
 
                 });
             });
-            // } else {
-            //     res.json({error: "Please, login store acc"});
-            // }
+            } else {
+                res.json({error: "Please, login store acc"});
+            }
 
         });
 

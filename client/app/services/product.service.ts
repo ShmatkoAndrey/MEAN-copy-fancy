@@ -34,8 +34,15 @@ export class ProductService {
 
         return this.http.post('/api/products', data)
             .toPromise()
-            .then(res => res.json().product)
-            .then(product => this.products.unshift(product))
+            .then(res => res.json())
+            .then(product => {
+                if(product.error){
+                    alert(product.error);
+                }
+                else {
+                    this.products.unshift(product)
+                }
+            })
             .catch(this.handleError);
     }
 

@@ -42,8 +42,15 @@ var ProductService = (function () {
         });
         return this.http.post('/api/products', data)
             .toPromise()
-            .then(function (res) { return res.json().product; })
-            .then(function (product) { return _this.products.unshift(product); })
+            .then(function (res) { return res.json(); })
+            .then(function (product) {
+            if (product.error) {
+                alert(product.error);
+            }
+            else {
+                _this.products.unshift(product);
+            }
+        })
             .catch(this.handleError);
     };
     ProductService.prototype.like = function (product) {
