@@ -1,4 +1,7 @@
 var User = require('../models/user');
+var Product = require('../models/product');
+var productHelper = require('../helpers/product');
+
 var userHelper = require('../helpers/user');
 
 module.exports = function(app){
@@ -40,6 +43,31 @@ module.exports = function(app){
     });
 
     app.post('/api/auth', function (req, res) {
+        console.log(res.body);
+    });
 
+    app.get('/api/stores', function (req, res) {
+       User.find({ store: true }, function (err, stores) {
+           stores = stores.map(function (e) {return e.serialized()});
+           res.json({stores: stores});
+       })
+    });
+
+    app.get('/api/stores/products', function (req, res) {
+        User.find({ store: true }, function (err, stores) {
+            stores = stores.map(function (e) {return e.serialized()});
+            var ii = 0;
+            stores.forEach(function (e, i) {
+                Product.find({user_id: e._id}, function (err, products) {
+                    productHelper.getFullInfoProducts(products, function (products) {
+                        var popular = products.slice(0);
+                        popular.sort(function(a,b) { return - a.user_likes.length + b.user_likes.length; });
+                        stores[i].products = popular.slice(0, 5);
+                        ii++;
+                        if(ii == stores.length) res.json({ products: stores });
+                    })
+                });
+            });
+        })
     })
 };

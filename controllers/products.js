@@ -12,6 +12,32 @@ module.exports = function(app){
         });
     });
 
+    app.get('/api/popular', function (req, res) {
+        Product.find({}, function (err, products) {
+            productHelper.getFullInfoProducts(products, function (products) {
+                var popular = products.slice(0);
+                popular.sort(function(a,b) {
+                    return - a.user_likes.length + b.user_likes.length;
+                });
+                res.json({ products: popular });
+            })
+        });
+    });
+
+    app.get('/api/popular/:n_start/:n', function (req, res) {
+        Product.find({}, function (err, products) {
+            productHelper.getFullInfoProducts(products, function (products) {
+                var popular = products.slice(0);
+                popular.sort(function(a,b) {
+                    return - a.user_likes.length + b.user_likes.length;
+                });
+
+                var p = popular.slice(parseInt(req.params.n_start), parseInt(req.params.n_start) + parseInt(req.params.n));
+                res.json({ products: p });
+            })
+        });
+    });
+
     app.get('/api/products/:n_start/:n', function (req, res) {
         Product.find({}, function (err, products) {
             productHelper.getFullInfoProducts(products, function (products) {
