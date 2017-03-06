@@ -37,5 +37,9 @@ module.exports = function(app){
     app.get('/api/logout', function (req, res) {
         req.session.user_id = null;
         res.json({ logout: true });
+    });
+
+    app.post('/api/auth', function (req, res) {
+
     })
 };

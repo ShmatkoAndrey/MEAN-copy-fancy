@@ -33,7 +33,7 @@
     background-color: rgba(211, 211, 211, 0.5);
     width: 30px;
     cursor: hand;
-    position: fixed;
+    position: absolute;
     margin-top: 290px;
 
     -webkit-touch-callout: none;
@@ -124,4 +124,6 @@
     flex: 2;
     white-space: pre-wrap;
     margin-top: 20px;
+    line-height: 20px;
+    color: #464646;
 }
