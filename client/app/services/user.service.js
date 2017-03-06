@@ -57,6 +57,12 @@ var UserService = (function () {
             .then(function (user) { return _this.user = null; })
             .catch(this.handleError);
     };
+    UserService.prototype.getStores = function () {
+        return this.http.get('/api/stores/products')
+            .toPromise()
+            .then(function (res) { return res.json().stores; })
+            .catch(this.handleError);
+    };
     UserService.prototype.handleError = function (err) {
         console.error('Error:', err);
         return Promise.reject(err.message || err);

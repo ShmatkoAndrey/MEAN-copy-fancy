@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
+import  {ProductService} from '../../services/product.service';
 
 @Component({
     moduleId: module.id,
@@ -7,5 +9,11 @@ import { Component } from '@angular/core';
     styleUrls: ['popular.component.css']
 })
 export class PopularComponent {
+    popular = [];
 
+    constructor(private productService: ProductService) {}
+
+    ngOnInit() {
+        this.productService.getPopular().then(popular => this.popular = popular);
+    }
 }

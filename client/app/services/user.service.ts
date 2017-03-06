@@ -52,6 +52,13 @@ export class UserService {
             .catch(this.handleError);
     }
 
+    getStores() {
+        return this.http.get('/api/stores/products')
+            .toPromise()
+            .then(res => res.json().stores)
+            .catch(this.handleError);
+    }
+
 
     private handleError(err: any) {
         console.error('Error:', err);

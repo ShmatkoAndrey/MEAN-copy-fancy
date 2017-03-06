@@ -62,9 +62,9 @@ module.exports = function(app){
                     productHelper.getFullInfoProducts(products, function (products) {
                         var popular = products.slice(0);
                         popular.sort(function(a,b) { return - a.user_likes.length + b.user_likes.length; });
-                        stores[i].products = popular.slice(0, 5);
+                        stores[i].products = popular.slice(0, 6);
                         ii++;
-                        if(ii == stores.length) res.json({ products: stores });
+                        if(ii == stores.length) res.json({ stores: stores });
                     })
                 });
             });

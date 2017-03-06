@@ -60,6 +60,13 @@ export class ProductService {
             .catch(this.handleError);
     }
 
+    getPopular() {
+        return this.http.get('/api/popular/0/9')
+            .toPromise()
+            .then(res => res.json().products)
+            .catch(this.handleError);
+    }
+
 
     private handleError(err: any) {
         console.error('Error:', err);

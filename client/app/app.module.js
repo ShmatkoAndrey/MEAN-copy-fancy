@@ -21,6 +21,7 @@ var modal_lr_component_1 = require("./components/modal-lr/modal-lr.component");
 var modal_np_component_1 = require("./components/modal-np/modal-np.component");
 var modal_showp_component_1 = require("./components/modal-showp/modal-showp.component");
 var cart_component_1 = require("./components/cart/cart.component");
+var stores_component_1 = require("./components/stores/stores.component");
 var product_service_1 = require("./services/product.service");
 var user_service_1 = require("./services/user.service");
 var cart_service_1 = require("./services/cart.service");
@@ -48,7 +49,8 @@ AppModule = __decorate([
             modal_lr_component_1.ModalLogRegComponent,
             modal_np_component_1.ModalNewProductComponent,
             modal_showp_component_1.ModalShowProductComponent,
-            cart_component_1.CartComponent
+            cart_component_1.CartComponent,
+            stores_component_1.StoresComponent
         ],
         providers: [product_service_1.ProductService, user_service_1.UserService, cart_service_1.CartService],
         bootstrap: [app_component_1.AppComponent]

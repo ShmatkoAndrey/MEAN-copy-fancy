@@ -1,0 +1,22 @@
+#main-popular {
+    list-style-type: none;
+    background-color: white;
+    width: 300px;
+    /*margin: 0;*/
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    /*height: 200px;*/
+    /*position: fixed;*/
+}
+
+.product-main-image {
+    margin: 5px;
+    width: 90px;
+    height: 90px;
+    /*object-fit: contain;*/
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}

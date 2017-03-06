@@ -9,26 +9,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var product_service_1 = require("../../services/product.service");
-var PopularComponent = (function () {
-    function PopularComponent(productService) {
-        this.productService = productService;
-        this.popular = [];
+var user_service_1 = require("../../services/user.service");
+var StoresComponent = (function () {
+    function StoresComponent(userService) {
+        this.userService = userService;
+        this.stores = [];
     }
-    PopularComponent.prototype.ngOnInit = function () {
+    StoresComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.productService.getPopular().then(function (popular) { return _this.popular = popular; });
+        this.userService.getStores().then(function (stores) { return _this.stores = stores; });
     };
-    return PopularComponent;
+    return StoresComponent;
 }());
-PopularComponent = __decorate([
+StoresComponent = __decorate([
     core_1.Component({
         moduleId: module.id,
-        selector: 'popular',
-        templateUrl: 'popular.component.html',
-        styleUrls: ['popular.component.css']
+        selector: 'stores',
+        templateUrl: 'stores.component.html',
+        styleUrls: ['stores.component.css']
     }),
-    __metadata("design:paramtypes", [product_service_1.ProductService])
-], PopularComponent);
-exports.PopularComponent = PopularComponent;
-//# sourceMappingURL=popular.component.js.map
+    __metadata("design:paramtypes", [user_service_1.UserService])
+], StoresComponent);
+exports.StoresComponent = StoresComponent;
+//# sourceMappingURL=stores.component.js.map

@@ -15,6 +15,7 @@ import { ModalLogRegComponent }   from './components/modal-lr/modal-lr.component
 import { ModalNewProductComponent }   from './components/modal-np/modal-np.component';
 import { ModalShowProductComponent }   from './components/modal-showp/modal-showp.component';
 import { CartComponent }   from './components/cart/cart.component';
+import { StoresComponent }   from './components/stores/stores.component';
 
 import { ProductService } from './services/product.service';
 import { UserService } from './services/user.service';
@@ -39,7 +40,8 @@ import { CartService } from './services/cart.service';
       ModalLogRegComponent,
       ModalNewProductComponent,
       ModalShowProductComponent,
-      CartComponent
+      CartComponent,
+      StoresComponent
   ],
 
   providers: [ ProductService, UserService, CartService ],

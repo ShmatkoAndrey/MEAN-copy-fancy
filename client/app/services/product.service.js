@@ -67,6 +67,12 @@ var ProductService = (function () {
         })
             .catch(this.handleError);
     };
+    ProductService.prototype.getPopular = function () {
+        return this.http.get('/api/popular/0/9')
+            .toPromise()
+            .then(function (res) { return res.json().products; })
+            .catch(this.handleError);
+    };
     ProductService.prototype.handleError = function (err) {
         console.error('Error:', err);
         return Promise.reject(err.message || err);
