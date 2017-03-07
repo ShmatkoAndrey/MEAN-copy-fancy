@@ -59,6 +59,10 @@ module.exports = function(app){
             var ii = 0;
             stores.forEach(function (e, i) {
                 Product.find({user_id: e._id}, function (err, products) {
+                    if(products.length == 0) {
+                        ii++;
+                        if(ii == stores.length) res.json({ stores: stores });
+                    }
                     productHelper.getFullInfoProducts(products, function (products) {
                         var popular = products.slice(0);
                         popular.sort(function(a,b) { return - a.user_likes.length + b.user_likes.length; });
