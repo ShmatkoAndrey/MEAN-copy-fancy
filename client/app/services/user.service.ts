@@ -1,6 +1,8 @@
 import  { Injectable } from '@angular/core';
 import  { Http, URLSearchParams } from '@angular/http';
 import 'rxjs/add/operator/toPromise'
+declare let FB;
+// let fb = require('../../fb');
 
 @Injectable()
 export class UserService {
@@ -59,6 +61,37 @@ export class UserService {
             .catch(this.handleError);
     }
 
+    auth(res, provider) {
+        let data = new URLSearchParams();
+        data.append('name', res.name);
+        data.append('uid', res.id);
+        data.append('provider', provider);
+
+        return this.http.post('/api/auth', data)
+            .toPromise()
+            .then(res => res.json().user)
+            .then(user => this.user = user)
+            .catch(this.handleError);
+
+    }
+
+    authFB() {
+        let _this = this;
+        function loginFB() {
+            FB.api('/me', {fields: ''}, function(response) {
+                _this.auth(response, 'facebook');
+            });
+        }
+
+        FB.getLoginStatus(function(response) {
+            if (response.status === 'connected') { loginFB(); }
+            else {
+                FB.login(function() {
+                    loginFB();
+                }, {scope: 'public_profile,email'});
+            }
+        });
+    }
 
     private handleError(err: any) {
         console.error('Error:', err);

@@ -1,5 +1,6 @@
 var User = require('../models/user');
 var Product = require('../models/product');
+var Identity = require('../models/identity');
 var productHelper = require('../helpers/product');
 
 var userHelper = require('../helpers/user');
@@ -43,7 +44,14 @@ module.exports = function(app){
     });
 
     app.post('/api/auth', function (req, res) {
-        console.log(res.body);
+        Identity.find({uid: req.body.uid, provider: req.body.provider}, function (err, identity) {
+            if(identity.length == 0) {
+                // create identity and user
+            }
+            else {
+                //find and return user
+            }
+        })
     });
 
     app.get('/api/stores', function (req, res) {

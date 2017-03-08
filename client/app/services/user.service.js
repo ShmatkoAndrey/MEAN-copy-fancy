@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 require("rxjs/add/operator/toPromise");
+// let fb = require('../../fb');
 var UserService = (function () {
     function UserService(http) {
         this.http = http;
@@ -62,6 +63,36 @@ var UserService = (function () {
             .toPromise()
             .then(function (res) { return res.json().stores; })
             .catch(this.handleError);
+    };
+    UserService.prototype.auth = function (res, provider) {
+        var _this = this;
+        var data = new http_1.URLSearchParams();
+        data.append('name', res.name);
+        data.append('uid', res.id);
+        data.append('provider', provider);
+        return this.http.post('/api/auth', data)
+            .toPromise()
+            .then(function (res) { return res.json().user; })
+            .then(function (user) { return _this.user = user; })
+            .catch(this.handleError);
+    };
+    UserService.prototype.authFB = function () {
+        var _this = this;
+        function loginFB() {
+            FB.api('/me', { fields: '' }, function (response) {
+                _this.auth(response, 'facebook');
+            });
+        }
+        FB.getLoginStatus(function (response) {
+            if (response.status === 'connected') {
+                loginFB();
+            }
+            else {
+                FB.login(function () {
+                    loginFB();
+                }, { scope: 'public_profile,email' });
+            }
+        });
     };
     UserService.prototype.handleError = function (err) {
         console.error('Error:', err);

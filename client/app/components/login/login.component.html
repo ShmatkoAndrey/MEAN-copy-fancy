@@ -3,3 +3,5 @@
     <input type="password" placeholder="Password" name="password" [(ngModel)]="password" required>
     <button type="submit" [disabled]="loginForm.form.invalid"> Login </button>
 </form>
+
+<button (click)="userService.authFB()"> FB LOGIN </button>
