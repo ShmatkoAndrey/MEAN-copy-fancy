@@ -5,6 +5,7 @@ var db = require('./db');
 var User = require('./models/User');
 var Product = require('./models/Product');
 var fileHepler = require('./helpers/files');
+var productHelper = require('./helpers/product');
 var faker = require('faker');
 var colors = require('colors');
 var fs = require('fs');
@@ -17,6 +18,7 @@ var products = [];
 var stores_cnt = 10;
 var users_cnt = 20;
 var products_cnt = 50;
+var like_cnt = 300;
 var rm = false;
 
 db.connection.on('connected', function () {
@@ -40,8 +42,6 @@ db.connection.on('connected', function () {
         products_cnt = parseInt(process.argv[2]);
     }
 
-
-
     if(rm) {
         User.remove({}, function (err) {
             console.log('removed all users'.red);
@@ -54,23 +54,32 @@ db.connection.on('connected', function () {
         console.log('images cleared'.red);
     }
 
+    var time = Date.now();
     var c_i_sore = 0;
     for (var i = 0; i < stores_cnt; i++) {
         userCreate(true, function (store) {
             stores.push(store);
             console.log('created store: \t'.green + store.username);
-
             c_i_sore++;
             if(c_i_sore == stores_cnt) {
-                var ii = 0; var time = Date.now();
+                var ii = 0;
                 for (var j = 0; j < products_cnt; j++) {
                     productCreate(stores[Math.floor(Math.random() * stores.length)]._id, function (product) {
                         products.push(product);
                         console.log('created product: \t'.green + product.title);
                         ii++;
                         if(ii == products_cnt) {
-                            console.log('Created time '.yellow, Date.now() - time);
-                            db.connection.close();
+                            products.forEach(function (e) {
+                                var cnt = getRandomInt(2, 10);
+                                var users_lds = [];
+                                for(var l = 0; l < cnt; l++) { users_lds.push(users[Math.floor(Math.random()*users.length)]._id) }
+                                productLikes(e._id, users_lds, function (status) {
+                                    if(e === products[products.length - 1]) {
+                                        db.connection.close();
+                                        console.log('Created time '.yellow, Date.now() - time);
+                                    }
+                                });
+                            });
                         }
                     });
                 }
@@ -86,7 +95,12 @@ db.connection.on('connected', function () {
     }
 });
 
-var deleteFolderRecursive = function(path) {
+function getRandomInt(min, max)
+{
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function deleteFolderRecursive(path) {
     if( fs.existsSync(path) ) {
         fs.readdirSync(path).forEach(function(file,index){
             var curPath = path + "/" + file;
@@ -179,4 +193,10 @@ function productCreate(user_id, callback) {
             });
         });
     });
+}
+
+function productLikes(product_id, users_ids, callback) {
+    Product.update({ _id: product_id }, { $set: { user_likes: users_ids } }, function (err, status) {
+        callback(product_id);
+    })
 }
