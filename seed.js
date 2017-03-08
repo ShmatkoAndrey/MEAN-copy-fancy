@@ -1,6 +1,3 @@
-// TODO: product likes
-
-console.log('Seed load');
 var db = require('./db');
 var User = require('./models/User');
 var Product = require('./models/Product');
@@ -18,7 +15,6 @@ var products = [];
 var stores_cnt = 10;
 var users_cnt = 20;
 var products_cnt = 50;
-var like_cnt = 300;
 var rm = false;
 
 db.connection.on('connected', function () {
@@ -69,17 +65,10 @@ db.connection.on('connected', function () {
                         console.log('created product: \t'.green + product.title);
                         ii++;
                         if(ii == products_cnt) {
-                            products.forEach(function (e) {
-                                var cnt = getRandomInt(2, 10);
-                                var users_lds = [];
-                                for(var l = 0; l < cnt; l++) { users_lds.push(users[Math.floor(Math.random()*users.length)]._id) }
-                                productLikes(e._id, users_lds, function (status) {
-                                    if(e === products[products.length - 1]) {
-                                        db.connection.close();
-                                        console.log('Created time '.yellow, Date.now() - time);
-                                    }
-                                });
-                            });
+                            productLikes(function () {
+                                db.connection.close();
+                                console.log('Created time '.yellow, Date.now() - time);
+                            })
                         }
                     });
                 }
@@ -195,8 +184,15 @@ function productCreate(user_id, callback) {
     });
 }
 
-function productLikes(product_id, users_ids, callback) {
-    Product.update({ _id: product_id }, { $set: { user_likes: users_ids } }, function (err, status) {
-        callback(product_id);
-    })
+function productLikes(callback) {
+    products.forEach(function (e) {
+        var cnt = getRandomInt(2, users.length);
+        var users_lds = [];
+        for(var l = 0; l < cnt; l++) { users_lds.push(users[Math.floor(Math.random()*users.length)]._id) }
+        Product.update({ _id: e._id }, { $set: { user_likes: users_lds } }, function (err, status) {
+            if(e === products[products.length - 1]) {
+                callback();
+            }
+        });
+    });
 }

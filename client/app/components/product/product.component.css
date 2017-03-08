@@ -39,9 +39,15 @@
     flex: 1;
     display: flex;
     align-items: center;
+    overflow: hidden;
+}
+
+.user-avatars {
+    height: 62px;
 }
 
 .btn-like {
+    flex: 0 0 50px;
     width: 40px;
     font-size: 14px;
     padding: 5px;
