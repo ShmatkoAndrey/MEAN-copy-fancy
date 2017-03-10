@@ -58,3 +58,17 @@
 .user-username {
     margin-right: 10px;
 }
+
+.cart-icon {
+    margin-right: 20px;
+}
+
+.cart-full {
+    /*max-height: 150px;*/
+    position: absolute;
+    margin-top: 50px;
+    z-index: 100;
+    align-self: flex-start;
+    margin-left: -140px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}

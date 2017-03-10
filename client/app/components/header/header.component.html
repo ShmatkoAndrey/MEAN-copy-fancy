@@ -12,6 +12,11 @@
             <modal-lr [show_modal]="show_LR_modal" (modalOff)="modalLROff()" (switchLogin)="switchLogin($event)" [isLogin]="isLogin"> </modal-lr>
         </span>
         <div class="user-info" *ngIf="userService.user && userService.user._id != undefined">
+            <span (click)="openCart()" class="cart-icon">C</span>
+            <div class="cart-full" *ngIf="show_cart">
+                <cart> </cart>
+            </div>
+
             <span class="btn-new-post" (click)="modaNPOn()">+</span>
             <modal-np [show_modal]="show_NP_modal" (modalOff)="modalNPOff()" > </modal-np>
             <img class="avatar" [src]="'/images/users/' + userService.user._id + '/avatar.jpg'" />
