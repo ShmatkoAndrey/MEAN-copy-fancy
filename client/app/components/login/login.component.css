@@ -23,8 +23,17 @@ button[type=submit]:hover {
     background-color: #45a049;
 }
 
-div {
-    border-radius: 5px;
-    background-color: #f2f2f2;
-    padding: 20px;
+.btn-fb {
+    padding: 20px 40px;
+    background-color: #3b5998;
+    color: white;
+    width: 80px;
+    text-align: center;
+    cursor: hand;
+}
+
+.btn-fb:hover,
+.btn-fb:focus,
+.btn-fb:active {
+    background-color: #3f65a8;
 }

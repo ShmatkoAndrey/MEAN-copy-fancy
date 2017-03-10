@@ -13,7 +13,4 @@ var schemaIdentity =  new db.Schema({
     }
 });
 
-
-
-
 module.exports = db.models.Identity ? db.model('Identity') : db.model('Identity', schemaIdentity);

@@ -46,10 +46,14 @@
     height: 62px;
 }
 
+.like-icon {
+    font-size: 20px;
+}
+
 .btn-like {
     flex: 0 0 50px;
     width: 40px;
-    font-size: 14px;
+    font-size: 20px;
     padding: 5px;
     margin: 15px 10px 15px 0;
     border: 1px solid dodgerblue;

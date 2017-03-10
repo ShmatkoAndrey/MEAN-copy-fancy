@@ -1,6 +1,7 @@
 var db = require('./db');
 var User = require('./models/User');
 var Product = require('./models/Product');
+var Identity = require('./models/Identity');
 var fileHepler = require('./helpers/files');
 var productHelper = require('./helpers/product');
 var faker = require('faker');
@@ -45,6 +46,9 @@ db.connection.on('connected', function () {
         Product.remove({}, function (err) {
             console.log('removed all products'.red);
         });
+         Identity.remove({}, function (err) {
+            console.log('removed all identities'.red);
+        });
 
         deleteFolderRecursive(__dirname + '/images/');
         console.log('images cleared'.red);
@@ -84,8 +88,7 @@ db.connection.on('connected', function () {
     }
 });
 
-function getRandomInt(min, max)
-{
+function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
