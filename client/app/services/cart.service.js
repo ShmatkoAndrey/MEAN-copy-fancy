@@ -29,6 +29,22 @@ var CartService = (function () {
     };
     CartService.prototype.deleteFromCart = function (product) {
     };
+    CartService.prototype.payment = function () {
+        var cart, c = this.getCookie('cart');
+        if (c) {
+            cart = JSON.parse(c);
+        }
+        var a = cart.map(function (e) {
+            return e._id;
+        });
+        var data = new http_1.URLSearchParams();
+        data.append('products', a.join(' '));
+        return this.http.post('/api/payment', data)
+            .toPromise()
+            .then(function (res) { return res.json().charge; })
+            .then(function (charge) { return console.log(charge); })
+            .catch(this.handleError);
+    };
     CartService.prototype.handleError = function (err) {
         console.error('Error:', err);
         return Promise.reject(err.message || err);

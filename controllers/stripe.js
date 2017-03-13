@@ -1,7 +1,9 @@
 var stripe = require('stripe')('sk_test_NZWyHet4rXjZBKEkMW1aqPt2'); // TODO: secrets.js
 
 module.exports = function(app){
-    app.get('/payment', function (req, res) {
+    app.post('/api/payment', function (req, res) {
+
+        var ids = req.body.products.split(' ');
 
         stripe.customers.create({
             email: 'foo-customer@example.com'

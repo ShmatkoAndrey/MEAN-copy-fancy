@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 import  { UserService } from '../../services/user.service';
 
@@ -12,7 +12,7 @@ export class LoginComponent {
 
     username: string = '';
     password: string = '';
-    // @Output() login = new EventEmitter();
+    @Output() onOff = new EventEmitter();
 
     constructor(private userService: UserService) {}
 
@@ -23,4 +23,10 @@ export class LoginComponent {
         });//.then(user => this.login.emit(user));
     }
 
+    onAuth() {
+       this.userService.authFB();
+       let interval = setInterval(function () {
+            if(this.userService.user) clearInterval(interval);
+       }.bind(this), 1000)
+    }
 }

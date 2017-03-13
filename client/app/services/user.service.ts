@@ -8,7 +8,8 @@ declare let FB;
 export class UserService {
     user;
 
-    constructor(private http: Http) {}
+    constructor(private http: Http) {
+    }
 
     getCurrentUser(): Promise<any> {
         return this.http.get('/api/current_user')
@@ -67,30 +68,30 @@ export class UserService {
         data.append('uid', res.id);
         data.append('provider', provider);
 
-        return this.http.post('/api/auth', data)
+        this.http.post('/api/auth', data)
             .toPromise()
             .then(res => res.json().user)
             .then(user => this.user = user)
             .catch(this.handleError);
-
     }
 
     authFB() {
-        let _this = this;
-        function loginFB() {
-            FB.api('/me', {fields: ''}, function(response) {
-                _this.auth(response, 'facebook');
-            });
-        }
-
-        FB.getLoginStatus(function(response) {
-            if (response.status === 'connected') { loginFB(); }
-            else {
-                FB.login(function() {
-                    loginFB();
-                }, {scope: 'public_profile,email'});
+        FB.getLoginStatus(function (response) {
+            if (response.status === 'connected') {
+                this.loginFB();
             }
-        });
+            else {
+                FB.login(function () {
+                    this.loginFB();
+                }.bind(this), {scope: 'public_profile,email'});
+            }
+        }.bind(this));
+    }
+
+    private loginFB() {
+        FB.api('/me', {fields: ''}, function (response) {
+            this.auth(response, 'facebook');
+        }.bind(this));
     }
 
     private handleError(err: any) {

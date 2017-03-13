@@ -28,6 +28,7 @@ li {
 
 .sum {
     text-align: center;
+    flex: 1;
 }
 .title {
     flex: 0 0 150px;
@@ -45,4 +46,18 @@ hr {
     color: lightgray;
     background-color: lightgray;
     height: 1px;
+}
+
+.btn-pay {
+    flex: 1;
+    padding: 10px;
+    cursor: hand;
+    background-color: #4CAF50;
+    display: inline-block;
+    text-align: center;
+}
+
+.pay-block {
+    display: flex;
+    align-items: center;
 }

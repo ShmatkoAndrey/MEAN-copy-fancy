@@ -70,29 +70,28 @@ var UserService = (function () {
         data.append('name', res.name);
         data.append('uid', res.id);
         data.append('provider', provider);
-        return this.http.post('/api/auth', data)
+        this.http.post('/api/auth', data)
             .toPromise()
             .then(function (res) { return res.json().user; })
             .then(function (user) { return _this.user = user; })
             .catch(this.handleError);
     };
     UserService.prototype.authFB = function () {
-        var _this = this;
-        function loginFB() {
-            FB.api('/me', { fields: '' }, function (response) {
-                _this.auth(response, 'facebook');
-            });
-        }
         FB.getLoginStatus(function (response) {
             if (response.status === 'connected') {
-                loginFB();
+                this.loginFB();
             }
             else {
                 FB.login(function () {
-                    loginFB();
-                }, { scope: 'public_profile,email' });
+                    this.loginFB();
+                }.bind(this), { scope: 'public_profile,email' });
             }
-        });
+        }.bind(this));
+    };
+    UserService.prototype.loginFB = function () {
+        FB.api('/me', { fields: '' }, function (response) {
+            this.auth(response, 'facebook');
+        }.bind(this));
     };
     UserService.prototype.handleError = function (err) {
         console.error('Error:', err);

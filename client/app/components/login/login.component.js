@@ -11,11 +11,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var user_service_1 = require("../../services/user.service");
 var LoginComponent = (function () {
-    // @Output() login = new EventEmitter();
     function LoginComponent(userService) {
         this.userService = userService;
         this.username = '';
         this.password = '';
+        this.onOff = new core_1.EventEmitter();
     }
     LoginComponent.prototype.onSubmit = function () {
         this.userService.login({
@@ -23,8 +23,19 @@ var LoginComponent = (function () {
             password: this.password
         }); //.then(user => this.login.emit(user));
     };
+    LoginComponent.prototype.onAuth = function () {
+        this.userService.authFB();
+        var interval = setInterval(function () {
+            if (this.userService.user)
+                clearInterval(interval);
+        }.bind(this), 1000);
+    };
     return LoginComponent;
 }());
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", Object)
+], LoginComponent.prototype, "onOff", void 0);
 LoginComponent = __decorate([
     core_1.Component({
         moduleId: module.id,

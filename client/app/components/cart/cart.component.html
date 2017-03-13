@@ -1,5 +1,8 @@
 <div id="cart" *ngIf="cart.length">
-    <span class="sum" > Sum: {{getSum()}} </span>
+    <div class="pay-block">
+        <span class="sum" > Sum: {{getSum()}} </span>
+        <div class="btn-pay" (click)="onPay()"> Buy </div>
+    </div>
     <hr>
     <ul>
         <li *ngFor="let product of cart"> <div class="title" >{{product.title}}</div> <div class="price"> ${{product.price}} </div></li>

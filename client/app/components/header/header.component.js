@@ -18,8 +18,7 @@ var HeaderComponent = (function () {
         this.show_cart = false;
     }
     HeaderComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.userService.getCurrentUser().then(function (user) { return _this.user = user; });
+        this.userService.getCurrentUser();
     };
     HeaderComponent.prototype.modalLROn = function () {
         this.show_LR_modal = true;
@@ -31,9 +30,8 @@ var HeaderComponent = (function () {
         this.isLogin = il;
     };
     HeaderComponent.prototype.logout = function () {
-        var _this = this;
         this.show_LR_modal = false;
-        this.userService.logout().then(function (user) { return _this.user = user; });
+        this.userService.logout();
     };
     HeaderComponent.prototype.modaNPOn = function () {
         this.show_NP_modal = true;

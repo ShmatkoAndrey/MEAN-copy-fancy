@@ -23,6 +23,25 @@ export class CartService {
 
     }
 
+    payment() {
+        let cart, c = this.getCookie('cart');
+        if(c) { cart = JSON.parse(c); }
+
+        let a = cart.map(function (e) {
+            return e._id;
+        });
+
+        let data = new URLSearchParams();
+        data.append('products', a.join(' '));
+
+        return this.http.post('/api/payment', data)
+            .toPromise()
+            .then(res => res.json().charge)
+            .then(charge => console.log(charge))
+            .catch(this.handleError);
+
+    }
+
 
 
     private handleError(err: any) {

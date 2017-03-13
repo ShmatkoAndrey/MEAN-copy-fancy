@@ -9,7 +9,6 @@ import { UserService } from '../../services/user.service';
     styleUrls: ['header.component.css']
 })
 export class HeaderComponent implements OnInit{
-    user;
     isLogin: boolean;
     show_LR_modal:boolean = false;
     show_NP_modal:boolean = false;
@@ -18,7 +17,7 @@ export class HeaderComponent implements OnInit{
     constructor(private userService: UserService ) {}
 
     ngOnInit() {
-        this.userService.getCurrentUser().then(user => this.user=user);
+        this.userService.getCurrentUser();
     }
 
     modalLROn() {
@@ -35,7 +34,7 @@ export class HeaderComponent implements OnInit{
 
     logout() {
         this.show_LR_modal = false;
-        this.userService.logout().then(user => this.user=user);
+        this.userService.logout();
     }
 
     modaNPOn() {

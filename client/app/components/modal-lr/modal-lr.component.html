@@ -6,7 +6,7 @@
             <span class="close" (click)="onOff()">&times;</span>
             <span class="auth-type" (click)="onSwitch(true)" [class.bold]="isLogin" > Login </span> |
             <span class="auth-type" (click)="onSwitch(false)" [class.bold]="!isLogin" > Registration </span>
-            <login *ngIf="isLogin">  </login>
+            <login *ngIf="isLogin" (onOff)="onOff()">  </login>
             <registration *ngIf="!isLogin">  </registration>
         </div>
         <div class="modal-blur" (click)="onOff()"  > </div>

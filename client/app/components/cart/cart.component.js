@@ -24,6 +24,9 @@ var CartComponent = (function () {
         });
         return sum;
     };
+    CartComponent.prototype.onPay = function () {
+        this.cartService.payment();
+    };
     return CartComponent;
 }());
 CartComponent = __decorate([
