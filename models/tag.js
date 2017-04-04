@@ -5,6 +5,11 @@ var schemaTag =  new db.Schema({
         type: String,
         require: true,
         unique: true
+    },
+
+    products: {
+        type: Array,
+        default: []
     }
 });
 

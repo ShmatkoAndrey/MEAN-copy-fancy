@@ -34,7 +34,7 @@ export class ModalNewProductComponent {
             title: this.title,
             description: this.description,
             price: this.price,
-            tags: this.tags.split(' '),
+            tags: this.tags,
             mainPhoto: this.mainPhoto,
             descriptionPhoto: this.descriptionPhoto
         })

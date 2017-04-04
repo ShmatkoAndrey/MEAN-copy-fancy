@@ -47,6 +47,15 @@ module.exports = function(app){
         });
     });
 
+    app.get('/api/tag/:name/:n_start/:n', function (req, res) {
+        Product.find({}, function (err, products) {
+            productHelper.getFullInfoProducts(products, function (products) {
+                var p = products.reverse().slice(parseInt(req.params.n_start), parseInt(req.params.n_start) + parseInt(req.params.n));
+                res.json({ products: p });
+            })
+        });
+    });
+
     app.post('/api/products', function (req, res) {
         productHelper.createProduct(req, res, function (product) {
             res.json({ product: product });

@@ -2,6 +2,7 @@ var db = require('./db');
 var User = require('./models/User');
 var Product = require('./models/Product');
 var Identity = require('./models/Identity');
+var Tag = require('./models/tag');
 var fileHepler = require('./helpers/files');
 var productHelper = require('./helpers/product');
 var faker = require('faker');
@@ -15,8 +16,10 @@ var products = [];
 
 var stores_cnt = 10;
 var users_cnt = 20;
-var products_cnt = 50;
+var products_cnt = 100;
 var rm = false;
+var all_tags = ['men', 'woman', 'child', 'art', 'gadgets', 'pets', 'food', 'workspace', 'tag1', 'tag2', 'tag3' ];
+
 
 db.connection.on('connected', function () {
 
@@ -49,10 +52,22 @@ db.connection.on('connected', function () {
          Identity.remove({}, function (err) {
             console.log('removed all identities'.red);
         });
+        Tag.remove({}, function (err) {
+            console.log('removed all tags'.red);
+        });
 
         deleteFolderRecursive(__dirname + '/images/');
         console.log('images cleared'.red);
     }
+
+    all_tags.forEach(function (tag) {
+        var new_tag = new Tag({
+            name: tag,
+            products: []
+        });
+        new_tag.save(function (err) {});
+    });
+
 
     var time = Date.now();
     var c_i_sore = 0;
@@ -144,12 +159,14 @@ function userCreate(store, callback) {
 }
 
 function productCreate(user_id, callback) {
+    var tags = randomTags();
+
     var new_product = new Product({
         user_id: user_id,
         title: faker.commerce.productName(),
         description: faker.lorem.paragraphs(),
         price: faker.commerce.price().split('.')[0],
-        tags: ['tag1', 'tag2', 'tag3', 'seedcreate']
+        tags: tags
     });
 
     var descriptionPhotos = [], mainPhoto;
@@ -160,6 +177,25 @@ function productCreate(user_id, callback) {
             var path = __dirname + '/test-images/' + items[Math.floor(Math.random() * items.length)];
             descriptionPhotos.push(path);
         }
+
+        tags.forEach(function (e) {
+            Tag.find({name: e + ""}, function (err, tag) {
+                if(tag.length == 0){
+                    var new_tag = new Tag({
+                        name: e,
+                        products: [new_product._id]
+                    });
+                    new_tag.save(function (err) { });
+                } else {
+                    console.log(tag);
+                    var new_products_tags = tag[0].products.concat([new_product._id]);
+                    console.log(new_products_tags);
+                    Tag.update({ _id: tag[0]._id }, { $set: { products: new_products_tags } }, function (err, status) { })
+                }
+            })
+
+        });
+
         var dphotos = [], ii = 0;
         descriptionPhotos.forEach(function (e, i) {
             mkdirp('./images/' + new_product._id, function (err) {
@@ -198,4 +234,14 @@ function productLikes(callback) {
             }
         });
     });
+}
+
+function randomTags() {
+    var tags_to_product = [];
+    all_tags.forEach(function (e) {
+        if(getRandomInt(0, 3) == 0) tags_to_product.push(e);
+
+    }) ;
+
+    return tags_to_product;
 }

@@ -89,6 +89,24 @@ export class ProductService {
             .catch(this.handleError);
     }
 
+    getByTag(name){
+        if(this.last != "tag-" + name) {
+            this.n_start = 0;
+            this.last = "tag-" + name;
+            this.products = [];
+        }
+
+        return this.http.get('/api/tag/' + name + '/' + this.n_start + '/' + this.n)
+            .toPromise()
+            .then(res => res.json().products)
+            .then(products => {
+                this.products = this.products.concat(products);
+                this.n_start += this.n;
+            })
+            .catch(this.handleError);
+
+    }
+
 
 
     private handleError(err: any) {

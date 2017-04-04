@@ -95,6 +95,22 @@ var ProductService = (function () {
         })
             .catch(this.handleError);
     };
+    ProductService.prototype.getByTag = function (name) {
+        var _this = this;
+        if (this.last != "tag-" + name) {
+            this.n_start = 0;
+            this.last = "tag-" + name;
+            this.products = [];
+        }
+        return this.http.get('/api/tag/' + name + '/' + this.n_start + '/' + this.n)
+            .toPromise()
+            .then(function (res) { return res.json().products; })
+            .then(function (products) {
+            _this.products = _this.products.concat(products);
+            _this.n_start += _this.n;
+        })
+            .catch(this.handleError);
+    };
     ProductService.prototype.handleError = function (err) {
         console.error('Error:', err);
         return Promise.reject(err.message || err);

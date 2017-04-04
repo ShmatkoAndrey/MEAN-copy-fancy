@@ -1,4 +1,5 @@
 var Product = require('../models/product');
+var Tag = require('../models/tag');
 var userHelper = require('../helpers/user');
 var fileHepler = require('../helpers/files');
 var formidable = require('formidable');
@@ -51,8 +52,26 @@ exports.createProduct = function (req, res, callback) {
                 title: product.title,
                 description: product.description,
                 price: product.price,
-                tags: product.tags
+                tags: product.tags.split(',').map(function(item){return item.trim()})
             });
+
+            product.tags.split(',').forEach(function (e) {
+                e = e.trim();
+                Tag.findOne({}, function (err, tag) {
+                    if(!tag){
+                        var new_tag = new Tag({
+                            name: e,
+                            products: [new_product._id]
+                        });
+                        new_tag.save(function (err) { });
+                    } else{
+                        var new_products_tags = tag.products.push(new_product._id);
+                        Tag.update({ _id: tag._id }, { $set: { products: new_products_tags } }, function (err, status) { })
+                    }
+                })
+
+            });
+
             var dphotos = [], ii = 0;
             descriptionPhotos.forEach(function (e, i) {
                 mkdirp('./images/' + new_product._id, function (err) {
