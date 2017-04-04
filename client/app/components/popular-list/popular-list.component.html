@@ -1,0 +1,6 @@
+<div id="product-list">
+    <product
+            *ngFor = "let product of productService.products"
+            [product]="product"
+    > </product>
+</div>

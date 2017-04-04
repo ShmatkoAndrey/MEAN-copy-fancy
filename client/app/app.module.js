@@ -9,6 +9,7 @@ var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
 var forms_1 = require("@angular/forms");
 var http_1 = require("@angular/http");
+var app_routes_1 = require("./app.routes");
 var app_component_1 = require("./app.component");
 var header_component_1 = require("./components/header/header.component");
 var tags_list_component_1 = require("./components/tags-list/tags-list.component");
@@ -22,6 +23,7 @@ var modal_np_component_1 = require("./components/modal-np/modal-np.component");
 var modal_showp_component_1 = require("./components/modal-showp/modal-showp.component");
 var cart_component_1 = require("./components/cart/cart.component");
 var stores_component_1 = require("./components/stores/stores.component");
+var popular_list_component_1 = require("./components/popular-list/popular-list.component");
 var product_service_1 = require("./services/product.service");
 var user_service_1 = require("./services/user.service");
 var cart_service_1 = require("./services/cart.service");
@@ -35,7 +37,8 @@ AppModule = __decorate([
         imports: [
             platform_browser_1.BrowserModule,
             forms_1.FormsModule,
-            http_1.HttpModule
+            http_1.HttpModule,
+            app_routes_1.routing
         ],
         declarations: [
             app_component_1.AppComponent,
@@ -50,9 +53,10 @@ AppModule = __decorate([
             modal_np_component_1.ModalNewProductComponent,
             modal_showp_component_1.ModalShowProductComponent,
             cart_component_1.CartComponent,
-            stores_component_1.StoresComponent
+            stores_component_1.StoresComponent,
+            popular_list_component_1.PopularListComponent
         ],
-        providers: [product_service_1.ProductService, user_service_1.UserService, cart_service_1.CartService],
+        providers: [app_routes_1.appRoutingProviders, product_service_1.ProductService, user_service_1.UserService, cart_service_1.CartService],
         bootstrap: [app_component_1.AppComponent]
     })
 ], AppModule);

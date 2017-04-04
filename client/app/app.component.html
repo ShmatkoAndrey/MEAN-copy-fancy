@@ -1,6 +1,6 @@
+<fancy-header> </fancy-header>
 
 <div class="page">
-    <fancy-header> </fancy-header>
 
     <div id="main-app" (scroll)="onScroll($event)">
 
@@ -11,7 +11,9 @@
                 <tags-list> </tags-list>
             </div>
 
-            <product-list> </product-list>
+            <div class="router-content">
+                <router-outlet></router-outlet>
+            </div>
 
             <div id="right-side">
                 <popular> </popular>

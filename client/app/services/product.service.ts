@@ -7,15 +7,21 @@ export class ProductService {
     products = [];
     n_start = 0;
     n = 5;
+    last = "product";
 
     constructor(private http: Http) {}
 
     getProducts() {
+        if(this.last != "product") {
+            this.n_start = 0;
+            this.last = "product";
+            this.products = [];
+        }
         return this.http.get('/api/products/'+ this.n_start + '/' + this.n)
             .toPromise()
             .then(res => res.json().products)
             .then(products => {
-                this.products = this.products.concat(products)
+                this.products = this.products.concat(products);
                 this.n_start += this.n;
             })
             .catch(this.handleError);
@@ -66,6 +72,23 @@ export class ProductService {
             .then(res => res.json().products)
             .catch(this.handleError);
     }
+
+    getPopularNum() {
+        if(this.last != "popular") {
+            this.n_start = 0;
+            this.last = "popular";
+            this.products = [];
+        }
+        return this.http.get('/api/popular/'+ this.n_start + '/' + this.n)
+            .toPromise()
+            .then(res => res.json().products)
+            .then(products => {
+                this.products = this.products.concat(products);
+                this.n_start += this.n;
+            })
+            .catch(this.handleError);
+    }
+
 
 
     private handleError(err: any) {

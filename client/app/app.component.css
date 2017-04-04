@@ -4,10 +4,6 @@
     flex-direction: column;
 }
 
-fancy-header {
-    flex: 0 0 auto;
-}
-
 #main-app {
     display: flex;
     position: relative;
@@ -24,7 +20,7 @@ fancy-header {
     flex: 0 0 240px;
 }
 
-product-list {
+.router-content {
     flex : 0 0 700px;
 }
 
@@ -33,5 +29,5 @@ product-list {
 }
 
 .empty {
-     flex: 1 2;
- }
+    flex: 1 2;
+}

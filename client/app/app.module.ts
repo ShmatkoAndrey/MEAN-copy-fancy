@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
+import { routing, appRoutingProviders } from './app.routes';
+
 import { AppComponent }   from './app.component';
 import { HeaderComponent }   from './components/header/header.component';
 import { TagsListComponent }   from './components/tags-list/tags-list.component';
@@ -16,6 +18,7 @@ import { ModalNewProductComponent }   from './components/modal-np/modal-np.compo
 import { ModalShowProductComponent }   from './components/modal-showp/modal-showp.component';
 import { CartComponent }   from './components/cart/cart.component';
 import { StoresComponent }   from './components/stores/stores.component';
+import { PopularListComponent }   from './components/popular-list/popular-list.component';
 
 import { ProductService } from './services/product.service';
 import { UserService } from './services/user.service';
@@ -25,9 +28,9 @@ import { CartService } from './services/cart.service';
   imports: [
       BrowserModule,
       FormsModule,
-      HttpModule
+      HttpModule,
+      routing
   ],
-
   declarations: [
       AppComponent,
       HeaderComponent,
@@ -41,10 +44,11 @@ import { CartService } from './services/cart.service';
       ModalNewProductComponent,
       ModalShowProductComponent,
       CartComponent,
-      StoresComponent
+      StoresComponent,
+      PopularListComponent
   ],
 
-  providers: [ ProductService, UserService, CartService ],
+  providers: [ appRoutingProviders, ProductService, UserService, CartService ],
 
   bootstrap:    [ AppComponent ]
 })

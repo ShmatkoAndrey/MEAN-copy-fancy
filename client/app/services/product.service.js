@@ -17,9 +17,15 @@ var ProductService = (function () {
         this.products = [];
         this.n_start = 0;
         this.n = 5;
+        this.last = "product";
     }
     ProductService.prototype.getProducts = function () {
         var _this = this;
+        if (this.last != "product") {
+            this.n_start = 0;
+            this.last = "product";
+            this.products = [];
+        }
         return this.http.get('/api/products/' + this.n_start + '/' + this.n)
             .toPromise()
             .then(function (res) { return res.json().products; })
@@ -71,6 +77,22 @@ var ProductService = (function () {
         return this.http.get('/api/popular/0/9')
             .toPromise()
             .then(function (res) { return res.json().products; })
+            .catch(this.handleError);
+    };
+    ProductService.prototype.getPopularNum = function () {
+        var _this = this;
+        if (this.last != "popular") {
+            this.n_start = 0;
+            this.last = "popular";
+            this.products = [];
+        }
+        return this.http.get('/api/popular/' + this.n_start + '/' + this.n)
+            .toPromise()
+            .then(function (res) { return res.json().products; })
+            .then(function (products) {
+            _this.products = _this.products.concat(products);
+            _this.n_start += _this.n;
+        })
             .catch(this.handleError);
     };
     ProductService.prototype.handleError = function (err) {
