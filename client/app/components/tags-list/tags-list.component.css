@@ -1,16 +1,9 @@
-#main-tags {
-    list-style-type: none;
-    margin: 0;
-    margin-top: 20px;
+#product-list {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    height: 200px;
-    position: fixed;
 }
 
-.tag {
-    flex: 1;
-    color: #4F535A;
-    font-size: 14px;
+product {
+    width: 650px;
+    margin-top: 20px;
 }

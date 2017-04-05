@@ -11,6 +11,14 @@ export class ProductService {
 
     constructor(private http: Http) {}
 
+    continueProducts() {
+
+        if(this.last.split(' ')[0] == 'product') { return this.getProducts() }
+        if(this.last.split(' ')[0] == 'popular') { return this.getPopularNum() }
+        if(this.last.split(' ')[0] == 'tag') { return this.getByTag(this.last.split(' ')[1]) }
+
+    }
+
     getProducts() {
         if(this.last != "product") {
             this.n_start = 0;
@@ -90,9 +98,9 @@ export class ProductService {
     }
 
     getByTag(name){
-        if(this.last != "tag-" + name) {
+        if(this.last != "tag " + name) {
             this.n_start = 0;
-            this.last = "tag-" + name;
+            this.last = "tag " + name;
             this.products = [];
         }
 

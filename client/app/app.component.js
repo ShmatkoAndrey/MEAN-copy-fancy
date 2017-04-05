@@ -20,7 +20,7 @@ var AppComponent = (function () {
         if (!this.load_posts) {
             if (event.target.scrollTop + event.target.clientHeight >= event.target.scrollHeight - 400) {
                 this.load_posts = true;
-                this.productService.getProducts().then(function () { return _this.load_posts = false; });
+                this.productService.continueProducts().then(function () { return _this.load_posts = false; });
             }
         }
     };

@@ -31,3 +31,20 @@
 .empty {
     flex: 1 2;
 }
+
+#main-tags {
+    list-style-type: none;
+    margin: 0;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 200px;
+    /*position: fixed;*/
+}
+
+.tag {
+    flex: 1;
+    color: #4F535A;
+    font-size: 14px;
+}

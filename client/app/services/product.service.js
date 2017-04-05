@@ -19,6 +19,17 @@ var ProductService = (function () {
         this.n = 5;
         this.last = "product";
     }
+    ProductService.prototype.continueProducts = function () {
+        if (this.last.split(' ')[0] == 'product') {
+            return this.getProducts();
+        }
+        if (this.last.split(' ')[0] == 'popular') {
+            return this.getPopularNum();
+        }
+        if (this.last.split(' ')[0] == 'tag') {
+            return this.getByTag(this.last.split(' ')[1]);
+        }
+    };
     ProductService.prototype.getProducts = function () {
         var _this = this;
         if (this.last != "product") {
@@ -97,9 +108,9 @@ var ProductService = (function () {
     };
     ProductService.prototype.getByTag = function (name) {
         var _this = this;
-        if (this.last != "tag-" + name) {
+        if (this.last != "tag " + name) {
             this.n_start = 0;
-            this.last = "tag-" + name;
+            this.last = "tag " + name;
             this.products = [];
         }
         return this.http.get('/api/tag/' + name + '/' + this.n_start + '/' + this.n)

@@ -8,7 +8,16 @@
 
         <div id="main-content">
             <div id="left-side">
-                <tags-list> </tags-list>
+                <ul id="main-tags">
+                    <li class="tag"> <a [routerLink]="['/popular']"> Popular </a>  </li>
+                    <li class="tag"> <a [routerLink]="['/tag', 'man']"> Man </a> </li>
+                    <li class="tag">  <a [routerLink]="['/tag', 'Woman']"> Woman </a> </li>
+                    <li class="tag">  <a [routerLink]="['/tag', 'Art']"> Art </a> </li>
+                    <li class="tag">  <a [routerLink]="['/tag', 'Gadgets']"> Gadgets </a> </li>
+                    <li class="tag">  <a [routerLink]="['/tag', 'Pets']"> Pets </a> </li>
+                    <li class="tag">  <a [routerLink]="['/tag', 'Food']"> Food </a> </li>
+                    <li class="tag">  <a [routerLink]="['/tag', 'Workspace']"> Workspace </a> </li>
+                </ul>
             </div>
 
             <div class="router-content">

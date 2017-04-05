@@ -18,7 +18,7 @@ var stores_cnt = 10;
 var users_cnt = 20;
 var products_cnt = 100;
 var rm = false;
-var all_tags = ['men', 'woman', 'child', 'art', 'gadgets', 'pets', 'food', 'workspace', 'tag1', 'tag2', 'tag3' ];
+var all_tags = ['man', 'woman', 'child', 'art', 'gadgets', 'pets', 'food', 'workspace', 'tag1', 'tag2', 'tag3' ];
 
 
 db.connection.on('connected', function () {
@@ -59,15 +59,6 @@ db.connection.on('connected', function () {
         deleteFolderRecursive(__dirname + '/images/');
         console.log('images cleared'.red);
     }
-
-    all_tags.forEach(function (tag) {
-        var new_tag = new Tag({
-            name: tag,
-            products: []
-        });
-        new_tag.save(function (err) {});
-    });
-
 
     var time = Date.now();
     var c_i_sore = 0;
@@ -119,7 +110,7 @@ function deleteFolderRecursive(path) {
         });
         fs.rmdirSync(path);
     }
-};
+}
 
 function userCreate(store, callback) {
     var userF = {
@@ -178,23 +169,25 @@ function productCreate(user_id, callback) {
             descriptionPhotos.push(path);
         }
 
-        tags.forEach(function (e) {
-            Tag.find({name: e + ""}, function (err, tag) {
-                if(tag.length == 0){
-                    var new_tag = new Tag({
-                        name: e,
-                        products: [new_product._id]
-                    });
-                    new_tag.save(function (err) { });
-                } else {
-                    console.log(tag);
-                    var new_products_tags = tag[0].products.concat([new_product._id]);
-                    console.log(new_products_tags);
-                    Tag.update({ _id: tag[0]._id }, { $set: { products: new_products_tags } }, function (err, status) { })
-                }
-            })
-
-        });
+        // tags.forEach(function (e) {
+        //     Tag.findOne({name: e}, function (err, tag) {
+        //         console.log("---");
+        //         console.log(tag);
+        //         if(!tag){
+        //             var new_tag = new Tag({
+        //                 name: e,
+        //                 products: [new_product._id]
+        //             });
+        //             new_tag.save(function (err, save_tag) { if(err) console.log(err) });
+        //         } else {
+        //             tag.products = tag.products.concat([new_product._id]);
+        //             tag.save(function (err, tag_upd) {
+        //                 // console.log(tag_upd);
+        //             });
+        //         }
+        //     })
+        //
+        // });
 
         var dphotos = [], ii = 0;
         descriptionPhotos.forEach(function (e, i) {

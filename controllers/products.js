@@ -48,11 +48,33 @@ module.exports = function(app){
     });
 
     app.get('/api/tag/:name/:n_start/:n', function (req, res) {
+        var tag_name = req.params.name.toLowerCase();
         Product.find({}, function (err, products) {
-            productHelper.getFullInfoProducts(products, function (products) {
-                var p = products.reverse().slice(parseInt(req.params.n_start), parseInt(req.params.n_start) + parseInt(req.params.n));
-                res.json({ products: p });
-            })
+            var tag_prod = [];
+            var ii = 0;
+            products.forEach(function (e) {
+                ii++;
+                if(e.tags.some(function (tag) {
+                    return tag == tag_name;
+                })){
+                    tag_prod.push(e);
+                }
+                if(ii == products.length - 1){
+
+                    tag_prod.sort(function(a, b){
+                        var keyA = new Date(a.created),
+                            keyB = new Date(b.created);
+                        if(keyA < keyB) return -1;
+                        if(keyA > keyB) return 1;
+                        return 0;
+                    });
+
+                    productHelper.getFullInfoProducts(tag_prod, function (products) {
+                        var p = products.reverse().slice(parseInt(req.params.n_start), parseInt(req.params.n_start) + parseInt(req.params.n));
+                        res.json({ products: p });
+                    })
+                }
+            });
         });
     });
 
