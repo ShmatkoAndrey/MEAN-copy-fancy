@@ -11,6 +11,8 @@ import { ProductService } from '../../services/product.service';
 })
 export class StorePageComponent implements OnInit{
     products;
+    store;
+    id;
 
     private sub: any;
 
@@ -19,7 +21,10 @@ export class StorePageComponent implements OnInit{
 
     ngOnInit() {
         this.sub = this.route.params.subscribe(params => {
+            this.id = params['id'];
             this.productService.getStoreProducts( params['id']).then(products => this.products = products);
+            this.productService.getStore( params['id']).then(store => this.store = store).then(()=> console.log(this.store));
+
         });
     }
 

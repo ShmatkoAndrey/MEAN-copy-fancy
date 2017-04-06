@@ -1,4 +1,5 @@
 var Product = require('../models/product');
+var User = require('../models/user');
 var productHelper = require('../helpers/product');
 var userHelper = require('../helpers/user');
 
@@ -40,9 +41,9 @@ module.exports = function(app){
 
     app.get('/api/products/:n_start/:n', function (req, res) {
         Product.find({}, function (err, products) {
-            productHelper.getFullInfoProducts(products, function (products) {
-                var p = products.reverse().slice(parseInt(req.params.n_start), parseInt(req.params.n_start) + parseInt(req.params.n));
-                res.json({ products: p });
+            var p = products.reverse().slice(parseInt(req.params.n_start), parseInt(req.params.n_start) + parseInt(req.params.n));
+            productHelper.getFullInfoProducts(p, function (products) {
+                res.json({ products: products });
             })
         });
     });
@@ -69,9 +70,9 @@ module.exports = function(app){
                         return 0;
                     });
 
-                    productHelper.getFullInfoProducts(tag_prod, function (products) {
-                        var p = products.reverse().slice(parseInt(req.params.n_start), parseInt(req.params.n_start) + parseInt(req.params.n));
-                        res.json({ products: p });
+                    var p = tag_prod.reverse().slice(parseInt(req.params.n_start), parseInt(req.params.n_start) + parseInt(req.params.n));
+                    productHelper.getFullInfoProducts(p, function (products) {
+                        res.json({ products: products });
                     })
                 }
             });
@@ -82,7 +83,9 @@ module.exports = function(app){
         Product.find({user_id: req.params.id}, function (err, products) {
             var p = products.reverse().slice(parseInt(req.params.n_start), parseInt(req.params.n_start) + parseInt(req.params.n));
             productHelper.getFullInfoProducts( p, function (products) {
-                res.json({products: products});
+                User.findById(req.params.id, function (err, store) {
+                    res.json({store: store.serialized(), products: products});
+                });
             })
 
         });

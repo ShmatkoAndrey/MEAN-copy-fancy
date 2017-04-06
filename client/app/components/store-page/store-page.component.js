@@ -19,7 +19,9 @@ var StorePageComponent = (function () {
     StorePageComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.sub = this.route.params.subscribe(function (params) {
+            _this.id = params['id'];
             _this.productService.getStoreProducts(params['id']).then(function (products) { return _this.products = products; });
+            _this.productService.getStore(params['id']).then(function (store) { return _this.store = store; }).then(function () { return console.log(_this.store); });
         });
     };
     StorePageComponent.prototype.ngOnDestroy = function () {

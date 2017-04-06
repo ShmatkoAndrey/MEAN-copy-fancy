@@ -8,8 +8,7 @@ declare let FB;
 export class UserService {
     user;
 
-    constructor(private http: Http) {
-    }
+    constructor(private http: Http) {}
 
     getCurrentUser(): Promise<any> {
         return this.http.get('/api/current_user')

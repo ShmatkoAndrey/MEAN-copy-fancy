@@ -15,6 +15,10 @@ export class AppComponent {
   constructor(private productService: ProductService) {}
 
   onScroll(event) {
+    if(this.load_posts && (event.target.scrollTop + event.target.clientHeight >= event.target.scrollHeight )) {
+      this.load_posts = false;
+    }
+
     if(!this.load_posts) {
       if (event.target.scrollTop + event.target.clientHeight >= event.target.scrollHeight - 400) {
         this.load_posts = true;

@@ -141,6 +141,12 @@ var ProductService = (function () {
         })
             .catch(this.handleError);
     };
+    ProductService.prototype.getStore = function (id) {
+        return this.http.get('/api/store/' + id)
+            .toPromise()
+            .then(function (res) { return res.json().store; })
+            .catch(this.handleError);
+    };
     ProductService.prototype.handleError = function (err) {
         console.error('Error:', err);
         return Promise.reject(err.message || err);

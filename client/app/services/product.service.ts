@@ -131,6 +131,13 @@ export class ProductService {
             .catch(this.handleError);
     }
 
+    getStore(id){
+        return this.http.get('/api/store/'+id)
+            .toPromise()
+            .then(res => res.json().store)
+            .catch(this.handleError);
+    }
+
     private handleError(err: any) {
         console.error('Error:', err);
         return Promise.reject(err.message || err);

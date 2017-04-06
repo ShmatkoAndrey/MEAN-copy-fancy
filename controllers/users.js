@@ -113,5 +113,12 @@ module.exports = function(app) {
                 });
             });
         })
-    })
+    });
+
+    app.get('/api/store/:id', function (req, res) {
+        User.findById(req.params.id, function (err, store) {
+            res.json({store: store.serialized()});
+        })
+    });
+
 };

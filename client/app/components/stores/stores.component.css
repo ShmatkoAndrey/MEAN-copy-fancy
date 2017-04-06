@@ -19,7 +19,8 @@
 
 .store-info {
     display: flex;
-    align-items: center;}
+    align-items: center;
+}
 
 .avatar {
     margin: 0 10px;

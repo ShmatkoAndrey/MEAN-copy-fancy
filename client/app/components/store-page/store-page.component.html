@@ -1,3 +1,8 @@
+<div class="store-info">
+    <img class="avatar" [src]="'/images/users/' + id + '/avatar.jpg'"  />
+    <span *ngIf="store">{{store.username}}</span>
+</div>
+
 <div id="product-list">
     <product
             *ngFor = "let product of productService.products"
