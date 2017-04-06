@@ -1,7 +1,7 @@
 <div id="main-stores">
 
     <div class="store" *ngFor="let store of stores">
-        <div class="store-info">
+        <div class="store-info" [routerLink]="['/store', store._id]">
             <img class="avatar" [src]="'/images/users/' + store._id + '/avatar.jpg'"  />
             <span>{{store.username}}</span>
         </div>

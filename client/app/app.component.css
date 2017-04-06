@@ -39,7 +39,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 200px;
+    height: 240px;
     /*position: fixed;*/
 }
 
@@ -47,4 +47,9 @@
     flex: 1;
     color: #4F535A;
     font-size: 14px;
+}
+
+.tag a {
+    text-decoration: none;
+    color: grey;
 }

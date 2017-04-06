@@ -4,7 +4,7 @@
 
 .product-info {
     width: 100%;
-    height: 120px;
+    height: 140px;
     background-color: white;
 }
 
@@ -31,8 +31,13 @@
 }
 
 .product-tags {
-    font-size: 13px;
+    font-size: 14px;
     margin: 5px 0;
+}
+
+.product-tags a {
+    text-decoration: none;
+    color: grey;
 }
 
 .product-like {

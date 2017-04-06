@@ -12,10 +12,10 @@ export class ProductService {
     constructor(private http: Http) {}
 
     continueProducts() {
-
         if(this.last.split(' ')[0] == 'product') { return this.getProducts() }
         if(this.last.split(' ')[0] == 'popular') { return this.getPopularNum() }
         if(this.last.split(' ')[0] == 'tag') { return this.getByTag(this.last.split(' ')[1]) }
+        if(this.last.split(' ')[0] == 'store') { return this.getStoreProducts(this.last.split(' ')[1]) }
 
     }
 
@@ -112,10 +112,24 @@ export class ProductService {
                 this.n_start += this.n;
             })
             .catch(this.handleError);
-
     }
 
+    getStoreProducts(store){
+        if(this.last != "store " + store) {
+            this.n_start = 0;
+            this.last = "store " + store;
+            this.products = [];
+        }
 
+        return this.http.get('/api/store/' + store + '/' + this.n_start + '/' + this.n)
+            .toPromise()
+            .then(res => res.json().products)
+            .then(products => {
+                this.products = this.products.concat(products);
+                this.n_start += this.n;
+            })
+            .catch(this.handleError);
+    }
 
     private handleError(err: any) {
         console.error('Error:', err);

@@ -29,6 +29,9 @@ var ProductService = (function () {
         if (this.last.split(' ')[0] == 'tag') {
             return this.getByTag(this.last.split(' ')[1]);
         }
+        if (this.last.split(' ')[0] == 'store') {
+            return this.getStoreProducts(this.last.split(' ')[1]);
+        }
     };
     ProductService.prototype.getProducts = function () {
         var _this = this;
@@ -114,6 +117,22 @@ var ProductService = (function () {
             this.products = [];
         }
         return this.http.get('/api/tag/' + name + '/' + this.n_start + '/' + this.n)
+            .toPromise()
+            .then(function (res) { return res.json().products; })
+            .then(function (products) {
+            _this.products = _this.products.concat(products);
+            _this.n_start += _this.n;
+        })
+            .catch(this.handleError);
+    };
+    ProductService.prototype.getStoreProducts = function (store) {
+        var _this = this;
+        if (this.last != "store " + store) {
+            this.n_start = 0;
+            this.last = "store " + store;
+            this.products = [];
+        }
+        return this.http.get('/api/store/' + store + '/' + this.n_start + '/' + this.n)
             .toPromise()
             .then(function (res) { return res.json().products; })
             .then(function (products) {

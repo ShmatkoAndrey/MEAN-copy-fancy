@@ -78,6 +78,16 @@ module.exports = function(app){
         });
     });
 
+    app.get('/api/store/:id/:n_start/:n', function (req, res) {
+        Product.find({user_id: req.params.id}, function (err, products) {
+            var p = products.reverse().slice(parseInt(req.params.n_start), parseInt(req.params.n_start) + parseInt(req.params.n));
+            productHelper.getFullInfoProducts( p, function (products) {
+                res.json({products: products});
+            })
+
+        });
+    });
+
     app.post('/api/products', function (req, res) {
         productHelper.createProduct(req, res, function (product) {
             res.json({ product: product });
