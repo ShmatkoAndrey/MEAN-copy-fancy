@@ -100,20 +100,21 @@ input[type=checkbox]:checked + label:after {
     position: absolute;
 }
 
+.banner-photo {
+    width:350px;
+    height:100px;
+    object-fit: cover;
+    position: absolute;
+}
+
 .file-upload {
-    text-align: center;
-    vertical-align: middle;
+    margin-top: 5px;
+    display: inline-block;
     overflow:hidden;
     width:100px;
     height:100px;
     cursor:pointer;
     border: 1px solid grey;
-    /*background:url(input-file.gif) no-repeat;*/
-}
-
-.name-file-upload {
-    position: absolute;
-    margin: 40px 27px;
 }
 
 input[type=file] {
@@ -127,4 +128,28 @@ input[type=file] {
     margin:0;
     border:none;
     /*margin-left:-450px;*/
+}
+
+
+.name-file-upload {
+    position: absolute;
+    margin: 40px 27px;
+}
+
+.file-upload-banner {
+    margin-top: 5px;
+    display: inline-block;
+    overflow:hidden;
+    width:350px;
+    height:100px;
+    cursor:pointer;
+    border: 1px solid grey;
+}
+
+.file-upload-banner .name-file-upload {
+    margin: 40px 85px;
+}
+
+.file-upload-banner input[type=file] {
+    width: 350px;
 }

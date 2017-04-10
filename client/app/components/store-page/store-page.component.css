@@ -28,8 +28,10 @@ product {
 }
 
 .store-info {
+    margin-top: 20px;
     display: flex;
     align-items: center;
+    width: 650px;
 }
 
 .avatar {
@@ -39,4 +41,10 @@ product {
     /*object-fit: contain;*/
     border-radius: 50px;
     flex: 0 0 40px;
+}
+
+.banner {
+    width: 650px;
+    max-height: 300px;
+    overflow: hidden;
 }

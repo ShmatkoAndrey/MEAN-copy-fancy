@@ -16,6 +16,8 @@ export class RegistrationComponent {
     admin: boolean = false;
     imageAvatarSrc;
     avatar;
+    imageBanner;
+    banner;
 
     constructor(private userService: UserService) {}
 
@@ -26,7 +28,8 @@ export class RegistrationComponent {
                 password_confirmation: this.password_confirmation,
                 store: this.store || false,
                 admin: this.admin || false,
-                avatar: this.avatar
+                avatar: this.avatar,
+                banner: this.banner
             }
         );
     }
@@ -39,14 +42,32 @@ export class RegistrationComponent {
             console.log('invalid format');
             return;
         }
-        reader.onload = this._handleReaderLoadedMain.bind(this);
+        reader.onload = this._handleReaderLoadedAvatar.bind(this);
         reader.readAsDataURL(file);
         this.avatar = file;
     }
 
-    _handleReaderLoadedMain(e) {
+    _handleReaderLoadedAvatar(e) {
         let reader = e.target;
         this.imageAvatarSrc = reader.result;
+    }
+
+    onChangeBanner(e) {
+        let file = e.dataTransfer ? e.dataTransfer.files[0] : e.target.files[0];
+        let pattern = /image-*/;
+        let reader = new FileReader();
+        if (!file.type.match(pattern)) {
+            console.log('invalid format');
+            return;
+        }
+        reader.onload = this._handleReaderLoadedBanner.bind(this);
+        reader.readAsDataURL(file);
+        this.banner = file;
+    }
+
+    _handleReaderLoadedBanner(e) {
+        let reader = e.target;
+        this.imageBanner = reader.result;
     }
 
 }

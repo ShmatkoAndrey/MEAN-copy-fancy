@@ -12,7 +12,8 @@ module.exports = function(app) {
         if (fs.existsSync(path_file)) {
             res.sendFile(path.resolve(path_file));
         } else {
-            res.sendFile(path.resolve(__dirname + './../public/standart_avatar.png'));
+            if(req.params.photo=='avatar.jpg') res.sendFile(path.resolve(__dirname + './../public/standart_avatar.png'));
+            if(req.params.photo=='banner.jpg') res.sendFile(path.resolve(__dirname + './../public/standart_banner.png'));
         }
     });
 };

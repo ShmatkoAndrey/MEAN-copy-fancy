@@ -11,10 +11,11 @@ exports.current_user = function (session_user_id, callback) {
 
 exports.saveUser = function (req, callback) {
     var form = new formidable.IncomingForm();
-    var userF, avatar;
+    var userF, avatar, banner;
     form.parse(req, function (err, fields, files) {
         userF = fields;
         avatar = files.avatar;
+        if(files.banner) banner = files.banner;
         if (userF.password === userF.password_confirmation) {
             User.findOne({username: userF.username}, function (err, user) {
                 if (err) callback({error: err});
@@ -29,12 +30,23 @@ exports.saveUser = function (req, callback) {
                         });
                         mkdirp('./images/users/' + new_user._id, function (err) {
                             fileHepler.saveImg(avatar.path, __dirname + './../images/users/' + new_user._id + '/avatar.jpg', function () {
-                                new_user.save(function (err) {
-                                    if (err) callback({error: err});
-                                    else {
-                                        callback(new_user);
-                                    }
-                                });
+                                if(banner) {
+                                    fileHepler.saveImg(banner.path, __dirname + './../images/users/' + new_user._id + '/banner.jpg', function () {
+                                        new_user.save(function (err) {
+                                            if (err) callback({error: err});
+                                            else {
+                                                callback(new_user);
+                                            }
+                                        });
+                                    })
+                                } else {
+                                    new_user.save(function (err) {
+                                        if (err) callback({error: err});
+                                        else {
+                                            callback(new_user);
+                                        }
+                                    });
+                                }
                             });
                         });
                     }

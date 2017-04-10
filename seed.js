@@ -163,6 +163,7 @@ function productCreate(user_id, callback) {
     var descriptionPhotos = [], mainPhoto;
     fs.readdir('./test-images/', function (err, items) {
         items.splice(items.indexOf('avatars'), 1);
+        items.splice(items.indexOf('banners'), 1);
         mainPhoto = __dirname + '/test-images/' + items[Math.floor(Math.random() * items.length)];
         for (var i = 0; i < 4; i++) {
             var path = __dirname + '/test-images/' + items[Math.floor(Math.random() * items.length)];

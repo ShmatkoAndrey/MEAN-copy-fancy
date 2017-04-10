@@ -23,5 +23,11 @@
         <input type="file" name="avatar"  (change)="onChangeAvatar($event)" />
     </div>
 
+    <div class="file-upload-banner" *ngIf="store">
+        <div  class="name-file-upload">Banner 650px * 200px</div>
+        <img  *ngIf="imageBanner" class="banner-photo" [src]="imageBanner" />
+        <input type="file" name="banner" (change)="onChangeBanner($event)" multiple />
+    </div>
+
     <button type="submit" [disabled]="registrationForm.form.invalid"> Registration </button>
 </form>

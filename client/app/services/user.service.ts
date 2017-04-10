@@ -38,6 +38,7 @@ export class UserService {
         data.append('store', user.store);
         data.append('admin', user.admin);
         data.append('avatar', user.avatar);
+        data.append('banner', user.banner);
 
         return this.http.post('/api/registration', data)
             .toPromise()

@@ -26,7 +26,8 @@ var RegistrationComponent = (function () {
             password_confirmation: this.password_confirmation,
             store: this.store || false,
             admin: this.admin || false,
-            avatar: this.avatar
+            avatar: this.avatar,
+            banner: this.banner
         });
     };
     RegistrationComponent.prototype.onChangeAvatar = function (e) {
@@ -37,13 +38,29 @@ var RegistrationComponent = (function () {
             console.log('invalid format');
             return;
         }
-        reader.onload = this._handleReaderLoadedMain.bind(this);
+        reader.onload = this._handleReaderLoadedAvatar.bind(this);
         reader.readAsDataURL(file);
         this.avatar = file;
     };
-    RegistrationComponent.prototype._handleReaderLoadedMain = function (e) {
+    RegistrationComponent.prototype._handleReaderLoadedAvatar = function (e) {
         var reader = e.target;
         this.imageAvatarSrc = reader.result;
+    };
+    RegistrationComponent.prototype.onChangeBanner = function (e) {
+        var file = e.dataTransfer ? e.dataTransfer.files[0] : e.target.files[0];
+        var pattern = /image-*/;
+        var reader = new FileReader();
+        if (!file.type.match(pattern)) {
+            console.log('invalid format');
+            return;
+        }
+        reader.onload = this._handleReaderLoadedBanner.bind(this);
+        reader.readAsDataURL(file);
+        this.banner = file;
+    };
+    RegistrationComponent.prototype._handleReaderLoadedBanner = function (e) {
+        var reader = e.target;
+        this.imageBanner = reader.result;
     };
     return RegistrationComponent;
 }());
