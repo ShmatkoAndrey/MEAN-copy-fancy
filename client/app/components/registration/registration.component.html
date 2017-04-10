@@ -17,8 +17,11 @@
         <div class="label"> Admin</div>
     </div>
 
-    <input type="file" name="avatar"  (change)="onChangeAvatar($event)" />
-    <img *ngIf="imageAvatarSrc" class="main-photo" [src]="imageAvatarSrc" />
+    <div class="file-upload" >
+        <div *ngIf="!imageAvatarSrc" class="name-file-upload">Avatar</div>
+        <img  *ngIf="imageAvatarSrc" class="main-photo" [src]="imageAvatarSrc" />
+        <input type="file" name="avatar"  (change)="onChangeAvatar($event)" />
+    </div>
 
     <button type="submit" [disabled]="registrationForm.form.invalid"> Registration </button>
 </form>

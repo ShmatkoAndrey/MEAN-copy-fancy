@@ -75,14 +75,51 @@ button[type=submit]:hover {
 /*}*/
 
 
-.main-photo {
+.description-photo {
     width: 150px;
     height: 150px;
     object-fit: cover;
+    margin-left: 5px;
 }
 
-.description-photo {
-    width: 100px;
-    height: 100px;
+.main-photo {
+    width:150px;
+    height:150px;
     object-fit: cover;
+    position: absolute;
+}
+
+.description-imgs {
+    display: inline-flex;
+    overflow: auto;
+    width: 600px;
+}
+
+.file-upload {
+    display: inline-block;
+
+    overflow:hidden;
+    width:150px;
+    height:150px;
+    cursor:pointer;
+    border: 1px solid grey;
+    /*background:url(input-file.gif) no-repeat;*/
+}
+
+.name-file-upload {
+    position: absolute;
+    margin: 65px 35px;
+}
+
+input[type=file] {
+    opacity:0;
+    filter:alpha(opacity:0);
+    /*font-size:100px;*/
+    height: 150px;
+    width: 150px;
+    cursor:pointer;
+    padding:0;
+    margin:0;
+    border:none;
+    /*margin-left:-450px;*/
 }

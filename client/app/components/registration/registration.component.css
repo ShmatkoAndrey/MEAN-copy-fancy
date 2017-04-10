@@ -92,3 +92,39 @@ input[type=checkbox]:checked + label {
 input[type=checkbox]:checked + label:after {
      background:#4caf50;
  }
+
+.main-photo {
+    width:100px;
+    height:100px;
+    object-fit: cover;
+    position: absolute;
+}
+
+.file-upload {
+    text-align: center;
+    vertical-align: middle;
+    overflow:hidden;
+    width:100px;
+    height:100px;
+    cursor:pointer;
+    border: 1px solid grey;
+    /*background:url(input-file.gif) no-repeat;*/
+}
+
+.name-file-upload {
+    position: absolute;
+    margin: 40px 27px;
+}
+
+input[type=file] {
+    opacity:0;
+    filter:alpha(opacity:0);
+    /*font-size:100px;*/
+    height: 100px;
+    width: 100px;
+    cursor:pointer;
+    padding:0;
+    margin:0;
+    border:none;
+    /*margin-left:-450px;*/
+}
