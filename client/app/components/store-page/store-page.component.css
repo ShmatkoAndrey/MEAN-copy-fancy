@@ -30,14 +30,15 @@ product {
 .store-info {
     margin-top: 20px;
     display: flex;
-    align-items: center;
+    justify-content: center;
+    align-items: flex-end;
     width: 650px;
 }
 
 .avatar {
-    margin: 0 10px;
-    width: 40px;
-    height: 40px;
+    margin-right: 5px;
+    width: 50px;
+    height: 50px;
     /*object-fit: contain;*/
     border-radius: 50px;
     flex: 0 0 40px;
@@ -47,4 +48,16 @@ product {
     width: 650px;
     max-height: 300px;
     overflow: hidden;
+}
+
+.info-name {
+    background-color: white;
+    position: absolute;
+    width: 135px;
+    padding: 10px;
+    margin-top: -10px;
+
+    display: flex;
+
+
 }

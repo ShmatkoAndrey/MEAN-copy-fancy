@@ -136,10 +136,25 @@ function userCreate(store, callback) {
                         var path = __dirname + '/test-images/avatars/' + items[Math.floor(Math.random() * items.length)];
                         mkdirp('./images/users/' + new_user._id, function (err) {
                             fileHepler.saveImg(path, __dirname + '/images/users/' + new_user._id + '/avatar.jpg', function () {
-                                new_user.save(function (err) {
-                                    if (err) callback({error: err});
-                                    else callback(new_user);
-                                });
+                                if(store){
+                                    fs.readdir('./test-images/banners/', function (err, items) {
+                                        var path = __dirname + '/test-images/banners/' + items[Math.floor(Math.random() * items.length)];
+                                        mkdirp('./images/users/' + new_user._id, function (err) {
+                                            fileHepler.saveImg(path, __dirname + '/images/users/' + new_user._id + '/banner.jpg', function () {
+                                                new_user.save(function (err) {
+                                                    if (err) callback({error: err});
+                                                    else callback(new_user);
+                                                });
+                                            })
+                                        })
+                                    })
+                                }
+                                else {
+                                    new_user.save(function (err) {
+                                        if (err) callback({error: err});
+                                        else callback(new_user);
+                                    });
+                                }
                             });
                         });
                     });

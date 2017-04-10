@@ -1,7 +1,10 @@
 <div class="store-info">
     <img class="banner" [src]="'/images/users/' + id + '/banner.jpg'"  />
-    <!-- Сверху картинки - середина с белым фоном название и иконка -->
-    <!--<span *ngIf="store">{{store.username}}</span>-->
+
+    <div *ngIf="store" class="info-name">
+        <img class="avatar" [src]="'/images/users/' + id + '/avatar.jpg'"  />
+        <span>{{store.username}}</span>
+    </div>
 </div>
 
 <div id="product-list">
