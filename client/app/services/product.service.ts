@@ -54,7 +54,8 @@ export class ProductService {
                     alert(product.error);
                 }
                 else {
-                    this.products.unshift(product)
+
+                    this.products.unshift(product.product)
                 }
             })
             .catch(this.handleError);

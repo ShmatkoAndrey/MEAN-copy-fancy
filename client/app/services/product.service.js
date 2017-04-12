@@ -68,7 +68,7 @@ var ProductService = (function () {
                 alert(product.error);
             }
             else {
-                _this.products.unshift(product);
+                _this.products.unshift(product.product);
             }
         })
             .catch(this.handleError);

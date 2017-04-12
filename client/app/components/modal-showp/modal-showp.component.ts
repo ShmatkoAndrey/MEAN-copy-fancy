@@ -21,6 +21,8 @@ export class ModalShowProductComponent implements OnInit{
         this.main_img = this.product.mainPhoto;
         this.all_imgs.push(this.product.mainPhoto);
         this.all_imgs = this.all_imgs.concat(this.product.descriptionPhoto);
+
+        this.show_modal = false;
     }
 
     showPhoto(photo) {

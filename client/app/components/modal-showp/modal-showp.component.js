@@ -21,6 +21,7 @@ var ModalShowProductComponent = (function () {
         this.main_img = this.product.mainPhoto;
         this.all_imgs.push(this.product.mainPhoto);
         this.all_imgs = this.all_imgs.concat(this.product.descriptionPhoto);
+        this.show_modal = false;
     };
     ModalShowProductComponent.prototype.showPhoto = function (photo) {
         this.main_img = photo;
