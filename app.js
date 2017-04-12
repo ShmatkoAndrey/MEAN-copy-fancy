@@ -25,6 +25,9 @@ fs.readdirSync('./controllers').forEach(function (file) {
     }
 });
 
+app.get('*', function(req, res){
+    res.redirect('/');
+});
 
 server = app.listen(config.port, function () {
     console.log('Listening port :' + config.port);
