@@ -20,13 +20,13 @@
     <div class="file-upload" >
         <div *ngIf="!imageAvatarSrc" class="name-file-upload">Avatar</div>
         <img  *ngIf="imageAvatarSrc" class="main-photo" [src]="imageAvatarSrc" />
-        <input type="file" name="avatar"  (change)="onChangeAvatar($event)" />
+        <input type="file" name="avatar" (change)="onChangeAvatar($event)" required />
     </div>
 
     <div class="file-upload-banner" *ngIf="store">
         <div  class="name-file-upload">Banner 650px * 200px</div>
         <img  *ngIf="imageBanner" class="banner-photo" [src]="imageBanner" />
-        <input type="file" name="banner" (change)="onChangeBanner($event)" multiple />
+        <input type="file" name="banner" (change)="onChangeBanner($event)" required />
     </div>
 
     <button type="submit" [disabled]="registrationForm.form.invalid"> Registration </button>
