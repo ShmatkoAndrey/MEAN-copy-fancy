@@ -15,7 +15,6 @@ var HeaderComponent = (function () {
         this.userService = userService;
         this.show_LR_modal = false;
         this.show_NP_modal = false;
-        this.show_cart = false;
     }
     HeaderComponent.prototype.ngOnInit = function () {
         this.userService.getCurrentUser();
@@ -38,9 +37,6 @@ var HeaderComponent = (function () {
     };
     HeaderComponent.prototype.modalNPOff = function () {
         this.show_NP_modal = false;
-    };
-    HeaderComponent.prototype.openCart = function () {
-        this.show_cart = !this.show_cart;
     };
     return HeaderComponent;
 }());

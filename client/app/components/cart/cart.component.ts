@@ -11,11 +11,16 @@ import {gunzip} from "zlib";
 })
 export class CartComponent implements OnInit{
     cart;
+    show_cart:boolean = false;
 
     constructor(private cartService: CartService) {}
 
     ngOnInit(){
         this.cart = this.cartService.getCart();
+    }
+
+    openCart() {
+        this.show_cart = !this.show_cart;
     }
 
     getSum() {
@@ -29,6 +34,7 @@ export class CartComponent implements OnInit{
     onPay() {
         this.cartService.payment();
     }
+
 
 
 }

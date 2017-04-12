@@ -13,9 +13,13 @@ var cart_service_1 = require("../../services/cart.service");
 var CartComponent = (function () {
     function CartComponent(cartService) {
         this.cartService = cartService;
+        this.show_cart = false;
     }
     CartComponent.prototype.ngOnInit = function () {
         this.cart = this.cartService.getCart();
+    };
+    CartComponent.prototype.openCart = function () {
+        this.show_cart = !this.show_cart;
     };
     CartComponent.prototype.getSum = function () {
         var sum = 0;

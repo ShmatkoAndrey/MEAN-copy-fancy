@@ -61,3 +61,35 @@ hr {
     display: flex;
     align-items: center;
 }
+
+
+.cart-icon {
+    margin: 0 20px 0 10px;
+    padding: 5px 9px;
+    border: 1px solid deepskyblue;
+    border-radius: 20px;
+    cursor: hand;
+    font-size: 20px;
+}
+
+.cart-full {
+    /*max-height: 150px;*/
+    position: absolute;
+    margin-top: 5px;
+    z-index: 100;
+    align-self: flex-start;
+    margin-left: -140px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+.cart-count{
+    font-size: 12px;
+    position: absolute;
+    background-color: red;
+    border-radius: 75px;
+    width: 13px;
+    height: 13px;
+    text-align: center;
+    color: white;
+    margin: -6px 9px;
+}

@@ -12,10 +12,7 @@
             <modal-lr [show_modal]="show_LR_modal" (modalOff)="modalLROff()" (switchLogin)="switchLogin($event)" [isLogin]="isLogin"> </modal-lr>
         </span>
         <div class="user-info" *ngIf="userService.user">
-            <span (click)="openCart()" class="cart-icon">C</span>
-            <div class="cart-full" *ngIf="show_cart">
-                <cart> </cart>
-            </div>
+            <cart> </cart>
 
             <span class="btn-new-post" (click)="modaNPOn()">+</span>
             <modal-np [show_modal]="show_NP_modal" (modalOff)="modalNPOff()" > </modal-np>

@@ -12,7 +12,6 @@ export class HeaderComponent implements OnInit{
     isLogin: boolean;
     show_LR_modal:boolean = false;
     show_NP_modal:boolean = false;
-    show_cart:boolean = false;
 
     constructor(private userService: UserService ) {}
 
@@ -44,10 +43,4 @@ export class HeaderComponent implements OnInit{
     modalNPOff() {
         this.show_NP_modal = false;
     }
-
-    openCart() {
-        this.show_cart = !this.show_cart;
-    }
-
-
 }
