@@ -47,6 +47,9 @@ var ProductComponent = (function () {
     ProductComponent.prototype.onAddToCart = function () {
         this.cartService.addToCart(this.product);
     };
+    ProductComponent.prototype.onDelete = function () {
+        this.productSetvice.deleteProduct(this.product._id);
+    };
     return ProductComponent;
 }());
 __decorate([

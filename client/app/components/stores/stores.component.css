@@ -11,6 +11,11 @@
     /*position: fixed;*/
 }
 
+.info {
+    padding: 10px;
+    font-size: 14px;
+}
+
 .store {
     flex: 1;
     color: #4F535A;

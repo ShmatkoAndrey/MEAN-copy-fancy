@@ -126,10 +126,10 @@ module.exports = function(app){
         userHelper.current_user(req.session.user_id, function (user) {
             if (user && ( user.admin || (user._id == product.user_id ) )) {
                 Product.remove({ _id: req.params.id }, function (err) { // findOneAndRemove ?
-                    res.json({ delete: true });
+                    res.json({ delete: true, id: req.params.id });
                 });
             } else {
-                res.json({error: "Please, login store acc"});
+                res.json({error: "Please, login admin or current store acc"});
             }
         });
     });

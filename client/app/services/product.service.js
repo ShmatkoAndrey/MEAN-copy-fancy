@@ -147,6 +147,24 @@ var ProductService = (function () {
             .then(function (res) { return res.json().store; })
             .catch(this.handleError);
     };
+    ProductService.prototype.deleteProduct = function (id) {
+        var _this = this;
+        return this.http.delete('/api/products/' + id)
+            .toPromise()
+            .then(function (res) { return res.json(); })
+            .then(function (status) {
+            if (status.error) {
+                alert(status.error);
+            }
+            else {
+                var index = _this.findIndexById(status.id);
+                if (index > -1) {
+                    _this.products.splice(index, 1);
+                }
+            }
+        })
+            .catch(this.handleError);
+    };
     ProductService.prototype.handleError = function (err) {
         console.error('Error:', err);
         return Promise.reject(err.message || err);

@@ -52,4 +52,8 @@ export class ProductComponent {
         this.cartService.addToCart(this.product);
     }
 
+    onDelete() {
+        this.productSetvice.deleteProduct(this.product._id);
+    }
+
 }

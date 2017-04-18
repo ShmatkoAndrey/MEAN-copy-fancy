@@ -11,6 +11,10 @@
                 </div>
             </div>
         </div>
+        <div *ngIf="userService.user && userService.user.admin" class="admin-panel">
+            <div class="admin-delete" (click)="onDelete()"> X </div>
+            <!--<div class="product-id"> id: {{product._id}}</div>-->
+        </div>
         <div class="product-price" (click)="onAddToCart()"> ${{ product.price }} </div>
     </div>
 </div>

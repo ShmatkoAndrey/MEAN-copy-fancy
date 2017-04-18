@@ -139,6 +139,22 @@ export class ProductService {
             .catch(this.handleError);
     }
 
+    deleteProduct(id){
+        return this.http.delete('/api/products/' + id)
+            .toPromise()
+            .then(res => res.json())
+            .then(status => {
+                if(status.error){ alert(status.error) }
+                else {
+                    let index = this.findIndexById(status.id);
+                    if (index > -1) {
+                        this.products.splice(index, 1);
+                    }
+                }
+            })
+            .catch(this.handleError);
+    }
+
     private handleError(err: any) {
         console.error('Error:', err);
         return Promise.reject(err.message || err);

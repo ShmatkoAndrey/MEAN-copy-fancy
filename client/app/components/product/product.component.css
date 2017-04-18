@@ -122,3 +122,24 @@
 .tag:first-child {
     margin: 0;
 }
+
+.admin-panel {
+    margin-top: 12px;
+    width: 100px;
+    height: 30px;
+    border: 1px solid lightgray;
+}
+
+.admin-delete {
+    display: inline-block;
+    font-size: 14px;
+    padding: 8px;
+    border: 1px solid grey;
+    border-radius: 3px;
+    cursor: hand;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
