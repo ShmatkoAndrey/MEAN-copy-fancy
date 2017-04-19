@@ -20,6 +20,7 @@ import { CartComponent }   from './components/cart/cart.component';
 import { StoresComponent }   from './components/stores/stores.component';
 import { PopularListComponent }   from './components/popular-list/popular-list.component';
 import { StorePageComponent }   from './components/store-page/store-page.component';
+import { AdminMainComponent }   from './components/admin-panel/admin-main/admin-main.component';
 
 import { ProductService } from './services/product.service';
 import { UserService } from './services/user.service';
@@ -47,7 +48,8 @@ import { CartService } from './services/cart.service';
       CartComponent,
       StoresComponent,
       PopularListComponent,
-      StorePageComponent
+      StorePageComponent,
+      AdminMainComponent
   ],
 
   providers: [ appRoutingProviders, ProductService, UserService, CartService ],

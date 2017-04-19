@@ -1,6 +1,9 @@
 <div class="header-box">
     <div class="empty"></div>
     <div class="header-menu">
+        <div *ngIf="userService.user && userService.user.admin">
+            <a (click)="adminPanelOn()" > AdminPanel </a>
+        </div>
     </div>
     <div id="logo">
         JustFancy

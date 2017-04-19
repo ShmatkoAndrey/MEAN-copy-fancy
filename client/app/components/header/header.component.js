@@ -9,12 +9,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
+var router_1 = require("@angular/router");
 var user_service_1 = require("../../services/user.service");
 var HeaderComponent = (function () {
-    function HeaderComponent(userService) {
+    function HeaderComponent(userService, router) {
         this.userService = userService;
+        this.router = router;
         this.show_LR_modal = false;
         this.show_NP_modal = false;
+        this.onAdmin = new core_1.EventEmitter();
     }
     HeaderComponent.prototype.ngOnInit = function () {
         this.userService.getCurrentUser();
@@ -38,8 +41,16 @@ var HeaderComponent = (function () {
     HeaderComponent.prototype.modalNPOff = function () {
         this.show_NP_modal = false;
     };
+    HeaderComponent.prototype.adminPanelOn = function () {
+        this.onAdmin.emit();
+        this.router.navigate(['/admin']);
+    };
     return HeaderComponent;
 }());
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", Object)
+], HeaderComponent.prototype, "onAdmin", void 0);
 HeaderComponent = __decorate([
     core_1.Component({
         moduleId: module.id,
@@ -47,7 +58,7 @@ HeaderComponent = __decorate([
         templateUrl: 'header.component.html',
         styleUrls: ['header.component.css']
     }),
-    __metadata("design:paramtypes", [user_service_1.UserService])
+    __metadata("design:paramtypes", [user_service_1.UserService, router_1.Router])
 ], HeaderComponent);
 exports.HeaderComponent = HeaderComponent;
 //# sourceMappingURL=header.component.js.map

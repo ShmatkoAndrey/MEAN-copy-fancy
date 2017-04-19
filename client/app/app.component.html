@@ -1,11 +1,11 @@
 <div class="page">
-    <fancy-header> </fancy-header>
+    <fancy-header (onAdmin)="onAdminPanelOn()" > </fancy-header>
     <div id="main-app" (scroll)="onScroll($event)">
 
-        <div class="empty"></div>
+        <div class="empty" *ngIf="!adminPanel"></div>
 
         <div id="main-content">
-            <div id="left-side">
+            <div id="left-side" *ngIf="!adminPanel">
                 <ul id="main-tags">
                     <li class="tag"> <a [routerLink]="['/popular']"> Popular </a>  </li>
                     <li class="tag"> <a [routerLink]="['/tag', 'man']"> Man </a> </li>
@@ -22,12 +22,12 @@
                 <router-outlet></router-outlet>
             </div>
 
-            <div id="right-side">
+            <div id="right-side" *ngIf="!adminPanel">
                 <popular> </popular>
                 <stores> </stores>
             </div>
         </div>
 
-        <div class="empty"></div>
+        <div class="empty" *ngIf="!adminPanel"></div>
     </div>
 </div>

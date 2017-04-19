@@ -13,6 +13,7 @@ var product_service_1 = require("./services/product.service");
 var AppComponent = (function () {
     function AppComponent(productService) {
         this.productService = productService;
+        this.adminPanel = false;
         this.load_posts = false;
     }
     AppComponent.prototype.onScroll = function (event) {
@@ -26,6 +27,9 @@ var AppComponent = (function () {
                 this.productService.continueProducts().then(function () { return _this.load_posts = false; });
             }
         }
+    };
+    AppComponent.prototype.onAdminPanelOn = function () {
+        this.adminPanel = true;
     };
     return AppComponent;
 }());

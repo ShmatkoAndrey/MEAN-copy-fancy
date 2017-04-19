@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { UserService } from '../../services/user.service';
 
@@ -13,7 +14,9 @@ export class HeaderComponent implements OnInit{
     show_LR_modal:boolean = false;
     show_NP_modal:boolean = false;
 
-    constructor(private userService: UserService ) {}
+    @Output() onAdmin = new EventEmitter();
+
+    constructor(private userService: UserService, private router: Router ) {}
 
     ngOnInit() {
         this.userService.getCurrentUser();
@@ -42,5 +45,10 @@ export class HeaderComponent implements OnInit{
 
     modalNPOff() {
         this.show_NP_modal = false;
+    }
+
+    adminPanelOn() {
+        this.onAdmin.emit();
+        this.router.navigate(['/admin']);
     }
 }

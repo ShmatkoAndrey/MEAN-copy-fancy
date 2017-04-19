@@ -10,6 +10,7 @@ import { ProductService } from './services/product.service'
 })
 export class AppComponent {
 
+  adminPanel = false;
   load_posts = false;
 
   constructor(private productService: ProductService) {}
@@ -25,5 +26,9 @@ export class AppComponent {
         this.productService.continueProducts().then(() => this.load_posts = false);
       }
     }
+  }
+
+  onAdminPanelOn() {
+    this.adminPanel = true;
   }
 }
