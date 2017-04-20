@@ -1,0 +1,18 @@
+<div class="user">
+    <div class="username">{{user.username}}</div>
+    <div class="slide-store">
+        <div class="slide">
+            <input type="checkbox" value="store" [id]="'store' + user._id" name="check" [(ngModel)]="store" />
+            <label [attr.for]="'store' + user._id"></label>
+        </div>
+        <div class="label"> Store</div>
+    </div>
+    <div class="slide-admin">
+        <div class="slide">
+            <input type="checkbox" value="admin" [id]="'admin' + user._id" name="check" [(ngModel)]="admin" />
+            <label [attr.for]="'admin' + user._id"></label>
+        </div>
+        <div class="label"> Admin</div>
+    </div>
+    <button (click)="onSubmit()" [disabled]="admin == user.admin && store == user.store"> Update </button>
+</div>

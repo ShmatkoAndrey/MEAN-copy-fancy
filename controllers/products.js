@@ -87,7 +87,6 @@ module.exports = function(app){
                     res.json({store: store.serialized(), products: products});
                 });
             })
-
         });
     });
 

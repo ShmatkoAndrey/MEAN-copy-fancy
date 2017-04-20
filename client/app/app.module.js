@@ -26,6 +26,8 @@ var stores_component_1 = require("./components/stores/stores.component");
 var popular_list_component_1 = require("./components/popular-list/popular-list.component");
 var store_page_component_1 = require("./components/store-page/store-page.component");
 var admin_main_component_1 = require("./components/admin-panel/admin-main/admin-main.component");
+var users_ap_component_1 = require("./components/admin-panel/users-ap/users-ap.component");
+var user_ap_component_1 = require("./components/admin-panel/user-ap/user-ap.component");
 var product_service_1 = require("./services/product.service");
 var user_service_1 = require("./services/user.service");
 var cart_service_1 = require("./services/cart.service");
@@ -58,7 +60,9 @@ AppModule = __decorate([
             stores_component_1.StoresComponent,
             popular_list_component_1.PopularListComponent,
             store_page_component_1.StorePageComponent,
-            admin_main_component_1.AdminMainComponent
+            admin_main_component_1.AdminMainComponent,
+            users_ap_component_1.UsersAdminPanelComponent,
+            user_ap_component_1.UserAdminPanelComponent
         ],
         providers: [app_routes_1.appRoutingProviders, product_service_1.ProductService, user_service_1.UserService, cart_service_1.CartService],
         bootstrap: [app_component_1.AppComponent]

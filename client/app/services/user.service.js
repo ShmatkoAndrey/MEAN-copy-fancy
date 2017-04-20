@@ -89,6 +89,28 @@ var UserService = (function () {
             }
         }.bind(this));
     };
+    UserService.prototype.getUsers = function () {
+        var _this = this;
+        return this.http.get('/api/users')
+            .toPromise()
+            .then(function (res) { return res.json().users; })
+            .then(function (users) { return _this.users = users; })
+            .catch(this.handleError);
+    };
+    UserService.prototype.updateUser = function (user) {
+        var _this = this;
+        var data = new http_1.URLSearchParams();
+        data.append('admin', user.admin);
+        data.append('store', user.store);
+        console.log("send");
+        return this.http.patch('/api/users/' + user._id, data)
+            .toPromise()
+            .then(function (res) { return res.json().user; })
+            .then(function (user) {
+            return _this.users[_this.findIndexById(user)] = user;
+        })
+            .catch(this.handleError);
+    };
     UserService.prototype.loginFB = function () {
         FB.api('/me', { fields: '' }, function (response) {
             this.auth(response, 'facebook');
@@ -97,6 +119,16 @@ var UserService = (function () {
     UserService.prototype.handleError = function (err) {
         console.error('Error:', err);
         return Promise.reject(err.message || err);
+    };
+    UserService.prototype.findIndexById = function (id) {
+        var index = -1;
+        this.users.forEach(function (e, i) {
+            if (e._id == id) {
+                index = i;
+                return index;
+            }
+        });
+        return index;
     };
     return UserService;
 }());

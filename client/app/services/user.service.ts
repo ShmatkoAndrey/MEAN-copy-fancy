@@ -7,6 +7,7 @@ declare let FB;
 @Injectable()
 export class UserService {
     user;
+    users;
 
     constructor(private http: Http) {}
 
@@ -88,6 +89,28 @@ export class UserService {
         }.bind(this));
     }
 
+    getUsers() {
+        return this.http.get('/api/users')
+            .toPromise()
+            .then(res => res.json().users)
+            .then(users => this.users = users)
+            .catch(this.handleError);
+    }
+
+    updateUser(user):Promise<any> {
+        let data = new URLSearchParams();
+        data.append('admin', user.admin);
+        data.append('store', user.store);
+console.log("send")
+        return this.http.patch('/api/users/' + user._id, data)
+            .toPromise()
+            .then(res => res.json().user)
+            .then(user =>
+                this.users[this.findIndexById(user)] = user
+            )
+            .catch(this.handleError);
+    }
+
     private loginFB() {
         FB.api('/me', {fields: ''}, function (response) {
             this.auth(response, 'facebook');
@@ -97,5 +120,16 @@ export class UserService {
     private handleError(err: any) {
         console.error('Error:', err);
         return Promise.reject(err.message || err);
+    }
+
+    private findIndexById(id): number {
+        let index = -1;
+        this.users.forEach(function (e, i) {
+            if(e._id == id) {
+                index = i;
+                return index;
+            }
+        });
+        return index;
     }
 }

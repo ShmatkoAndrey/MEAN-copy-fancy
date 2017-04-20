@@ -121,4 +121,21 @@ module.exports = function(app) {
         })
     });
 
+    app.get('/api/users', function (req, res) {
+        User.find({}, function (err, users) {
+           res.json({ users: users.reverse() });
+        });
+    });
+
+    app.patch('/api/users/:id', function (req, res) {
+        User.update({ _id: req.params.id }, { $set: { admin: req.body.admin, store: req.body.store } }, function (err, status) {
+            if(err) { res.json({ error: err }); }
+            else {
+                User.findById(req.params.id, function (err, user) {
+                    res.json({user: user});
+                });
+            }
+        })
+    });
+
 };
