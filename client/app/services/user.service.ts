@@ -101,7 +101,7 @@ export class UserService {
         let data = new URLSearchParams();
         data.append('admin', user.admin);
         data.append('store', user.store);
-console.log("send")
+
         return this.http.patch('/api/users/' + user._id, data)
             .toPromise()
             .then(res => res.json().user)

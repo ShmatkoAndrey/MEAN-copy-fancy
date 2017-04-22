@@ -29,6 +29,6 @@ app.get('*', function(req, res){
     res.redirect('/');
 });
 
-server = app.listen(config.port, function () {
-    console.log('Listening port :' + config.port);
+server = app.listen(process.env.PORT || config.port, function () {
+    console.log('Listening port :' + process.env.PORT || config.port);
 });
