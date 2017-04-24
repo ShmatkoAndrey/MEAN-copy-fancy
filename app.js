@@ -8,6 +8,7 @@ var db = require('./db');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/client'));
+app.use(express.static(__dirname + '/node_modules'));
 
 app.use(cookieParser());
 app.use(session({
