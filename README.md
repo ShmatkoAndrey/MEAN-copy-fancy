@@ -1,7 +1,7 @@
 ```
 npm i
-node app.js
 node seed remove
+node app.js
 ```
 
 Seeds:
