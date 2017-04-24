@@ -13,6 +13,7 @@
     "postinstall": "typings install",
     "tsc": "tsc",
     "tsc:w": "tsc -w",
+    "preinstall": "npm i typings -g",
     "typings": "typings"
   },
   "licenses": [
