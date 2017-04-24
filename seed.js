@@ -2,7 +2,6 @@ var db = require('./db');
 var User = require('./models/User');
 var Product = require('./models/Product');
 var Identity = require('./models/Identity');
-var Tag = require('./models/tag');
 var faker = require('faker');
 var colors = require('colors');
 var mkdirp = require('mkdirp');
@@ -14,7 +13,7 @@ var products = [];
 
 var stores_cnt = 10;
 var users_cnt = 20;
-var products_cnt = 30;
+var products_cnt = 10;
 var rm = false;
 var all_tags = ['man', 'woman', 'child', 'art', 'gadgets', 'pets', 'food', 'workspace', 'tag1', 'tag2', 'tag3' ];
 
@@ -48,9 +47,6 @@ db.connection.on('connected', function () {
         });
          Identity.remove({}, function (err) {
             console.log('removed all identities'.red);
-        });
-        Tag.remove({}, function (err) {
-            console.log('removed all tags'.red);
         });
 
         cloudinary.api.delete_resources_by_prefix('public/', function(result){
@@ -122,7 +118,6 @@ function userCreate(store, callback) {
                         admin: userF.admin
                     });
                     cloudinary.api.resources(function(result){
-                        console.log(result)
                         var avatars = result.resources;
                         cloudinary.uploader.upload(avatars[Math.floor(Math.random() * avatars.length)].url, function(result) {
                             new_user.avatar = result.url;

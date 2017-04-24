@@ -1,9 +1,7 @@
 var Product = require('../models/product');
-var Tag = require('../models/tag');
 var userHelper = require('../helpers/user');
-var fileHepler = require('../helpers/files');
 var formidable = require('formidable');
-var mkdirp = require('mkdirp');
+var cloudinary = require('../cloudinary');
 
 exports.getFullInfoProducts = function (products, callback) {
     var ii = 0;
@@ -47,58 +45,35 @@ exports.createProduct = function (req, res, callback) {
         }
         userHelper.current_user(req.session.user_id, function (user) {
             if (user && ( user.admin || user.store )) {
-            var new_product = new Product({
-                user_id: user.id,
-                title: product.title,
-                description: product.description,
-                price: product.price,
-                tags: product.tags.split(',').map(function(item){return item.trim()})
-            });
-
-            product.tags.split(',').forEach(function (e) {
-                e = e.trim();
-                Tag.findOne({}, function (err, tag) {
-                    if(!tag){
-                        var new_tag = new Tag({
-                            name: e,
-                            products: [new_product._id]
-                        });
-                        new_tag.save(function (err) { });
-                    } else{
-                        var new_products_tags = tag.products.push(new_product._id);
-                        Tag.update({ _id: tag._id }, { $set: { products: new_products_tags } }, function (err, status) { })
-                    }
-                })
-
-            });
-
-            var dphotos = [], ii = 0;
-            descriptionPhotos.forEach(function (e, i) {
-                mkdirp('./images/' + new_product._id, function (err) {
-                    var name = Math.random().toString(36).substring(7) + '.' + e.name.split('.').pop();
-                    fileHepler.saveImg(e.path, __dirname + './../images/' + new_product._id + '/' + name, function () {
-                        dphotos[i] = name;
+                var new_product = new Product({
+                    user_id: user.id,
+                    title: product.title,
+                    description: product.description,
+                    price: product.price,
+                    tags: product.tags.split(',').map(function(item){return item.trim()})
+                });
+                var dphotos = [], ii = 0;
+                descriptionPhotos.forEach(function (e, i) {
+                    cloudinary.uploader.upload(e.path, function (result) {
+                        dphotos[i] = result.url;
                         ii++;
                         if (ii == descriptionPhotos.length) {
-                            var mainPhotoDir = Math.random().toString(36).substring(7) + '.' + mainPhoto.name.split('.').pop();
-                            fileHepler.saveImg(mainPhoto.path, __dirname + './../images/' + new_product._id + '/' + mainPhotoDir, function () {
+                            cloudinary.uploader.upload(mainPhoto.path, function (result) {
                                 new_product.descriptionPhoto = dphotos;
-                                new_product.mainPhoto = mainPhotoDir;
+                                new_product.mainPhoto = result.url;
                                 new_product.save(function (err) {
-                                    if (err) res.json({error: err});
-                                    else {
-                                        new_product.getFullInfo(function (product) {
-                                            callback(product);
-                                        });
-                                    }
-                                });
-                            });
-                        }
-                    });
+                                    new_product.getFullInfo(function (product) {
+                                        callback(product);
+                                    });
 
+                                });
+                            }, {folder: 'public'});
+
+                        }
+                    }, {folder: 'public'})
                 });
-            });
-            } else {
+            }
+            else {
                 res.json({error: "Please, login store acc"});
             }
 

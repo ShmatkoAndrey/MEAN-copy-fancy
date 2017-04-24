@@ -1,7 +1,6 @@
 var User = require('../models/user');
-var fileHepler = require('../helpers/files');
 var formidable = require('formidable');
-var mkdirp = require('mkdirp');
+var cloudinary = require('../cloudinary');
 
 exports.current_user = function (session_user_id, callback) {
     User.findById(session_user_id, function (err, user) {
@@ -28,27 +27,24 @@ exports.saveUser = function (req, callback) {
                             store: userF.store,
                             admin: userF.admin
                         });
-                        mkdirp('./images/users/' + new_user._id, function (err) {
-                            fileHepler.saveImg(avatar.path, __dirname + './../images/users/' + new_user._id + '/avatar.jpg', function () {
-                                if(banner) {
-                                    fileHepler.saveImg(banner.path, __dirname + './../images/users/' + new_user._id + '/banner.jpg', function () {
+                        cloudinary.uploader.upload(avatar.path, function(result) {
+                            new_user.avatar = result.url;
+                            if(userF.store == 'true') {
+                                    cloudinary.uploader.upload(banner.path, function (result) {
+                                        new_user.banner = result.url;
                                         new_user.save(function (err) {
                                             if (err) callback({error: err});
-                                            else {
-                                                callback(new_user);
-                                            }
+                                            else callback(new_user);
                                         });
-                                    })
-                                } else {
-                                    new_user.save(function (err) {
-                                        if (err) callback({error: err});
-                                        else {
-                                            callback(new_user);
-                                        }
-                                    });
-                                }
-                            });
-                        });
+                                    }, {folder: 'public'})
+                            }
+                            else {
+                                new_user.save(function (err) {
+                                    if (err) callback({error: err});
+                                    else callback(new_user);
+                                });
+                            }
+                        },{folder: 'public'});
                     }
                 }
             })
