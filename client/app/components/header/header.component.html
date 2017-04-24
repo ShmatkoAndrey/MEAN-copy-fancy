@@ -19,7 +19,7 @@
 
             <span *ngIf="userService.user.store" class="btn-new-post" (click)="modaNPOn()">+</span>
             <modal-np [show_modal]="show_NP_modal" (modalOff)="modalNPOff()" > </modal-np>
-            <img class="avatar" [src]="'/images/users/' + userService.user._id + '/avatar.jpg'" />
+            <img class="avatar" [src]="userService.user.avatar" />
             <span class="user-username"> {{ userService.user.username }} </span>
             <span (click)="logout()" > Logout </span>
         </div>

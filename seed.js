@@ -3,12 +3,10 @@ var User = require('./models/User');
 var Product = require('./models/Product');
 var Identity = require('./models/Identity');
 var Tag = require('./models/tag');
-var fileHepler = require('./helpers/files');
-var productHelper = require('./helpers/product');
 var faker = require('faker');
 var colors = require('colors');
-var fs = require('fs');
 var mkdirp = require('mkdirp');
+var cloudinary = require('./cloudinary');
 
 var stores = [];
 var users = [];
@@ -16,10 +14,9 @@ var products = [];
 
 var stores_cnt = 10;
 var users_cnt = 20;
-var products_cnt = 100;
+var products_cnt = 30;
 var rm = false;
 var all_tags = ['man', 'woman', 'child', 'art', 'gadgets', 'pets', 'food', 'workspace', 'tag1', 'tag2', 'tag3' ];
-
 
 db.connection.on('connected', function () {
 
@@ -56,10 +53,16 @@ db.connection.on('connected', function () {
             console.log('removed all tags'.red);
         });
 
-        deleteFolderRecursive(__dirname + '/images/');
-        console.log('images cleared'.red);
+        cloudinary.api.delete_resources_by_prefix('public/', function(result){
+            console.log('images cleared'.red);
+            startSeeds();
+        });
+    } else {
+        startSeeds();
     }
+});
 
+function startSeeds() {
     var time = Date.now();
     var c_i_sore = 0;
     for (var i = 0; i < stores_cnt; i++) {
@@ -92,24 +95,10 @@ db.connection.on('connected', function () {
             console.log('created user: \t'.green + user.username);
         });
     }
-});
+}
 
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function deleteFolderRecursive(path) {
-    if( fs.existsSync(path) ) {
-        fs.readdirSync(path).forEach(function(file,index){
-            var curPath = path + "/" + file;
-            if(fs.lstatSync(curPath).isDirectory()) {
-                deleteFolderRecursive(curPath);
-            } else {
-                fs.unlinkSync(curPath);
-            }
-        });
-        fs.rmdirSync(path);
-    }
 }
 
 function userCreate(store, callback) {
@@ -132,32 +121,31 @@ function userCreate(store, callback) {
                         store: userF.store,
                         admin: userF.admin
                     });
-                    fs.readdir('./test-images/avatars/', function (err, items) {
-                        var path = __dirname + '/test-images/avatars/' + items[Math.floor(Math.random() * items.length)];
-                        mkdirp('./images/users/' + new_user._id, function (err) {
-                            fileHepler.saveImg(path, __dirname + '/images/users/' + new_user._id + '/avatar.jpg', function () {
-                                if(store){
-                                    fs.readdir('./test-images/banners/', function (err, items) {
-                                        var path = __dirname + '/test-images/banners/' + items[Math.floor(Math.random() * items.length)];
-                                        mkdirp('./images/users/' + new_user._id, function (err) {
-                                            fileHepler.saveImg(path, __dirname + '/images/users/' + new_user._id + '/banner.jpg', function () {
-                                                new_user.save(function (err) {
-                                                    if (err) callback({error: err});
-                                                    else callback(new_user);
-                                                });
-                                            })
-                                        })
-                                    })
-                                }
-                                else {
-                                    new_user.save(function (err) {
-                                        if (err) callback({error: err});
-                                        else callback(new_user);
-                                    });
-                                }
-                            });
-                        });
-                    });
+                    cloudinary.api.resources(function(result){
+                        console.log(result)
+                        var avatars = result.resources;
+                        cloudinary.uploader.upload(avatars[Math.floor(Math.random() * avatars.length)].url, function(result) {
+                            new_user.avatar = result.url;
+                            if(store) {
+                                cloudinary.api.resources(function (result) {
+                                    var banners = result.resources;
+                                    cloudinary.uploader.upload(banners[Math.floor(Math.random() * banners.length)].url, function (result) {
+                                        new_user.banner = result.url;
+                                        new_user.save(function (err) {
+                                            if (err) callback({error: err});
+                                            else callback(new_user);
+                                        });
+                                    }, {folder: 'public'})
+                                }, {type: 'upload', prefix: 'seed-images/banners'});
+                            }
+                            else {
+                                new_user.save(function (err) {
+                                    if (err) callback({error: err});
+                                    else callback(new_user);
+                                });
+                            }
+                        },{folder: 'public'})
+                    },{ type: 'upload', prefix: 'seed-images/avatars' });
                 }
             }
         })
@@ -166,7 +154,6 @@ function userCreate(store, callback) {
 
 function productCreate(user_id, callback) {
     var tags = randomTags();
-
     var new_product = new Product({
         user_id: user_id,
         title: faker.commerce.productName(),
@@ -174,62 +161,34 @@ function productCreate(user_id, callback) {
         price: faker.commerce.price().split('.')[0],
         tags: tags
     });
-
     var descriptionPhotos = [], mainPhoto;
-    fs.readdir('./test-images/', function (err, items) {
-        items.splice(items.indexOf('avatars'), 1);
-        items.splice(items.indexOf('banners'), 1);
-        mainPhoto = __dirname + '/test-images/' + items[Math.floor(Math.random() * items.length)];
+    cloudinary.api.resources(function(result) {
+        var items = result.resources;
         for (var i = 0; i < 4; i++) {
-            var path = __dirname + '/test-images/' + items[Math.floor(Math.random() * items.length)];
+            var path = items[Math.floor(Math.random() * items.length)].url;
             descriptionPhotos.push(path);
         }
-
-        // tags.forEach(function (e) {
-        //     Tag.findOne({name: e}, function (err, tag) {
-        //         console.log("---");
-        //         console.log(tag);
-        //         if(!tag){
-        //             var new_tag = new Tag({
-        //                 name: e,
-        //                 products: [new_product._id]
-        //             });
-        //             new_tag.save(function (err, save_tag) { if(err) console.log(err) });
-        //         } else {
-        //             tag.products = tag.products.concat([new_product._id]);
-        //             tag.save(function (err, tag_upd) {
-        //                 // console.log(tag_upd);
-        //             });
-        //         }
-        //     })
-        //
-        // });
-
         var dphotos = [], ii = 0;
         descriptionPhotos.forEach(function (e, i) {
-            mkdirp('./images/' + new_product._id, function (err) {
-                var name = Math.random().toString(36).substring(7) + '.' + e.split('.').pop();
-                fileHepler.saveImg(e, __dirname + '/images/' + new_product._id + '/' + name, function () {
-                    dphotos[i] = name;
-                    ii++;
-                    if (ii == descriptionPhotos.length) {
-                        var mainPhotoDir = Math.random().toString(36).substring(7) + '.' + mainPhoto.split('.').pop();
-                        fileHepler.saveImg(mainPhoto, __dirname + '/images/' + new_product._id + '/' + mainPhotoDir, function () {
-                            new_product.descriptionPhoto = dphotos;
-                            new_product.mainPhoto = mainPhotoDir;
-                            new_product.save(function (err) {
-                                new_product.getFullInfo(function (product) {
-                                    callback(product);
-                                });
-
+            cloudinary.uploader.upload(e, function (result) {
+                dphotos[i] = result.url;
+                ii++;
+                if (ii == descriptionPhotos.length) {
+                    cloudinary.uploader.upload(items[Math.floor(Math.random() * items.length)].url, function (result) {
+                        new_product.descriptionPhoto = dphotos;
+                        new_product.mainPhoto = result.url;
+                        new_product.save(function (err) {
+                            new_product.getFullInfo(function (product) {
+                                callback(product);
                             });
-                        });
-                    }
-                });
 
-            });
+                        });
+                    }, {folder: 'public'});
+
+                }
+            }, {folder: 'public'})
         });
-    });
+    },{ type: 'upload', prefix: 'seed-images' });
 }
 
 function productLikes(callback) {

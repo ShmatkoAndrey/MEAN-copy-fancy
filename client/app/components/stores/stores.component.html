@@ -2,9 +2,9 @@
     <div class="info"> STORES </div>
     <div class="store" *ngFor="let store of stores.reverse()">
         <div class="store-info" [routerLink]="['/store', store._id]">
-            <img class="avatar" [src]="'/images/users/' + store._id + '/avatar.jpg'"  />
+            <img class="avatar" [src]="store.avatar"  />
             <span>{{store.username}}</span>
         </div>
-            <img class="product-main-image" *ngFor="let product of store.products" [src]="'/images/' + product._id + '/' + product.mainPhoto" />
+            <img class="product-main-image" *ngFor="let product of store.products" [src]="product.mainPhoto" />
     </div>
 </div>

@@ -30,6 +30,12 @@ var schemaUser = new db.Schema({
     store: {
         type: Boolean,
         default: false
+    },
+    avatar: {
+        type: String
+    },
+    banner: {
+        type: String
     }
 });
 
@@ -62,7 +68,8 @@ schemaUser.methods.serialized = function () {
         username: this.username,
         admin: this.admin,
         store: this.store,
-        avatar: this.avatar
+        avatar: this.avatar,
+        banner: this.banner
     }
 
 };

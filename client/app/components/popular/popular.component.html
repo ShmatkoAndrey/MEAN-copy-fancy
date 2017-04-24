@@ -1,6 +1,6 @@
 <div id="main-popular">
     <div class="info"> POPULAR </div>
     <div class="popular-imgs">
-        <img class="product-main-image" *ngFor="let product of popular" [src]="'/images/' + product._id + '/' + product.mainPhoto" />
+        <img class="product-main-image" *ngFor="let product of popular" [src]="product.mainPhoto" />
     </div>
 </div>

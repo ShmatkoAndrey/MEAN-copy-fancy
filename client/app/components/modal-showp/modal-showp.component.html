@@ -5,12 +5,12 @@
         <div class="product-content">
             <div class="product-photos">
                 <div class="imgs-menu">
-                    <img class="description-photo" *ngFor="let photo of all_imgs" [src]="'/images/' + product._id + '/' + photo" (click)="showPhoto(photo)" />
+                    <img class="description-photo" *ngFor="let photo of all_imgs" [src]="photo" (click)="showPhoto(photo)" />
                 </div>
                 <div class="product-main-image-block">
                     <div class="left-arrow" (click)="PrevPhoto()"> < </div>
                     <div class="right-arrow" (click)="NextPhoto()"> > </div>
-                    <img class="product-main-image" [src]="'/images/' + product._id + '/' + main_img"  (click)="NextPhoto()" />
+                    <img class="product-main-image" [src]="main_img"  (click)="NextPhoto()" />
                 </div>
             </div>
             <div class="product-info">

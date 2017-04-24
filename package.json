@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.16.1",
+    "cloudinary": "^1.8.0",
     "colors": "^1.1.2",
     "cookie-parser": "^1.4.3",
     "crypto": "0.0.3",

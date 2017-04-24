@@ -1,8 +1,8 @@
 <div class="store-info">
-    <img class="banner" [src]="'/images/users/' + id + '/banner.jpg'"  />
+    <img *ngIf="store" class="banner" [src]="store.banner"  />
 
     <div *ngIf="store" class="info-name">
-        <img class="avatar" [src]="'/images/users/' + id + '/avatar.jpg'"  />
+        <img class="avatar" [src]="store.avatar"  />
         <div class="store-name">{{store.username}}</div>
     </div>
 </div>
