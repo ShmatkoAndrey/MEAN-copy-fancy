@@ -1,11 +1,13 @@
 ```
 npm i
-node seed remove
 node app.js
 ```
 
 Seeds:
 ```
+node seed remove
+
+
 node seed  // start geberate users, stores and products
 node seed store_cnt users_cnt products_cnt // like node seed 20 10 300
 

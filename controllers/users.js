@@ -50,7 +50,8 @@ module.exports = function(app) {
                     username: req.body.name,
                     password: Math.random().toString(36).substring(7),
                     store: false,
-                    admin: false
+                    admin: false,
+                    avatar: 'http://res.cloudinary.com/dqbbwgcdr/image/upload/v1493116976/seed-images/public/standart_avatar.png'
                 });
                 var new_identity = new Identity({
                     uid: req.body.uid,
