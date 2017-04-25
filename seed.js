@@ -13,7 +13,7 @@ var products = [];
 
 var stores_cnt = 10;
 var users_cnt = 20;
-var products_cnt = 10;
+var products_cnt = 100;
 var rm = false;
 var all_tags = ['man', 'woman', 'child', 'art', 'gadgets', 'pets', 'food', 'workspace', 'tag1', 'tag2', 'tag3' ];
 
@@ -131,7 +131,7 @@ function userCreate(store, callback) {
                                             else callback(new_user);
                                         });
                                     }, {folder: 'public'})
-                                }, {type: 'upload', prefix: 'seed-images/banners'});
+                                }, {type: 'upload', prefix: 'seed-images/banners', max_results: 200});
                             }
                             else {
                                 new_user.save(function (err) {
@@ -140,7 +140,7 @@ function userCreate(store, callback) {
                                 });
                             }
                         },{folder: 'public'})
-                    },{ type: 'upload', prefix: 'seed-images/avatars' });
+                    },{ type: 'upload', prefix: 'seed-images/avatars', max_results: 200 });
                 }
             }
         })
@@ -183,7 +183,7 @@ function productCreate(user_id, callback) {
                 }
             }, {folder: 'public'})
         });
-    },{ type: 'upload', prefix: 'seed-images' });
+    },{ type: 'upload', prefix: 'seed-images/products', max_results: 200 });
 }
 
 function productLikes(callback) {
