@@ -25,6 +25,15 @@
 .store-info {
     display: flex;
     align-items: center;
+    cursor: hand;
+}
+
+.store:hover .store-info {
+    color: #139890;
+}
+
+.store:hover .avatar {
+    border: 2px solid #139890;
 }
 
 .avatar {
@@ -34,6 +43,7 @@
     /*object-fit: contain;*/
     border-radius: 50px;
     flex: 0 0 40px;
+    border: 2px solid white;
 }
 
 .product-main-image {

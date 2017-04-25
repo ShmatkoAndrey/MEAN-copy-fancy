@@ -1,7 +1,7 @@
 <div id="main-stores">
     <div class="info"> STORES </div>
-    <div class="store" *ngFor="let store of stores.reverse()">
-        <div class="store-info" [routerLink]="['/store', store._id]">
+    <div class="store" *ngFor="let store of stores.reverse()" [routerLink]="['/store', store._id]">
+        <div class="store-info" >
             <img class="avatar" [src]="store.avatar"  />
             <span>{{store.username}}</span>
         </div>
