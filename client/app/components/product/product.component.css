@@ -55,6 +55,11 @@
 
 .like-icon {
     font-size: 20px;
+    color: rgba(30, 144, 255, 0.31);
+}
+
+.liked {
+    color: dodgerblue;
 }
 
 .btn-like {

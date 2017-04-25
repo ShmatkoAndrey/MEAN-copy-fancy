@@ -45,6 +45,17 @@ var ProductComponent = (function () {
             this.productSetvice.like(this.product);
         }
     };
+    ProductComponent.prototype.isLiked = function () {
+        var f = false;
+        if (this.userService.user) {
+            if (this.product.user_likes.some(function (e) {
+                return e._id == this.userService.user._id;
+            }.bind(this))) {
+                f = true;
+            }
+        }
+        return f;
+    };
     ProductComponent.prototype.onAddToCart = function () {
         this.cartService.addToCart(this.product);
     };

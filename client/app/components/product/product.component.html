@@ -5,7 +5,7 @@
             <div class="product-title" (click)="modalOn()"> {{ product.title }} </div>
             <div class="product-tags" > <a class="tag" *ngFor="let tag of product.tags"  [routerLink]="['/tag', tag]"  > {{tag}} </a> </div>
             <div class="product-like">
-                <div class="btn-like" (click)="onLike()"> <span class="like-icon">❤</span> {{ product.user_likes.length }} </div>
+                <div class="btn-like" (click)="onLike()"> <span class="like-icon" [ngClass]="isLiked() ? 'liked' : ''">❤</span> {{ product.user_likes.length }} </div>
                 <div class="user-avatars">
                     <img class="avatar" *ngFor="let user of product.user_likes.reverse()" [src]="user.avatar" />
                 </div>

@@ -48,6 +48,18 @@ export class ProductComponent {
         if(this.userService.user) { this.productSetvice.like(this.product); }
     }
 
+    isLiked() {
+        let f = false;
+        if(this.userService.user) {
+            if(this.product.user_likes.some(function(e){
+                return e._id==this.userService.user._id
+            }.bind(this))){
+                f = true;
+            }
+        }
+        return f;
+    }
+
     onAddToCart() {
         this.cartService.addToCart(this.product);
     }
