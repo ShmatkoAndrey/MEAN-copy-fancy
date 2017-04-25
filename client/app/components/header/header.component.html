@@ -10,6 +10,7 @@
     </div>
     <div class="header-menu">
         <span *ngIf="!userService.user">
+             <cart> </cart>
             <span class="auth-type" (click)="modalLROn()" (click)="switchLogin(false)">Registration </span> |
             <span class="auth-type" (click)="modalLROn()" (click)="switchLogin(true)"> Login </span>
             <modal-lr [show_modal]="show_LR_modal" (modalOff)="modalLROff()" (switchLogin)="switchLogin($event)" [isLogin]="isLogin"> </modal-lr>

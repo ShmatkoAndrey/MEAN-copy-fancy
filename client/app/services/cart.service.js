@@ -28,7 +28,9 @@ var CartService = (function () {
         this.cart.push({ title: product.title, price: product.price, _id: product._id });
         this.setCookie('cart', this.cart, { expires: 36000 });
     };
-    CartService.prototype.deleteFromCart = function (product) {
+    CartService.prototype.deleteCart = function () {
+        this.deleteCookie("cart");
+        this.cart = [];
     };
     CartService.prototype.payment = function () {
         var cart, c = this.getCookie('cart');

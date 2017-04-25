@@ -31,6 +31,8 @@ var CartComponent = (function () {
     };
     CartComponent.prototype.onPay = function () {
         this.cartService.payment();
+        this.cartService.deleteCart();
+        this.show_cart = false;
     };
     return CartComponent;
 }());

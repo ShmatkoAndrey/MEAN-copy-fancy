@@ -13,8 +13,9 @@
     flex: 1 0 300px;
     align-self: center;
     text-align: center;
-    font-size: 30px;
-    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    font-size: 40px;
+    font-family: "Papyrus", "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    margin-right: 75px;
 }
 
 .header-menu {
@@ -57,4 +58,8 @@
 
 .user-username {
     margin-right: 10px;
+}
+
+cart {
+    display: inline-block;
 }

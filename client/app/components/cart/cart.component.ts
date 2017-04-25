@@ -33,6 +33,8 @@ export class CartComponent implements OnInit{
 
     onPay() {
         this.cartService.payment();
+        this.cartService.deleteCart();
+        this.show_cart = false;
     }
 
 

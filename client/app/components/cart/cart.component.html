@@ -1,13 +1,13 @@
-<div (click)="openCart()" class="cart-icon">C <div class="cart-count">{{cart.length}}</div></div>
+<div (click)="openCart()" class="cart-icon">C <div class="cart-count">{{cartService.cart.length}}</div></div>
 <div class="cart-full" *ngIf="show_cart">
-    <div id="cart" *ngIf="cart.length">
+    <div id="cart" *ngIf="cartService.cart.length">
         <div class="pay-block">
             <span class="sum" > Sum: {{getSum()}} </span>
             <div class="btn-pay" (click)="onPay()"> Buy </div>
         </div>
         <hr>
         <ul>
-            <li *ngFor="let product of cart"> <div class="title" >{{product.title}}</div> <div class="price"> ${{product.price}} </div></li>
+            <li *ngFor="let product of cartService.cart"> <div class="title" >{{product.title}}</div> <div class="price"> ${{product.price}} </div></li>
         </ul>
     </div>
 </div>

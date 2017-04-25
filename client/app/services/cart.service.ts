@@ -19,8 +19,9 @@ export class CartService {
         this.setCookie('cart', this.cart, {expires: 36000});
     }
 
-    deleteFromCart(product) {
-
+    deleteCart() {
+        this.deleteCookie("cart");
+        this.cart = [];
     }
 
     payment() {
